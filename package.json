@@ -1,0 +1,17 @@
+{
+  "name": "matus-kocik-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+  "dev": "tailwindcss -i ./input.css -o ./static/css/styles.css --watch",
+  "build": "tailwindcss -i ./input.css -o ./static/css/styles.css --minify"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^4.1.11",
+    "uglify-js": "^3.19.3"
+  }
+}

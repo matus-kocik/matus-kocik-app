@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
+
+  <div class="w-full max-w-md rounded-3xl bg-[#30638E] p-8 text-center
+              shadow-2xl shadow-black/40">
+
+    <img
+      src="{% static 'images/avatar.jpg' %}"
+      alt="Matúš Kočik"
+      class="w-40 h-40 mx-auto rounded-full object-cover
+             ring-4 ring-[#EDAE49]
+             shadow-lg shadow-[#EDAE49]/30 mb-8"
+    />
+
+    <h1 class="text-3xl font-bold text-white mb-10">
+      Matúš Kočik
+    </h1>
+
+    <a
+      href="https://github.com/matus-kocik"
+      target="_blank"
+      class="flex items-center justify-center gap-4
+             rounded-xl px-6 py-4
+             bg-[#EDAE49] text-[#003D5B]
+             font-bold text-lg
+             shadow-xl shadow-[#EDAE49]/40
+             transition-all duration-300
+             hover:-translate-y-1 hover:bg-[#68A357]
+             focus:outline-none focus:ring-4 focus:ring-[#00798C]"
+    >
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+        class="w-8 h-8"
+      />
+      <span>GitHub</span>
+    </a>
+
+  </div>
+</div>
+{% endblock %}
