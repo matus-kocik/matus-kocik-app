@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen p-6 bg-[#003D5B]">
+
+  <div class="max-w-5xl xl:max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-8 shadow-2xl shadow-black/40">
+
+    <!-- Hlavička faktúry -->
+    <div class="mb-10">
+      <div class="flex items-center justify-between gap-6">
+
+        <div>
+          <div class="flex items-center gap-4">
+            <h1 class="text-3xl font-extrabold text-[#EDAE49]">
+              Faktúra č. {{ form.number.value|default:"—" }}
+            </h1>
+
+            <button
+              type="button"
+              onclick="toggleInvoiceNumberEdit()"
+              class="text-sm text-[#EDAE49] hover:underline cursor-pointer"
+            >
+              Upraviť
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- manuálne pole – skryté -->
+      <div id="invoice-number-edit" class="mt-2 hidden max-w-sm">
+        <label class="block text-white/80 mb-1">
+          Manuálne číslo faktúry
+        </label>
+        {{ form.number }}
+      </div>
+
+      <div class="mt-4 border-b border-white/20"></div>
+    </div>
+
+    <form method="post" class="space-y-8">
+      {% csrf_token %}
+
+
+      <!-- Odberateľ -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Odberateľ
+        </h2>
+        <div class="mt-4 mb-10 border-b border-white/20"></div>
+
+        <div class="space-y-12">
+
+          <!-- Skupina 1: Identifikačné údaje -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-3">
+              <label class="block text-white/80 mb-1">{{ form.customer_name.label }}</label>
+              {{ form.customer_name }}
+              {% if form.customer_name.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_name.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div>
+              <label class="block text-white/80 mb-1">{{ form.customer_ico.label }}</label>
+              {{ form.customer_ico }}
+              {% if form.customer_ico.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_ico.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div>
+              <label class="block text-white/80 mb-1">{{ form.customer_dic.label }}</label>
+              {{ form.customer_dic }}
+              {% if form.customer_dic.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_dic.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div>
+              <label class="block text-white/80 mb-1">{{ form.customer_ic_dph.label }}</label>
+              {{ form.customer_ic_dph }}
+              {% if form.customer_ic_dph.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_ic_dph.errors|striptags }}</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Skupina 2: Adresa -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+              <label class="block text-white/80 mb-1">{{ form.customer_street.label }}</label>
+              {{ form.customer_street }}
+            </div>
+
+            <div>
+              <label class="block text-white/80 mb-1">{{ form.customer_street_number.label }}</label>
+              {{ form.customer_street_number }}
+            </div>
+
+            <div>
+              <label class="block text-white/80 mb-1">{{ form.customer_zip.label }}</label>
+              {{ form.customer_zip }}
+              {% if form.customer_zip.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_zip.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-white/80 mb-1">{{ form.customer_city.label }}</label>
+              {{ form.customer_city }}
+              {% if form.customer_city.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_city.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-white/80 mb-1">{{ form.customer_country.label }}</label>
+              {{ form.customer_country }}
+              {% if form.customer_country.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_country.errors|striptags }}</p>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- Skupina 3: Kontakt / platba -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="col-span-1 md:col-span-3">
+              <label class="block text-white/80 mb-1">{{ form.customer_iban.label }}</label>
+              {{ form.customer_iban }}
+              {% if form.customer_iban.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_iban.errors|striptags }}</p>
+              {% endif %}
+            </div>
+
+            <div class="md:col-span-3">
+              <label class="block text-white/80 mb-1">{{ form.customer_email.label }}</label>
+              {{ form.customer_email }}
+              {% if form.customer_email.errors %}
+                <p class="text-red-300 text-sm mt-1">{{ form.customer_email.errors|striptags }}</p>
+              {% endif %}
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- removed divider for Odberateľ -->
+
+      <!-- Dodávateľ -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Dodávateľ
+        </h2>
+        <div class="mt-4 mb-10 border-b border-white/20"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <div class="md:col-span-2">
+            <label class="block text-white/80 mb-1">{{ form.supplier_name.label }}</label>
+            {{ form.supplier_name }}
+            {% if form.supplier_name.errors %}
+              <p class="text-red-300 text-sm mt-1">{{ form.supplier_name.errors|striptags }}</p>
+            {% endif %}
+          </div>
+
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.supplier_ico.label }}</label>
+            {{ form.supplier_ico }}
+            {% if form.supplier_ico.errors %}
+              <p class="text-red-300 text-sm mt-1">{{ form.supplier_ico.errors|striptags }}</p>
+            {% endif %}
+          </div>
+
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.supplier_dic.label }}</label>
+            {{ form.supplier_dic }}
+            {% if form.supplier_dic.errors %}
+              <p class="text-red-300 text-sm mt-1">{{ form.supplier_dic.errors|striptags }}</p>
+            {% endif %}
+          </div>
+
+
+        </div>
+      </div>
+      <!-- removed divider for Dodávateľ -->
+
+      <!-- Základné údaje -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Platobné údaje
+        </h2>
+        <div class="mt-4 mb-10 border-b border-white/20"></div>
+
+        {{ form.non_field_errors }}
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.issue_date.label }}</label>
+    {{ form.issue_date }}
+  </div>
+
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.delivery_date.label }}</label>
+    {{ form.delivery_date }}
+  </div>
+
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.due_date.label }}</label>
+    {{ form.due_date }}
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+  <div class="md:col-span-3">
+    <label class="block text-white/80 mb-1">{{ form.supplier_iban.label }}</label>
+    {{ form.supplier_iban }}
+  </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.variable_symbol.label }}</label>
+    {{ form.variable_symbol }}
+  </div>
+
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.constant_symbol.label }}</label>
+    {{ form.constant_symbol }}
+  </div>
+
+  <div>
+    <label class="block text-white/80 mb-1">{{ form.specific_symbol.label }}</label>
+    {{ form.specific_symbol }}
+  </div>
+</div>
+
+      </div>
+      <!-- removed divider for Platobné údaje -->
+
+      <!-- Poznámka -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Poznámka
+        </h2>
+        <div class="mt-4 mb-10 border-b border-white/20"></div>
+
+        <div>
+          <label class="block text-white/80 mb-1">
+            {{ form.note.label }}
+          </label>
+          {{ form.note }}
+          {% if form.note.errors %}
+            <p class="text-red-300 text-sm mt-1">{{ form.note.errors|striptags }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <!-- removed divider for Poznámka -->
+
+      <!-- Položky -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Položky
+        </h2>
+        <div class="mt-4 mb-10 border-b border-white/20"></div>
+
+        {{ formset.management_form }}
+
+        <div class="space-y-4">
+          {% for item_form in formset %}
+            <div class="bg-[#30638E] rounded-xl p-4 border border-white/10">
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-2">
+                  <label class="block text-white/80 mb-1">
+                    {{ item_form.name.label }}
+                  </label>
+                  {{ item_form.name }}
+                </div>
+
+                <div>
+                  <label class="block text-white/80 mb-1">
+                    {{ item_form.quantity.label }}
+                  </label>
+                  {{ item_form.quantity }}
+                </div>
+
+                <div>
+                  <label class="block text-white/80 mb-1">
+                    {{ item_form.unit_price.label }}
+                  </label>
+                  {{ item_form.unit_price }}
+                </div>
+
+                {% if item_form.total %}
+                <div class="md:col-span-4">
+                  <label class="block text-white/60 mb-1">
+                    {{ item_form.total.label }}
+                  </label>
+                  {{ item_form.total }}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Akcie -->
+      <div class="flex items-center gap-4">
+        <button
+          type="submit"
+          class="rounded-xl px-6 py-3
+                 bg-[#EDAE49] text-[#003D5B]
+                 font-bold
+                 shadow-lg shadow-[#EDAE49]/40
+                 transition-all duration-300
+                 hover:-translate-y-0.5 hover:bg-[#68A357]
+                 focus:outline-none focus:ring-4 focus:ring-[#00798C] cursor-pointer"
+        >
+          Uložiť
+        </button>
+
+        <a
+          href="{% url 'invoice_list' %}"
+          class="text-white/80 hover:underline"
+        >
+          Späť
+        </a>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+
+<script>
+  function toggleInvoiceNumberEdit() {
+    const el = document.getElementById("invoice-number-edit");
+    el.classList.toggle("hidden");
+  }
+</script>
+{% endblock %}
