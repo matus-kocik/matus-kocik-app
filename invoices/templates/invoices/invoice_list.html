@@ -57,6 +57,13 @@
                   Upraviť
                 </a>
                 <a
+                  href="{% url 'invoice_pdf' invoice.pk %}"
+                  class="text-white/80 hover:underline"
+                  target="_blank"
+                >
+                  PDF
+                </a>
+                <a
                   href="{% url 'invoice_delete' invoice.pk %}"
                   class="text-red-400 hover:underline"
                 >

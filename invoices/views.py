@@ -1,7 +1,10 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, ListView, DeleteView
+from django.views.generic import CreateView, UpdateView, ListView, DeleteView, DetailView
 from django.db import transaction
 from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
 
 from .models import Invoice
 from .forms import InvoiceForm, InvoiceItemFormSet
@@ -55,18 +58,19 @@ class InvoiceCreateView(CreateView):
         formset = context["formset"]
 
         with transaction.atomic():
-            if not form.instance.number:
-                form.instance.number = self.get_initial().get("number")
             self.object = form.save()
 
-            if formset.is_valid():
+            # ak formset nie je validný ALEBO je úplne prázdny, ulož len faktúru
+            if formset.is_valid() and formset.has_changed():
                 formset.instance = self.object
                 formset.save()
-                self.object.recalculate_total()
-            else:
-                return self.form_invalid(form)
 
-        return super().form_valid(form)
+            self.object.recalculate_total()
+
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return self.success_url
 
 
 class InvoiceUpdateView(UpdateView):
@@ -112,3 +116,20 @@ class InvoiceDeleteView(DeleteView):
         invoice.is_deleted = True
         invoice.save(update_fields=["is_deleted"])
         return redirect(self.success_url)
+
+
+class InvoicePDFView(DetailView):
+    model = Invoice
+
+    def get(self, request, *args, **kwargs):
+        invoice = self.get_object()
+        html_string = render_to_string(
+            "invoices/pdf/invoice.html",
+            {"invoice": invoice}
+        )
+        html = HTML(string=html_string, base_url=request.build_absolute_uri())
+        pdf = html.write_pdf()
+
+        response = HttpResponse(pdf, content_type="application/pdf")
+        response["Content-Disposition"] = f'inline; filename="invoice_{invoice.number}.pdf"'
+        return response

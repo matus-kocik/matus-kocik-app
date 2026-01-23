@@ -1,5 +1,3 @@
-
-
 from django.urls import path
 
 from .views import (
@@ -7,6 +5,7 @@ from .views import (
     InvoiceCreateView,
     InvoiceUpdateView,
     InvoiceDeleteView,
+    InvoicePDFView,
 )
 
 urlpatterns = [
@@ -14,4 +13,5 @@ urlpatterns = [
     path("new/", InvoiceCreateView.as_view(), name="invoice_create"),
     path("<int:pk>/edit/", InvoiceUpdateView.as_view(), name="invoice_edit"),
     path("<int:pk>/delete/", InvoiceDeleteView.as_view(), name="invoice_delete"),
+    path("<int:pk>/pdf/", InvoicePDFView.as_view(), name="invoice_pdf"),
 ]

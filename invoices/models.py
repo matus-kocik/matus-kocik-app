@@ -30,6 +30,7 @@ class Invoice(models.Model):
     # Platobné údaje
     variable_symbol = models.CharField(
         max_length=20,
+        blank=True,
         verbose_name="Variabilný symbol",
     )
 
@@ -144,20 +145,12 @@ class Invoice(models.Model):
             (item.total for item in self.items.all()),
             Decimal("0"),
         )
-        self.total = total
-        self.save(update_fields=["total"])
+        Invoice.objects.filter(pk=self.pk).update(total=total)
 
     def save(self, *args, **kwargs):
-        creating = self.pk is None
-
         if not self.variable_symbol:
             self.variable_symbol = self.number
-
         super().save(*args, **kwargs)
-
-        # po uložení prepočítaj sumu len ak faktúra už existuje
-        if not creating:
-            self.recalculate_total()
 
     def __str__(self):
         return self.number
@@ -196,6 +189,11 @@ class InvoiceItem(models.Model):
         super().save(*args, **kwargs)
         if self.invoice_id:
             self.invoice.recalculate_total()
+
+    def delete(self, *args, **kwargs):
+        invoice = self.invoice
+        super().delete(*args, **kwargs)
+        invoice.recalculate_total()
 
     def __str__(self):
         return self.name
