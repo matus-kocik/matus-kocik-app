@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Page layout wrapper -->
+<div class="min-h-screen p-6 bg-[#003D5B]">
+
+  <!-- Main card -->
+  <div class="max-w-5xl xl:max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-8 shadow-2xl shadow-black/40">
+
+    <!-- Page header -->
+    <div class="mb-10">
+      <h1 class="text-3xl font-extrabold text-[#EDAE49]">
+        {% if object %}Subjekt{% else %}Nový subjekt{% endif %}
+      </h1>
+      <div class="mt-4 border-b border-white/20"></div>
+    </div>
+
+    <!-- Entity form -->
+    <form method="post" class="space-y-10">
+      {% csrf_token %}
+
+      <!-- Basic entity info -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Základné údaje
+        </h2>
+        <div class="mb-10 border-b border-white/20"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.name.label }}</label>
+            {{ form.name }}
+          </div>
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.email.label }}</label>
+            {{ form.email }}
+          </div>
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.ico.label }}</label>
+            {{ form.ico }}
+          </div>
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.dic.label }}</label>
+            {{ form.dic }}
+          </div>
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.ic_dph.label }}</label>
+            {{ form.ic_dph }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+        <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">
+          Adresa
+        </h2>
+        <div class="mb-10 border-b border-white/20"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="md:col-span-2">
+            <label class="block text-white/80 mb-1">{{ form.street.label }}</label>
+            {{ form.street }}
+          </div>
+          <div>
+            <label class="block text-white/80 mb-1">{{ form.zip_code.label }}</label>
+            {{ form.zip_code }}
+          </div>
+          <div class="md:col-span-2">
+            <label class="block text-white/80 mb-1">{{ form.city.label }}</label>
+            {{ form.city }}
+          </div>
+          <div class="md:col-span-3">
+            <label class="block text-white/80 mb-1">{{ form.country.label }}</label>
+            {{ form.country }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary actions -->
+      <div class="flex items-center gap-4">
+        <button
+          type="submit"
+          class="rounded-xl px-6 py-3
+                 bg-[#EDAE49] text-[#003D5B]
+                 font-bold
+                 shadow-lg shadow-[#EDAE49]/40
+                 transition-all duration-300
+                 hover:-translate-y-0.5 hover:bg-[#68A357]
+                 focus:outline-none focus:ring-4 focus:ring-[#00798C] cursor-pointer"
+        >
+          Uložiť
+        </button>
+
+        <a
+          href="{% url 'entities:entity_list' %}"
+          class="text-white/80 hover:underline"
+        >
+          Späť
+        </a>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}

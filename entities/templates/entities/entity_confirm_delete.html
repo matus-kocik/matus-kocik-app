@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-<!-- Invoice delete confirmation -->
 
 {% block content %}
 <!-- Page layout wrapper -->
@@ -8,14 +7,14 @@
 
     <!-- Confirmation title -->
     <h1 class="text-2xl font-bold text-white mb-4">
-      Zmazať faktúru
+      Zmazať subjekt
     </h1>
 
-    <!-- Confirmation message with invoice identifier -->
+    <!-- Confirmation message -->
     <p class="text-white/80 mb-8">
-      Naozaj chceš zmazať faktúru
-      <span class="font-mono font-semibold text-white">
-        {{ object.number|default:object.pk }}
+      Naozaj chceš zmazať subjekt
+      <span class="font-semibold text-white">
+        {{ object.name }}
       </span>
       ?
     </p>
@@ -24,7 +23,7 @@
     <form method="post" class="flex items-center justify-center gap-4">
       {% csrf_token %}
 
-      <!-- Confirm deletion action -->
+      <!-- Confirm deletion -->
       <button
         type="submit"
         class="rounded-xl px-6 py-3
@@ -38,9 +37,9 @@
         Áno, zmazať
       </button>
 
-      <!-- Cancel and return to invoice list -->
+      <!-- Cancel -->
       <a
-        href="{% url 'invoice_list' %}"
+        href="{% url 'entities:entity_list' %}"
         class="rounded-xl px-6 py-3
                bg-[#EDAE49] text-[#003D5B]
                font-bold

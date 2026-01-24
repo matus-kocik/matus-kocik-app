@@ -1,7 +1,3 @@
-# from django.contrib import admin
-
-# Register your models here.
-
 from django.contrib import admin
 
 from .models import Invoice, InvoiceItem
@@ -28,14 +24,15 @@ class InvoiceAdmin(admin.ModelAdmin):
     """
     list_display = (
         "number",
-        "customer_name",
+        "supplier",
+        "customer",
         "issue_date",
         "due_date",
         "total",
         "is_deleted",
     )
     list_filter = ("is_deleted", "issue_date", "due_date")
-    search_fields = ("number", "customer_name")
+    search_fields = ("number", "customer__name", "supplier__name")
     ordering = ("-created_at",)
 
     inlines = [InvoiceItemInline]
@@ -55,24 +52,11 @@ class InvoiceAdmin(admin.ModelAdmin):
             },
         ),
         (
-            "Supplier",
+            "Entities",
             {
                 "fields": (
-                    "supplier_name",
-                    "supplier_ico",
-                    "supplier_dic",
-                )
-            },
-        ),
-        (
-            "Customer",
-            {
-                "fields": (
-                    "customer_name",
-                    "customer_address",
-                    "customer_city",
-                    "customer_zip",
-                    "customer_country",
+                    "supplier",
+                    "customer",
                 )
             },
         ),
@@ -80,7 +64,7 @@ class InvoiceAdmin(admin.ModelAdmin):
             "Payment",
             {
                 "fields": (
-                    "iban",
+                    "bank_account",
                     "variable_symbol",
                     "constant_symbol",
                     "specific_symbol",

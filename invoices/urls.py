@@ -17,7 +17,7 @@ urlpatterns = [
     # Create a new invoice
     path("new/", InvoiceCreateView.as_view(), name="invoice_create"),
     # Edit an existing invoice
-    path("<int:pk>/edit/", InvoiceUpdateView.as_view(), name="invoice_edit"),
+    path("<int:pk>/update/", InvoiceUpdateView.as_view(), name="invoice_update"),
     # Soft-delete an invoice
     path("<int:pk>/delete/", InvoiceDeleteView.as_view(), name="invoice_delete"),
     # Render invoice as PDF

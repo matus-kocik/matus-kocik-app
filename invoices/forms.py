@@ -22,7 +22,18 @@ class InvoiceForm(forms.ModelForm):
         Meta configuration mapping Invoice model fields to form widgets.
         """
         model = Invoice
-        fields = "__all__"
+        fields = (
+            "number",
+            "issue_date",
+            "delivery_date",
+            "due_date",
+            "supplier",
+            "customer",
+            "variable_symbol",
+            "constant_symbol",
+            "specific_symbol",
+            "note",
+        )
         widgets = {
             "number": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
@@ -39,57 +50,12 @@ class InvoiceForm(forms.ModelForm):
                 "type": "date",
                 "class": BASE_INPUT_CLASS
             }),
-
-            # Supplier (issuer)
-            "supplier_name": forms.TextInput(attrs={
+            "supplier": forms.Select(attrs={
                 "class": BASE_INPUT_CLASS
             }),
-            "supplier_ico": forms.TextInput(attrs={
+            "customer": forms.Select(attrs={
                 "class": BASE_INPUT_CLASS
             }),
-            "supplier_dic": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "supplier_iban": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS + " font-mono"
-            }),
-
-            # Customer
-            "customer_name": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_ico": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_dic": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_ic_dph": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_street": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_street_number": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_city": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_zip": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_country": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_email": forms.EmailInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer_iban": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS + " font-mono"
-            }),
-
-            # Payment details
             "variable_symbol": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
             }),
@@ -99,8 +65,6 @@ class InvoiceForm(forms.ModelForm):
             "specific_symbol": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
             }),
-
-            # Additional note
             "note": forms.Textarea(attrs={
                 "class": BASE_INPUT_CLASS,
                 "rows": 4

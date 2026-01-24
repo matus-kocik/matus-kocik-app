@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}Subjekty{% endblock %}
+
+{% block content %}
+<div class="min-h-screen p-6 bg-[#003D5B]">
+    <div class="max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-6 shadow-2xl shadow-black/40">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-3xl font-bold text-white">Subjekty</h1>
+            <a href="{% url 'entities:entity_create' %}"
+               class="rounded-xl px-6 py-3
+                      bg-[#EDAE49] text-[#003D5B]
+                      font-bold
+                      shadow-lg shadow-[#EDAE49]/40
+                      transition-all duration-300
+                      hover:-translate-y-0.5 hover:bg-[#68A357]
+                      focus:outline-none focus:ring-4 focus:ring-[#00798C]">
+                + Nový subjekt
+            </a>
+        </div>
+        <table class="w-full text-left text-white">
+            <thead class="bg-[#003D5B] text-white/80">
+                <tr>
+                    <th class="px-4 py-3">Názov</th>
+                    <th class="px-4 py-3">IČO</th>
+                    <th class="px-4 py-3">DIČ</th>
+                    <th class="px-4 py-3">Krajina</th>
+                    <th class="px-4 py-3 text-right">Akcie</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if entities %}
+                    {% for entity in entities %}
+                        <tr class="border-b border-white/10 hover:bg-[#003D5B]/40 transition">
+                            <td class="px-4 py-3 font-medium">
+                                {{ entity.name }}
+                            </td>
+                            <td class="px-4 py-3">
+                                {{ entity.ico|default:"—" }}
+                            </td>
+                            <td class="px-4 py-3">
+                                {{ entity.dic|default:"—" }}
+                            </td>
+                            <td class="px-4 py-3">
+                                {{ entity.country }}
+                            </td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap">
+                                <a href="{% url 'entities:entity_update' entity.pk %}"
+                                   class="text-[#EDAE49] hover:underline mr-3">
+                                    Upraviť
+                                </a>
+                                <a href="{% url 'entities:entity_delete' entity.pk %}"
+                                   class="text-red-400 hover:underline">
+                                    Zmazať
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="px-4 py-10 text-center text-white/70">
+                            Zatiaľ nemáš žiadne subjekty.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

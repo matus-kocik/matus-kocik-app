@@ -12,4 +12,5 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     # Invoices application routes
     path("invoices/", include("invoices.urls")),
+    path("entities/", include("entities.urls")),
 ]

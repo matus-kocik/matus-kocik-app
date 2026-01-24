@@ -1,5 +1,6 @@
 from django.db import models
 from decimal import Decimal
+from entities.models import Entity
 
 
 class Invoice(models.Model):
@@ -21,15 +22,18 @@ class Invoice(models.Model):
         verbose_name="Dátum dodania",
     )
 
-    supplier_iban = models.CharField(
-        max_length=34,
-        verbose_name="IBAN dodávateľa",
+    supplier = models.ForeignKey(
+        Entity,
+        related_name="issued_invoices",
+        on_delete=models.PROTECT,
+        verbose_name="Dodávateľ",
     )
 
-    customer_iban = models.CharField(
-        max_length=34,
-        blank=True,
-        verbose_name="IBAN odberateľa",
+    customer = models.ForeignKey(
+        Entity,
+        related_name="received_invoices",
+        on_delete=models.PROTECT,
+        verbose_name="Odberateľ",
     )
 
     # Payment identifiers used mainly for bank transfers (SK/CZ context)
@@ -49,75 +53,6 @@ class Invoice(models.Model):
         max_length=20,
         blank=True,
         verbose_name="Špecifický symbol",
-    )
-
-    # Supplier (issuer) identification
-    supplier_name = models.CharField(
-        max_length=255,
-        verbose_name="Názov dodávateľa",
-    )
-    supplier_ico = models.CharField(
-        max_length=20,
-        verbose_name="IČO dodávateľa",
-    )
-    supplier_dic = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="DIČ dodávateľa",
-    )
-
-    # Customer identification and address
-    customer_name = models.CharField(
-        max_length=255,
-        verbose_name="Obchodné meno / meno a priezvisko",
-    )
-
-    customer_ico = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="IČO",
-    )
-
-    customer_dic = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="DIČ",
-    )
-
-    customer_ic_dph = models.CharField(
-        max_length=20,
-        blank=True,
-        verbose_name="IČ DPH",
-    )
-
-    customer_street = models.CharField(
-        max_length=255,
-        verbose_name="Ulica",
-    )
-
-    customer_street_number = models.CharField(
-        max_length=50,
-        verbose_name="Číslo",
-    )
-
-    customer_city = models.CharField(
-        max_length=100,
-        verbose_name="Mesto",
-    )
-
-    customer_zip = models.CharField(
-        max_length=10,
-        verbose_name="PSČ",
-    )
-
-    customer_country = models.CharField(
-        max_length=100,
-        verbose_name="Krajina",
-    )
-
-    customer_email = models.EmailField(
-        blank=True,
-        verbose_name="Email odberateľa",
     )
 
     note = models.TextField(

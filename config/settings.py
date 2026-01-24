@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "users",
     "core",
     "invoices",
+    "entities",
 ]
 
 MIDDLEWARE = [

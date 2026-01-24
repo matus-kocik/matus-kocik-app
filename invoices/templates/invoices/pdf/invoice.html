@@ -93,32 +93,38 @@
     <div class="col">
       <h2>Dodávateľ</h2>
       <div class="block">
-        <div><span class="label">Názov:</span> {{ invoice.supplier_name }}</div>
-        <div><span class="label">IČO:</span> {{ invoice.supplier_ico }}</div>
+        <div><span class="label">Názov:</span> {{ invoice.supplier.name }}</div>
+        <div><span class="label">IČO:</span> {{ invoice.supplier.ico }}</div>
         <!-- Optional supplier tax ID -->
-        {% if invoice.supplier_dic %}
-          <div><span class="label">DIČ:</span> {{ invoice.supplier_dic }}</div>
+        {% if invoice.supplier.dic %}
+          <div><span class="label">DIČ:</span> {{ invoice.supplier.dic }}</div>
         {% endif %}
+        {% if invoice.supplier.ic_dph %}
+          <div><span class="label">IČ DPH:</span> {{ invoice.supplier.ic_dph }}</div>
+        {% endif %}
+        <div>{{ invoice.supplier.street }}</div>
+        <div>{{ invoice.supplier.zip_code }} {{ invoice.supplier.city }}</div>
+        <div>{{ invoice.supplier.country }}</div>
       </div>
     </div>
 
     <div class="col">
       <h2>Odberateľ</h2>
       <div class="block">
-        <div><span class="label">Názov:</span> {{ invoice.customer_name }}</div>
+        <div><span class="label">Názov:</span> {{ invoice.customer.name }}</div>
         <!-- Optional customer identification fields -->
-        {% if invoice.customer_ico %}
-          <div><span class="label">IČO:</span> {{ invoice.customer_ico }}</div>
+        {% if invoice.customer.ico %}
+          <div><span class="label">IČO:</span> {{ invoice.customer.ico }}</div>
         {% endif %}
-        {% if invoice.customer_dic %}
-          <div><span class="label">DIČ:</span> {{ invoice.customer_dic }}</div>
+        {% if invoice.customer.dic %}
+          <div><span class="label">DIČ:</span> {{ invoice.customer.dic }}</div>
         {% endif %}
-        {% if invoice.customer_ic_dph %}
-          <div><span class="label">IČ DPH:</span> {{ invoice.customer_ic_dph }}</div>
+        {% if invoice.customer.ic_dph %}
+          <div><span class="label">IČ DPH:</span> {{ invoice.customer.ic_dph }}</div>
         {% endif %}
-        <div>{{ invoice.customer_street }}</div>
-        <div>{{ invoice.customer_zip }} {{ invoice.customer_city }}</div>
-        <div>{{ invoice.customer_country }}</div>
+        <div>{{ invoice.customer.street }}</div>
+        <div>{{ invoice.customer.zip_code }} {{ invoice.customer.city }}</div>
+        <div>{{ invoice.customer.country }}</div>
       </div>
     </div>
   </div>
@@ -131,7 +137,11 @@
       <div><span class="label">Dátum splatnosti:</span> {{ invoice.due_date }}</div>
     </div>
     <div class="col">
-      <div><span class="label">IBAN:</span> {{ invoice.supplier_iban }}</div>
+      <div><span class="label">IBAN:</span> 
+        {% if invoice.supplier.default_bank_account %}
+          {{ invoice.supplier.default_bank_account.iban }}
+        {% endif %}
+      </div>
       {% if invoice.variable_symbol %}
         <div><span class="label">VS:</span> {{ invoice.variable_symbol }}</div>
       {% endif %}

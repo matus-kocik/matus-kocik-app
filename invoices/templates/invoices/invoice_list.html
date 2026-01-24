@@ -47,7 +47,7 @@
                 {{ invoice.number }}
               </td>
               <td class="px-4 py-3">
-                {{ invoice.customer_name }}
+                {{ invoice.customer.name }}
               </td>
               <td class="px-4 py-3">
                 {{ invoice.issue_date }}
@@ -55,10 +55,10 @@
               <td class="px-4 py-3 font-semibold">
                 {{ invoice.total }} €
               </td>
-              <!-- Row actions: edit, PDF export, delete -->
+              <!-- Row actions: update, PDF export, delete -->
               <td class="px-4 py-3 text-right space-x-4">
                 <a
-                  href="{% url 'invoice_edit' invoice.pk %}"
+                  href="{% url 'invoice_update' invoice.pk %}"
                   class="text-[#EDAE49] hover:underline"
                 >
                   Upraviť
