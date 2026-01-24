@@ -10,34 +10,13 @@ from django.db.models.functions import Concat
 
 class CustomUserManager(BaseUserManager):
     """
-    Custom manager for the CustomUser model.
-
-    This manager is responsible for handling user creation, including regular users
-    and superusers, and provides additional authentication-related methods.
-
-    Methods:
-        - create_user(email, password=None, **extra_fields): Creates a regular user.
-        - create_superuser(email, password=None, **extra_fields): Creates a superuser.
-        - get_by_natural_key(email): Retrieves a user by their email.
+    User manager that uses email as the primary identifier instead of username.
+    Handles creation of regular users and superusers.
     """
 
     def create_user(self, email, password=None, **extra_fields):
         """
-        Creates and returns a regular user with the given email and password.
-
-        This method ensures that every user has a unique email and that the email
-        is properly formatted before storing it in the database.
-
-        Args:
-            email (str): The unique email address of the user.
-            password (str, optional): The user's password. Defaults to None.
-            **extra_fields: Additional fields for the user model.
-
-        Returns:
-            CustomUser: The created user instance.
-
-        Raises:
-            ValueError: If the email is missing.
+        Create and persist a regular user identified by email.
         """
         if not email:
             raise ValueError("The Email field is required and must be set")
@@ -60,23 +39,7 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, password=None, **extra_fields):
         """
-        Creates and saves a new superuser with the given email and password.
-        Extra fields are added to indicate that the user is staff, active,
-        and indeed a superuser.
-
-        Superusers have full permissions (`is_staff=True` and `is_superuser=True`).
-        If these flags are not explicitly set, the method will raise an error.
-
-        Args:
-            email (str): The unique email address of the superuser.
-            password (str, optional): The superuser's password. Defaults to None.
-            **extra_fields: Additional fields for the superuser model.
-
-        Returns:
-            CustomUser: Created superuser instance with admin privileges
-
-        Raises:
-            ValueError: If `is_staff` or `is_superuser` is not set to True.
+        Create a superuser with staff and superuser permissions enabled.
         """
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
@@ -90,19 +53,7 @@ class CustomUserManager(BaseUserManager):
 
     def get_by_natural_key(self, email):
         """
-        Retrieves a user instance by their natural key (email).
-
-        This method is used by Django's authentication system to find users
-        during login or permission checks.
-
-        Args:
-            email (str): The email of the user.
-
-        Returns:
-            CustomUser: The user instance.
-
-        Raises:
-            ValueError: If the email is not provided.
+        Enable case-insensitive lookup by email for authentication.
         """
         if not email:
             raise ValueError("Natural key (email) must be provided")
@@ -112,25 +63,13 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
-    Custom user model that replaces Django's default User model.
-
-    This model extends Django's AbstractBaseUser and PermissionsMixin to create
-    a fully featured user model with admin-compliant permissions.
-
-    Fields:
-        - email (EmailField): The user's unique email address.
-        - first_name (CharField): The user's first name.
-        - last_name (CharField): The user's last name.
-        - full_name (GeneratedField): The user's full name (first + last name).
-        - is_active (BooleanField): Indicates whether the account is active.
-        - is_staff (BooleanField): Determines if the user has admin privileges.
-        - date_joined (DateTimeField): Timestamp of when the account was created.
-
-    Authentication:
-        - `USERNAME_FIELD` is set to `email` (instead of `username`).
-        - `REQUIRED_FIELDS` include `first_name` and `last_name`.
+    Custom user model using email as the unique login identifier.
     """
 
+    # Model field notes:
+    # - verbose_name: label shown in Django admin and forms
+    # - help_text: helper text displayed under the input field
+    # - db_index: improves performance for frequent lookups (e.g. login)
     email = models.EmailField(
         unique=True,
         db_index=True,  # Optimizes queries involving email searches
@@ -178,21 +117,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         """
-        Returns a string representation of the user.
-
-        This method formats the user's full name and email in a readable way.
+        Human-readable representation used in admin and logs.
         """
         return f"{self.full_name} ({self.email})"
 
     class Meta:
         """
-        Meta options for the CustomUser model.
-
-        - `db_table`: Defines the database table name (`users`).
-        - `verbose_name`: Defines the singular name for the model in the admin.
-        - `verbose_name_plural`: Defines the plural name for the model in the admin.
-        - `ordering`: Ensures that users are ordered by their registration date
-            (newest first).
+        Admin and database configuration for the user model.
         """
 
         db_table = "users"
@@ -202,15 +133,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def clean(self):
         """
-        Custom validation for the user model.
-
-        This method:
-        - Ensures that the email is always stored in lowercase.
-        - Validates that first and last names are not empty.
-        - Prevents duplicate emails from being registered.
-
-        Raises:
-            ValidationError: If any validation rule fails.
+        Normalize and validate user data before saving.
+        Ensures lowercase email and avoids case-sensitive duplicates.
         """
         super().clean()
 

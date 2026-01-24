@@ -1,11 +1,17 @@
+<!-- Base layout template -->
+<!-- Provides common HTML structure, global styles, and content block -->
 <!doctype html>
 <html class="dark">
 <head>
     <title>MK WEB</title>
+    <!-- Load Django static files (CSS, JS, images) -->
     {% load static %}
+    <!-- Global compiled CSS (Tailwind output) -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<!-- Page body -->
 <body class="bg-gray-100 dark:bg-gray-900">
+    <!-- Main page content will be injected here -->
     {% block content %}{% endblock %}
 </body>
 </html>

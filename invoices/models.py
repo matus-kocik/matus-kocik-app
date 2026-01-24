@@ -3,6 +3,11 @@ from decimal import Decimal
 
 
 class Invoice(models.Model):
+    """
+    Represents a sales invoice including supplier, customer, and payment details.
+    Acts as the aggregate root for invoice items.
+    """
+    # Core invoice identification and dates
     number = models.CharField(
         max_length=20,
         unique=True,
@@ -27,7 +32,7 @@ class Invoice(models.Model):
         verbose_name="IBAN odberateľa",
     )
 
-    # Platobné údaje
+    # Payment identifiers used mainly for bank transfers (SK/CZ context)
     variable_symbol = models.CharField(
         max_length=20,
         blank=True,
@@ -46,6 +51,7 @@ class Invoice(models.Model):
         verbose_name="Špecifický symbol",
     )
 
+    # Supplier (issuer) identification
     supplier_name = models.CharField(
         max_length=255,
         verbose_name="Názov dodávateľa",
@@ -60,6 +66,7 @@ class Invoice(models.Model):
         verbose_name="DIČ dodávateľa",
     )
 
+    # Customer identification and address
     customer_name = models.CharField(
         max_length=255,
         verbose_name="Obchodné meno / meno a priezvisko",
@@ -118,6 +125,7 @@ class Invoice(models.Model):
         verbose_name="Poznámka",
     )
 
+    # Cached total amount of the invoice (calculated from items)
     total = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -126,11 +134,13 @@ class Invoice(models.Model):
         verbose_name="Celková suma",
     )
 
+    # Soft-delete flag to keep invoices for history/audit purposes
     is_deleted = models.BooleanField(
         default=False,
         verbose_name="Zmazaná",
     )
 
+    # Timestamps
     created_at = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Vytvorené",
@@ -141,6 +151,9 @@ class Invoice(models.Model):
     )
 
     def recalculate_total(self):
+        """
+        Recalculate and persist the invoice total based on related items.
+        """
         total = sum(
             (item.total for item in self.items.all()),
             Decimal("0"),
@@ -148,15 +161,25 @@ class Invoice(models.Model):
         Invoice.objects.filter(pk=self.pk).update(total=total)
 
     def save(self, *args, **kwargs):
+        """
+        Ensure variable symbol defaults to invoice number on first save.
+        """
         if not self.variable_symbol:
             self.variable_symbol = self.number
         super().save(*args, **kwargs)
 
     def __str__(self):
+        """
+        String representation used in admin and selections.
+        """
         return self.number
 
 
 class InvoiceItem(models.Model):
+    """
+    Line item belonging to an invoice.
+    Calculates its own total and keeps the parent invoice total in sync.
+    """
     invoice = models.ForeignKey(
         Invoice,
         related_name="items",
@@ -185,15 +208,24 @@ class InvoiceItem(models.Model):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Calculate item total before saving and update parent invoice total.
+        """
         self.total = (self.quantity or Decimal("0")) * (self.unit_price or Decimal("0"))
         super().save(*args, **kwargs)
         if self.invoice_id:
             self.invoice.recalculate_total()
 
     def delete(self, *args, **kwargs):
+        """
+        Recalculate parent invoice total after item removal.
+        """
         invoice = self.invoice
         super().delete(*args, **kwargs)
         invoice.recalculate_total()
 
     def __str__(self):
+        """
+        Human-readable item label.
+        """
         return self.name

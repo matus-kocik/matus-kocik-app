@@ -1,8 +1,11 @@
+<!-- Invoice PDF template -->
+<!-- Used for server-side PDF rendering (HTML -> PDF). -->
 <!DOCTYPE html>
 <html lang="sk">
 <head>
   <meta charset="UTF-8">
   <title>Faktúra {{ invoice.number }}</title>
+  <!-- Inline styles required for PDF rendering engines (no external CSS). -->
   <style>
     body {
       font-family: DejaVu Sans, Arial, sans-serif;
@@ -82,14 +85,17 @@
 
 <body>
 
+  <!-- Invoice title -->
   <h1>Faktúra č. {{ invoice.number }}</h1>
 
+  <!-- Supplier and customer details -->
   <div class="row">
     <div class="col">
       <h2>Dodávateľ</h2>
       <div class="block">
         <div><span class="label">Názov:</span> {{ invoice.supplier_name }}</div>
         <div><span class="label">IČO:</span> {{ invoice.supplier_ico }}</div>
+        <!-- Optional supplier tax ID -->
         {% if invoice.supplier_dic %}
           <div><span class="label">DIČ:</span> {{ invoice.supplier_dic }}</div>
         {% endif %}
@@ -100,6 +106,7 @@
       <h2>Odberateľ</h2>
       <div class="block">
         <div><span class="label">Názov:</span> {{ invoice.customer_name }}</div>
+        <!-- Optional customer identification fields -->
         {% if invoice.customer_ico %}
           <div><span class="label">IČO:</span> {{ invoice.customer_ico }}</div>
         {% endif %}
@@ -116,6 +123,7 @@
     </div>
   </div>
 
+  <!-- Payment and date information -->
   <h2>Platobné údaje</h2>
   <div class="row">
     <div class="col">
@@ -136,6 +144,7 @@
     </div>
   </div>
 
+  <!-- Invoice line items table -->
   <h2>Položky</h2>
   <table>
     <thead>
@@ -147,6 +156,7 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Iterate over invoice items -->
       {% for item in invoice.items.all %}
         <tr>
           <td>{{ item.name }}</td>
@@ -158,10 +168,12 @@
     </tbody>
   </table>
 
+  <!-- Final invoice total -->
   <div class="total">
     Celkom na úhradu: {{ invoice.total }} €
   </div>
 
+  <!-- Optional invoice note -->
   {% if invoice.note %}
     <div class="note">
       <strong>Poznámka:</strong><br>

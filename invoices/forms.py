@@ -1,15 +1,26 @@
+# Forms for creating and editing invoices and their line items.
+# Focused mainly on presentation (widgets, CSS classes), not business logic.
 from django import forms
 from django.forms import inlineformset_factory
 
 from .models import Invoice, InvoiceItem
 
 
+# Shared Tailwind CSS classes for form inputs.
+# Centralized here to keep widget definitions consistent and maintainable.
 BASE_INPUT_CLASS = "w-full rounded-xl bg-white/80 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
 BASE_INPUT_NUMBER_CLASS = BASE_INPUT_CLASS + " text-right"
 
 
 class InvoiceForm(forms.ModelForm):
+    """
+    Model form for creating and editing invoices.
+    Handles only field presentation and basic HTML input configuration.
+    """
     class Meta:
+        """
+        Meta configuration mapping Invoice model fields to form widgets.
+        """
         model = Invoice
         fields = "__all__"
         widgets = {
@@ -29,7 +40,7 @@ class InvoiceForm(forms.ModelForm):
                 "class": BASE_INPUT_CLASS
             }),
 
-            # Dodávateľ
+            # Supplier (issuer)
             "supplier_name": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
             }),
@@ -43,7 +54,7 @@ class InvoiceForm(forms.ModelForm):
                 "class": BASE_INPUT_CLASS + " font-mono"
             }),
 
-            # Odberateľ
+            # Customer
             "customer_name": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
             }),
@@ -78,7 +89,7 @@ class InvoiceForm(forms.ModelForm):
                 "class": BASE_INPUT_CLASS + " font-mono"
             }),
 
-            # Platobné údaje
+            # Payment details
             "variable_symbol": forms.TextInput(attrs={
                 "class": BASE_INPUT_CLASS
             }),
@@ -89,7 +100,7 @@ class InvoiceForm(forms.ModelForm):
                 "class": BASE_INPUT_CLASS
             }),
 
-            # Poznámka
+            # Additional note
             "note": forms.Textarea(attrs={
                 "class": BASE_INPUT_CLASS,
                 "rows": 4
@@ -98,7 +109,14 @@ class InvoiceForm(forms.ModelForm):
 
 
 class InvoiceItemForm(forms.ModelForm):
+    """
+    Form for a single invoice line item.
+    Used primarily within an inline formset.
+    """
     class Meta:
+        """
+        Meta configuration for invoice item fields and widgets.
+        """
         model = InvoiceItem
         fields = ("name", "quantity", "unit_price")
         widgets = {
@@ -118,6 +136,7 @@ class InvoiceItemForm(forms.ModelForm):
         }
 
 
+# Inline formset for managing invoice items directly within the invoice form.
 InvoiceItemFormSet = inlineformset_factory(
     Invoice,
     InvoiceItem,

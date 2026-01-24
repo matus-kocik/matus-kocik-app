@@ -1,12 +1,16 @@
+<!-- Home / landing page -->
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
+<!-- Page layout wrapper -->
 <div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
 
+  <!-- Centered profile card -->
   <div class="w-full max-w-md rounded-3xl bg-[#30638E] p-8 text-center
               shadow-2xl shadow-black/40">
 
+    <!-- Profile avatar -->
     <img
       src="{% static 'images/avatar.jpg' %}"
       alt="Matúš Kočik"
@@ -15,10 +19,12 @@
              shadow-lg shadow-[#EDAE49]/30 mb-8"
     />
 
+    <!-- Profile name -->
     <h1 class="text-3xl font-bold text-white mb-10">
       Matúš Kočik
     </h1>
 
+    <!-- Primary external link (GitHub profile) -->
     <a
       href="https://github.com/matus-kocik"
       target="_blank"
