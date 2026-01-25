@@ -1,195 +1,201 @@
 <!-- Invoice PDF template -->
 <!-- Used for server-side PDF rendering (HTML -> PDF). -->
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sk">
-<head>
-  <meta charset="UTF-8">
-  <title>Faktúra {{ invoice.number }}</title>
-  <!-- Inline styles required for PDF rendering engines (no external CSS). -->
-  <style>
-    body {
-      font-family: DejaVu Sans, Arial, sans-serif;
-      font-size: 12px;
-      color: #111827;
-      margin: 0;
-      padding: 32px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Faktúra {{ invoice.number }}</title>
+    <!-- Inline styles required for PDF rendering engines (no external CSS). -->
+    <style>
+      body {
+        font-family:
+          DejaVu Sans,
+          Arial,
+          sans-serif;
+        font-size: 12px;
+        color: #111827;
+        margin: 0;
+        padding: 32px;
+      }
 
-    h1 {
-      font-size: 22px;
-      margin: 0 0 16px 0;
-    }
+      h1 {
+        font-size: 22px;
+        margin: 0 0 16px 0;
+      }
 
-    h2 {
-      font-size: 14px;
-      margin: 24px 0 8px 0;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 4px;
-    }
+      h2 {
+        font-size: 14px;
+        margin: 24px 0 8px 0;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 4px;
+      }
 
-    .row {
-      display: flex;
-      justify-content: space-between;
-      gap: 32px;
-    }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+      }
 
-    .col {
-      flex: 1;
-    }
+      .col {
+        flex: 1;
+      }
 
-    .block {
-      margin-bottom: 16px;
-    }
+      .block {
+        margin-bottom: 16px;
+      }
 
-    .label {
-      font-weight: bold;
-      color: #374151;
-    }
+      .label {
+        font-weight: bold;
+        color: #374151;
+      }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-    }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+      }
 
-    table th {
-      text-align: left;
-      border-bottom: 1px solid #d1d5db;
-      padding: 6px 4px;
-      font-weight: bold;
-    }
+      table th {
+        text-align: left;
+        border-bottom: 1px solid #d1d5db;
+        padding: 6px 4px;
+        font-weight: bold;
+      }
 
-    table td {
-      padding: 6px 4px;
-      border-bottom: 1px solid #f3f4f6;
-    }
+      table td {
+        padding: 6px 4px;
+        border-bottom: 1px solid #f3f4f6;
+      }
 
-    .text-right {
-      text-align: right;
-    }
+      .text-right {
+        text-align: right;
+      }
 
-    .total {
-      margin-top: 12px;
-      text-align: right;
-      font-size: 14px;
-      font-weight: bold;
-    }
+      .total {
+        margin-top: 12px;
+        text-align: right;
+        font-size: 14px;
+        font-weight: bold;
+      }
 
-    .note {
-      margin-top: 24px;
-      font-size: 11px;
-      color: #374151;
-    }
-  </style>
-</head>
+      .note {
+        margin-top: 24px;
+        font-size: 11px;
+        color: #374151;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <!-- Invoice title -->
+    <h1>Faktúra č. {{ invoice.number }}</h1>
 
-  <!-- Invoice title -->
-  <h1>Faktúra č. {{ invoice.number }}</h1>
-
-  <!-- Supplier and customer details -->
-  <div class="row">
-    <div class="col">
-      <h2>Dodávateľ</h2>
-      <div class="block">
-        <div><span class="label">Názov:</span> {{ invoice.supplier.name }}</div>
-        <div><span class="label">IČO:</span> {{ invoice.supplier.ico }}</div>
-        <!-- Optional supplier tax ID -->
-        {% if invoice.supplier.dic %}
+    <!-- Supplier and customer details -->
+    <div class="row">
+      <div class="col">
+        <h2>Dodávateľ</h2>
+        <div class="block">
+          <div>
+            <span class="label">Názov:</span> {{ invoice.supplier.name }}
+          </div>
+          <div><span class="label">IČO:</span> {{ invoice.supplier.ico }}</div>
+          <!-- Optional supplier tax ID -->
+          {% if invoice.supplier.dic %}
           <div><span class="label">DIČ:</span> {{ invoice.supplier.dic }}</div>
-        {% endif %}
-        {% if invoice.supplier.ic_dph %}
-          <div><span class="label">IČ DPH:</span> {{ invoice.supplier.ic_dph }}</div>
-        {% endif %}
-        <div>{{ invoice.supplier.street }}</div>
-        <div>{{ invoice.supplier.zip_code }} {{ invoice.supplier.city }}</div>
-        <div>{{ invoice.supplier.country }}</div>
+          {% endif %} {% if invoice.supplier.ic_dph %}
+          <div>
+            <span class="label">IČ DPH:</span> {{ invoice.supplier.ic_dph }}
+          </div>
+          {% endif %}
+          <div>{{ invoice.supplier.street }}</div>
+          <div>{{ invoice.supplier.zip_code }} {{ invoice.supplier.city }}</div>
+          <div>{{ invoice.supplier.country }}</div>
+        </div>
       </div>
-    </div>
 
-    <div class="col">
-      <h2>Odberateľ</h2>
-      <div class="block">
-        <div><span class="label">Názov:</span> {{ invoice.customer.name }}</div>
-        <!-- Optional customer identification fields -->
-        {% if invoice.customer.ico %}
+      <div class="col">
+        <h2>Odberateľ</h2>
+        <div class="block">
+          <div>
+            <span class="label">Názov:</span> {{ invoice.customer.name }}
+          </div>
+          <!-- Optional customer identification fields -->
+          {% if invoice.customer.ico %}
           <div><span class="label">IČO:</span> {{ invoice.customer.ico }}</div>
-        {% endif %}
-        {% if invoice.customer.dic %}
+          {% endif %} {% if invoice.customer.dic %}
           <div><span class="label">DIČ:</span> {{ invoice.customer.dic }}</div>
-        {% endif %}
-        {% if invoice.customer.ic_dph %}
-          <div><span class="label">IČ DPH:</span> {{ invoice.customer.ic_dph }}</div>
-        {% endif %}
-        <div>{{ invoice.customer.street }}</div>
-        <div>{{ invoice.customer.zip_code }} {{ invoice.customer.city }}</div>
-        <div>{{ invoice.customer.country }}</div>
+          {% endif %} {% if invoice.customer.ic_dph %}
+          <div>
+            <span class="label">IČ DPH:</span> {{ invoice.customer.ic_dph }}
+          </div>
+          {% endif %}
+          <div>{{ invoice.customer.street }}</div>
+          <div>{{ invoice.customer.zip_code }} {{ invoice.customer.city }}</div>
+          <div>{{ invoice.customer.country }}</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Payment and date information -->
-  <h2>Platobné údaje</h2>
-  <div class="row">
-    <div class="col">
-      <div><span class="label">Dátum vystavenia:</span> {{ invoice.issue_date }}</div>
-      <div><span class="label">Dátum splatnosti:</span> {{ invoice.due_date }}</div>
-    </div>
-    <div class="col">
-      <div><span class="label">IBAN:</span> 
-        {% if invoice.supplier.default_bank_account %}
-          {{ invoice.supplier.default_bank_account.iban }}
-        {% endif %}
+    <!-- Payment and date information -->
+    <h2>Platobné údaje</h2>
+    <div class="row">
+      <div class="col">
+        <div>
+          <span class="label">Dátum vystavenia:</span> {{ invoice.issue_date }}
+        </div>
+        <div>
+          <span class="label">Dátum splatnosti:</span> {{ invoice.due_date }}
+        </div>
       </div>
-      {% if invoice.variable_symbol %}
+      <div class="col">
+        <div>
+          <span class="label">IBAN:</span>
+          {% if invoice.supplier.default_bank_account %} {{
+          invoice.supplier.default_bank_account.iban }} {% endif %}
+        </div>
+        {% if invoice.variable_symbol %}
         <div><span class="label">VS:</span> {{ invoice.variable_symbol }}</div>
-      {% endif %}
-      {% if invoice.constant_symbol %}
+        {% endif %} {% if invoice.constant_symbol %}
         <div><span class="label">KS:</span> {{ invoice.constant_symbol }}</div>
-      {% endif %}
-      {% if invoice.specific_symbol %}
+        {% endif %} {% if invoice.specific_symbol %}
         <div><span class="label">ŠS:</span> {{ invoice.specific_symbol }}</div>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
-  </div>
 
-  <!-- Invoice line items table -->
-  <h2>Položky</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Názov</th>
-        <th class="text-right">Množstvo</th>
-        <th class="text-right">Cena</th>
-        <th class="text-right">Spolu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Iterate over invoice items -->
-      {% for item in invoice.items.all %}
+    <!-- Invoice line items table -->
+    <h2>Položky</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Názov</th>
+          <th class="text-right">Množstvo</th>
+          <th class="text-right">Cena</th>
+          <th class="text-right">Spolu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iterate over invoice items -->
+        {% for item in invoice.items.all %}
         <tr>
           <td>{{ item.name }}</td>
           <td class="text-right">{{ item.quantity }}</td>
           <td class="text-right">{{ item.unit_price }} €</td>
           <td class="text-right">{{ item.total }} €</td>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+        {% endfor %}
+      </tbody>
+    </table>
 
-  <!-- Final invoice total -->
-  <div class="total">
-    Celkom na úhradu: {{ invoice.total }} €
-  </div>
+    <!-- Final invoice total -->
+    <div class="total">Celkom na úhradu: {{ invoice.total }} €</div>
 
-  <!-- Optional invoice note -->
-  {% if invoice.note %}
+    <!-- Optional invoice note -->
+    {% if invoice.note %}
     <div class="note">
-      <strong>Poznámka:</strong><br>
+      <strong>Poznámka:</strong><br />
       {{ invoice.note|linebreaks }}
     </div>
-  {% endif %}
-
-</body>
+    {% endif %}
+  </body>
 </html>

@@ -1,66 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="sk">
-<head>
-  <meta charset="UTF-8">
-  <title>Potvrdenie registrácie</title>
-</head>
-<body style="margin:0;padding:0;background-color:#0f2f44;font-family:Arial,Helvetica,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#0f2f44;padding:40px 0;">
-    <tr>
-      <td align="center">
-        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#3f6186;border-radius:20px;padding:32px;color:#ffffff;">
-          <tr>
-            <td style="font-size:22px;font-weight:bold;padding-bottom:12px;">
-              Ahoj {{ user.first_name }},
-            </td>
-          </tr>
-
-          <tr>
-            <td style="font-size:16px;line-height:1.5;padding-bottom:20px;">
-              ďakujeme za registráciu do aplikácie.
-            </td>
-          </tr>
-
-          <tr>
-            <td style="font-size:16px;line-height:1.5;padding-bottom:24px;">
-              Pre aktiváciu účtu klikni na tlačidlo nižšie:
-            </td>
-          </tr>
-
-          <tr>
-            <td align="center" style="padding-bottom:32px;">
-              <a
-                href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}"
-                style="
-                  display:inline-block;
-                  background-color:#EDAE49;
-                  color:#003D5B;
-                  text-decoration:none;
-                  font-weight:bold;
-                  padding:14px 28px;
-                  border-radius:12px;
-                  font-size:16px;
-                "
+  <head>
+    <meta charset="UTF-8" />
+    <title>Potvrdenie registrácie</title>
+  </head>
+  <body
+    style="
+      margin: 0;
+      padding: 0;
+      background-color: #0f2f44;
+      font-family: Arial, Helvetica, sans-serif;
+    "
+  >
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="background-color: #0f2f44; padding: 40px 0"
+    >
+      <tr>
+        <td align="center">
+          <table
+            width="600"
+            cellpadding="0"
+            cellspacing="0"
+            style="
+              background-color: #3f6186;
+              border-radius: 20px;
+              padding: 32px;
+              color: #ffffff;
+            "
+          >
+            <tr>
+              <td
+                style="font-size: 22px; font-weight: bold; padding-bottom: 12px"
               >
-                Aktivovať účet
-              </a>
-            </td>
-          </tr>
+                Ahoj {{ user.first_name }},
+              </td>
+            </tr>
 
-          <tr>
-            <td style="font-size:14px;line-height:1.5;color:#e0e0e0;">
-              Ak si sa neregistroval ty, tento email pokojne ignoruj.
-            </td>
-          </tr>
+            <tr>
+              <td
+                style="font-size: 16px; line-height: 1.5; padding-bottom: 20px"
+              >
+                ďakujeme za registráciu do aplikácie.
+              </td>
+            </tr>
 
-          <tr>
-            <td style="font-size:12px;color:#c0c0c0;padding-top:32px;">
-              © {{ domain }}
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-</body>
+            <tr>
+              <td
+                style="font-size: 16px; line-height: 1.5; padding-bottom: 24px"
+              >
+                Pre aktiváciu účtu klikni na tlačidlo nižšie:
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="padding-bottom: 32px">
+                <a
+                  href="{{ activation_url }}"
+                  style="
+                    display: inline-block;
+                    background-color: #edae49;
+                    color: #003d5b;
+                    text-decoration: none;
+                    font-weight: bold;
+                    padding: 14px 28px;
+                    border-radius: 12px;
+                    font-size: 16px;
+                  "
+                >
+                  Aktivovať účet
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="font-size: 14px; line-height: 1.5; color: #e0e0e0">
+                Ak si sa neregistroval ty, tento email pokojne ignoruj.
+              </td>
+            </tr>
+
+            <tr>
+              <td style="font-size: 12px; color: #c0c0c0; padding-top: 32px">
+                © {{ domain }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>

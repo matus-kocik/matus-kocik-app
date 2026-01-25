@@ -2,60 +2,64 @@
 <!-- Provides common HTML structure, global styles, and content block -->
 <!doctype html>
 <html class="dark">
-<head>
+  <head>
     <title>MK WEB</title>
     <!-- Load Django static files (CSS, JS, images) -->
     {% load static %}
     <!-- Global compiled CSS (Tailwind output) -->
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
-<!-- Page body -->
-<body class="bg-[#003D5B]">
-{% if request.user.is_authenticated and request.resolver_match.url_name != 'home' %}
-<header class="sticky top-8 z-40 mt-4">
-  <div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mb-4">
-    <div class="rounded-2xl px-4 h-14 flex items-center justify-between">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <!-- Page body -->
+  <body class="bg-[#003D5B]">
+    {% if request.user.is_authenticated and request.resolver_match.url_name != 'home' %}
+    <header class="top-8 z-40 mt-6">
+      <div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mb-2">
+        <div class="rounded-2xl px-4 h-14 flex items-center justify-between">
+          <!-- Center navigation -->
+          <nav class="flex items-center gap-2">
+            <a
+              href="{% url 'home' %}"
+              class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition"
+            >
+              Dashboard
+            </a>
+            <a
+              href="{% url 'invoice_list' %}"
+              class="px-4 py-2 rounded-xl bg-[#30638E] text-white text-base font-semibold hover:bg-[#003D5B]/60 transition"
+            >
+              Faktúry
+            </a>
+            <a
+              href="{% url 'entities:entity_list' %}"
+              class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition"
+            >
+              Subjekty
+            </a>
+          </nav>
 
-      <!-- Center navigation -->
-      <nav class="flex items-center gap-2">
-        <a href="{% url 'home' %}"
-           class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition">
-          Dashboard
-        </a>
-        <a href="{% url 'invoice_list' %}"
-           class="px-4 py-2 rounded-xl bg-[#30638E] text-white text-base font-semibold hover:bg-[#003D5B]/60 transition">
-          Faktúry
-        </a>
-        <a href="{% url 'entities:entity_list' %}"
-           class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition">
-          Subjekty
-        </a>
-      </nav>
-
-      <!-- Logout (right) -->
-      <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button
-          type="submit"
-          title="Odhlásiť sa"
-          aria-label="Odhlásiť sa"
-          class="px-4 py-2 rounded-xl
-                 bg-[#30638E]
-                 flex items-center justify-center
-                 text-[#EDAE49]
-                 hover:bg-[#003D5B]/70
-                 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]
-                 cursor-pointer"
-        >
-          ⎋ Odhlásiť sa
-        </button>
-      </form>
-
-    </div>
-  </div>
-</header>
+          <!-- Logout (right) -->
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button
+              type="submit"
+              title="Odhlásiť sa"
+              aria-label="Odhlásiť sa"
+              class="px-4 py-2 rounded-xl bg-[#30638E] flex items-center justify-center text-[#EDAE49] hover:bg-[#003D5B]/70 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer"
+            >
+              ⎋ Odhlásiť sa
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
     {% endif %}
     <!-- Main page content will be injected here -->
     {% block content %}{% endblock %}
-</body>
+    <!-- Cloudflare Turnstile -->
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
+  </body>
 </html>

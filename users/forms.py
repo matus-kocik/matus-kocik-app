@@ -1,4 +1,6 @@
 from django import forms
+import requests
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
@@ -11,8 +13,24 @@ BASE_INPUT_CLASS = (
     "focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
 )
 
+class TurnstileField(forms.Field):
+    def validate(self, value):
+        super().validate(value)
+        response = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": settings.TURNSTILE_SECRET_KEY,
+                "response": value,
+            },
+            timeout=5,
+        ).json()
+
+        if not response.get("success"):
+            raise forms.ValidationError("Overenie proti spamu zlyhalo.")
 
 class UserRegisterForm(UserCreationForm):
+    turnstile = TurnstileField(required=True)
+
     class Meta:
         model = User
         fields = ("email", "first_name", "last_name", "password1", "password2")

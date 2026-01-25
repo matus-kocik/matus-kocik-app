@@ -2,7 +2,6 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import FormView
 from django.urls import reverse_lazy
 
-from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
@@ -41,21 +40,27 @@ class UserRegisterView(FormView):
         user.save()
 
         request = self.request
-        current_site = get_current_site(request)
-        subject = "Potvrdenie registrácie"
+
+        activation_url = request.build_absolute_uri(
+            reverse_lazy(
+                "activate",
+                kwargs={
+                    "uidb64": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": default_token_generator.make_token(user),
+                },
+            )
+        )
 
         html_message = render_to_string(
             "users/email_activation.html",
             {
                 "user": user,
-                "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                "token": default_token_generator.make_token(user),
+                "activation_url": activation_url,
             },
         )
 
         email = EmailMultiAlternatives(
-            subject=subject,
+            subject="Potvrdenie registrácie",
             body="Aktivuj si účet kliknutím na odkaz v emaili.",
             from_email=settings.DEFAULT_FROM_EMAIL,
             to=[user.email],
