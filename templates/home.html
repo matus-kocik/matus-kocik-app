@@ -1,49 +1,128 @@
-<!-- Home / landing page -->
 {% extends "base.html" %}
 {% load static %}
 
 {% block content %}
-<!-- Page layout wrapper -->
-<div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
+<div class="min-h-screen flex items-center justify-center bg-[#003D5B] p-6">
 
-  <!-- Centered profile card -->
-  <div class="w-full max-w-md rounded-3xl bg-[#30638E] p-8 text-center
-              shadow-2xl shadow-black/40">
+  <!-- SHARED OUTER CARD -->
+  <div class="w-full max-w-5xl rounded-3xl bg-[#30638E] shadow-2xl p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-    <!-- Profile avatar -->
-    <img
-      src="{% static 'images/avatar.jpg' %}"
-      alt="Matúš Kočik"
-      class="w-40 h-40 mx-auto rounded-full object-cover
-             ring-4 ring-[#EDAE49]
-             shadow-lg shadow-[#EDAE49]/30 mb-8"
-    />
+      <!-- LEFT: ORIGINAL PROFILE CARD (UNCHANGED) -->
+      <div class="p-8 text-center">
 
-    <!-- Profile name -->
-    <h1 class="text-3xl font-bold text-white mb-10">
-      Matúš Kočik
-    </h1>
+        <img
+          src="{% static 'images/avatar.jpg' %}"
+          alt="Matúš Kočik"
+          class="w-40 h-40 mx-auto rounded-full object-cover
+                 ring-4 ring-[#EDAE49]
+                 shadow-lg shadow-[#EDAE49]/30 mb-8"
+        />
 
-    <!-- Primary external link (GitHub profile) -->
-    <a
-      href="https://github.com/matus-kocik"
-      target="_blank"
-      class="flex items-center justify-center gap-4
-             rounded-xl px-6 py-4
-             bg-[#EDAE49] text-[#003D5B]
-             font-bold text-lg
-             shadow-xl shadow-[#EDAE49]/40
-             transition-all duration-300
-             hover:-translate-y-1 hover:bg-[#68A357]
-             focus:outline-none focus:ring-4 focus:ring-[#00798C]"
-    >
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-        class="w-8 h-8"
-      />
-      <span>GitHub</span>
-    </a>
+        <h1 class="text-3xl font-bold text-[#EDAE49] mb-10">
+          Matúš Kočik
+        </h1>
 
+        <a
+          href="https://github.com/matus-kocik"
+          target="_blank"
+          class="flex items-center justify-center gap-4
+                 rounded-xl px-6 py-4
+                 bg-[#EDAE49] text-[#003D5B]
+                 font-bold text-lg md:text-base
+                 border border-[#EDAE49]/60
+                 transition-all duration-300
+                 hover:bg-[#EDAE49]/90
+                 focus:outline-none focus:ring-4 focus:ring-[#00798C]"
+        >
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            class="w-8 h-8"
+          />
+          <span>GitHub</span>
+        </a>
+
+      </div>
+
+      <!-- RIGHT: ENTRY CARD (UNCHANGED) -->
+      <div class="p-8 text-white">
+<h2 class="text-3xl font-bold text-[#EDAE49] mb-4">
+  Vstup do aplikácie
+</h2>
+
+<p class="text-white/80 mb-6 text-sm">
+  Prihlás sa do aplikácie a pokračuj v práci s faktúrami.
+</p>
+
+{% if not user.is_authenticated %}
+<form method="post" class="flex flex-col gap-4">
+  {% csrf_token %}
+
+  <input
+    type="text"
+    name="username"
+    placeholder="Používateľské meno"
+    class="block w-full rounded-xl bg-white px-5 py-4
+           text-[#003D5B] text-lg
+           placeholder:text-[#003D5B]/50
+           focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
+  />
+
+  <input
+    type="password"
+    name="password"
+    placeholder="Heslo"
+    class="block w-full rounded-xl bg-white px-5 py-4
+           text-[#003D5B] text-lg
+           placeholder:text-[#003D5B]/50
+           focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
+  />
+
+  <button
+    type="submit"
+    class="mt-4 w-full rounded-xl bg-[#EDAE49]
+           py-4 text-xl font-bold text-[#003D5B]
+           shadow-lg shadow-[#EDAE49]/30
+           transition-all duration-300
+           hover:-translate-y-0.5 hover:bg-[#68A357]
+           focus:outline-none focus:ring-4 focus:ring-[#00798C]"
+  >
+    Prihlásiť sa
+  </button>
+</form>
+
+<div class="mt-6 flex items-center justify-between text-sm text-white/80">
+  <span>Nemáš účet?</span>
+
+  {# TODO: register URL #}
+  <a
+    href="#"
+    class="font-bold text-[#EDAE49] hover:underline"
+  >
+    Registrovať sa
+  </a>
+</div>
+
+{% else %}
+
+<p class="mb-6 text-sm text-white/70">
+  Si prihlásený.
+</p>
+
+{# TODO: dashboard URL #}
+<a
+  href="#"
+  class="block text-center rounded-xl bg-[#00798C] py-3 font-bold
+         transition hover:bg-[#68A357]"
+>
+  Prejsť do aplikácie
+</a>
+
+{% endif %}
+      </div>
+
+    </div>
   </div>
+
 </div>
 {% endblock %}
