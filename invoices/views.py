@@ -7,13 +7,14 @@ from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from weasyprint import HTML
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Invoice
 from .forms import InvoiceForm, InvoiceItemFormSet
 from django.utils import timezone
 
 
-class InvoiceListView(ListView):
+class InvoiceListView(LoginRequiredMixin, ListView):
     """
     List view showing all non-deleted invoices.
     Acts as the main overview screen.
@@ -26,10 +27,14 @@ class InvoiceListView(ListView):
         """
         Exclude soft-deleted invoices and show newest first.
         """
-        return Invoice.objects.filter(is_deleted=False).order_by("-created_at")
+        return (
+            Invoice.objects
+            .filter(is_deleted=False, owner=self.request.user)
+            .order_by("-created_at")
+        )
 
 
-class InvoiceCreateView(CreateView):
+class InvoiceCreateView(LoginRequiredMixin, CreateView):
     """
     Create view for a new invoice together with its line items.
     Handles invoice number generation and atomic save of invoice + items.
@@ -58,6 +63,16 @@ class InvoiceCreateView(CreateView):
             next_seq = 1
 
         initial["number"] = f"{year}{next_seq:04d}"
+
+        # Pre-fill supplier / customer from query params (after entity creation)
+        supplier_id = self.request.GET.get("supplier")
+        customer_id = self.request.GET.get("customer")
+
+        if supplier_id:
+            initial["supplier"] = supplier_id
+        if customer_id:
+            initial["customer"] = customer_id
+
         return initial
 
     def get_context_data(self, **kwargs):
@@ -80,7 +95,9 @@ class InvoiceCreateView(CreateView):
         formset = context["formset"]
 
         with transaction.atomic():
-            self.object = form.save()
+            self.object = form.save(commit=False)
+            self.object.owner = self.request.user
+            self.object.save()
 
             # Save invoice first; save items only if the formset is valid and not empty
             if formset.is_valid() and formset.has_changed():
@@ -95,7 +112,7 @@ class InvoiceCreateView(CreateView):
         return self.success_url
 
 
-class InvoiceUpdateView(UpdateView):
+class InvoiceUpdateView(LoginRequiredMixin, UpdateView):
     """
     Update view for an existing invoice and its items.
     """
@@ -103,6 +120,22 @@ class InvoiceUpdateView(UpdateView):
     form_class = InvoiceForm
     template_name = "invoices/invoice_form.html"
     success_url = reverse_lazy("invoice_list")
+
+    def get_queryset(self):
+        return Invoice.objects.filter(owner=self.request.user)
+
+    def get_initial(self):
+        initial = super().get_initial()
+
+        supplier_id = self.request.GET.get("supplier")
+        customer_id = self.request.GET.get("customer")
+
+        if supplier_id:
+            initial["supplier"] = supplier_id
+        if customer_id:
+            initial["customer"] = customer_id
+
+        return initial
 
     def get_context_data(self, **kwargs):
         """
@@ -137,13 +170,16 @@ class InvoiceUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class InvoiceDeleteView(DeleteView):
+class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
     """
     Soft-delete view that hides an invoice without removing it from the database.
     """
     model = Invoice
     template_name = "invoices/invoice_confirm_delete.html"
     success_url = reverse_lazy("invoice_list")
+
+    def get_queryset(self):
+        return Invoice.objects.filter(owner=self.request.user)
 
     def delete(self, request, *args, **kwargs):
         """
@@ -155,11 +191,14 @@ class InvoiceDeleteView(DeleteView):
         return redirect(self.success_url)
 
 
-class InvoicePDFView(DetailView):
+class InvoicePDFView(LoginRequiredMixin, DetailView):
     """
     Render an invoice as a PDF document using an HTML template.
     """
     model = Invoice
+
+    def get_queryset(self):
+        return Invoice.objects.filter(owner=self.request.user)
 
     def get(self, request, *args, **kwargs):
         """

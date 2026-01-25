@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+@layer components {
+    .btn-entry {
+    @apply mt-4 w-full rounded-xl
+        bg-[#EDAE49]
+        py-4
+        text-xl font-bold text-[#003D5B]
+        shadow-lg shadow-[#EDAE49]/30
+        transition-all duration-300
+        hover:-translate-y-0.5 hover:bg-[#68A357]
+        focus:outline-none focus:ring-4 focus:ring-[#00798C]
+        cursor-pointer;
+    }
+    .btn-primary {
+    @apply inline-flex items-center justify-center
+        rounded-xl bg-[#EDAE49]
+        px-6 py-3
+        text-lg font-bold text-[#003D5B]
+        shadow-lg shadow-[#EDAE49]/30
+        transition-all duration-300
+        hover:-translate-y-0.5 hover:bg-[#68A357]
+        focus:outline-none focus:ring-4 focus:ring-[#00798C]
+        cursor-pointer;
+    }
+    .btn-entry-link {
+    @apply inline-flex items-center justify-center
+        rounded-xl bg-[#EDAE49]
+        px-8 py-4
+        text-xl font-bold text-[#003D5B]
+        shadow-lg shadow-[#EDAE49]/30
+        transition-all duration-300
+        hover:-translate-y-0.5 hover:bg-[#68A357]
+        focus:outline-none focus:ring-4 focus:ring-[#00798C]
+        cursor-pointer;
+}
+    .input-entry {
+    @apply block w-full rounded-xl
+        bg-white
+        px-5 py-4
+        text-lg text-[#003D5B]
+        placeholder:text-[#003D5B]/60
+        focus:outline-none focus:ring-2 focus:ring-[#EDAE49];
+    }
+}
+

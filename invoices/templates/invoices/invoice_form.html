@@ -55,6 +55,12 @@
               {{ form.customer.label }}
             </label>
             {{ form.customer }}
+            <a
+              href="{% url 'entities:entity_create' %}?next={{ request.path }}&field=customer&supplier={{ form.supplier.value|default:'' }}"
+              class="inline-block mt-2 text-sm text-[#EDAE49] hover:underline cursor-pointer"
+            >
+              + Pridať nového odberateľa
+            </a>
             {% if form.customer.errors %}
               <p class="text-red-300 text-sm mt-1">
                 {{ form.customer.errors|striptags }}
@@ -77,6 +83,12 @@
               {{ form.supplier.label }}
             </label>
             {{ form.supplier }}
+            <a
+              href="{% url 'entities:entity_create' %}?next={{ request.path }}&field=supplier&customer={{ form.customer.value|default:'' }}"
+              class="inline-block mt-2 text-sm text-[#EDAE49] hover:underline cursor-pointer"
+            >
+              + Pridať nového dodávateľa
+            </a>
             {% if form.supplier.errors %}
               <p class="text-red-300 text-sm mt-1">
                 {{ form.supplier.errors|striptags }}
@@ -209,13 +221,7 @@
       <div class="flex items-center gap-4">
         <button
           type="submit"
-          class="rounded-xl bg-[#EDAE49]
-          px-6 py-3
-          text-lg font-bold text-[#003D5B]
-          shadow-lg shadow-[#EDAE49]/30
-          transition-all duration-300
-          hover:-translate-y-0.5 hover:bg-[#68A357]
-          focus:outline-none focus:ring-4 focus:ring-[#00798C]"
+          class="btn-primary"
         >
           Uložiť
         </button>

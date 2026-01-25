@@ -10,7 +10,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Public home / landing page
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    # Users application routes
+    path("", include("users.urls")),
     # Invoices application routes
     path("invoices/", include("invoices.urls")),
+    # Entities application routes
     path("entities/", include("entities.urls")),
 ]

@@ -5,6 +5,8 @@ from django.forms import inlineformset_factory
 
 from .models import Invoice, InvoiceItem
 
+from entities.models import Entity
+
 
 # Shared Tailwind CSS classes for form inputs.
 # Centralized here to keep widget definitions consistent and maintainable.
@@ -70,6 +72,13 @@ class InvoiceForm(forms.ModelForm):
                 "rows": 4
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        if user is not None:
+            self.fields["supplier"].queryset = Entity.objects.filter(owner=user)
+            self.fields["customer"].queryset = Entity.objects.filter(owner=user)
 
 
 class InvoiceItemForm(forms.ModelForm):

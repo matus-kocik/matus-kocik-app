@@ -20,6 +20,10 @@ class EntityForm(forms.ModelForm):
     basic Django defaults. It is designed for reuse across invoices, entities CRUD, profile, and future flows.
     """
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = Entity
         fields = [
@@ -51,6 +55,10 @@ class BankAccountForm(forms.ModelForm):
     Presentation-only form for managing bank accounts linked to an entity.
     Typically used inline or as a secondary step associated with an Entity.
     """
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
 
     class Meta:
         model = BankAccount

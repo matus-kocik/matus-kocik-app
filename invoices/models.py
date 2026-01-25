@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from decimal import Decimal
 from entities.models import Entity
 
@@ -8,6 +9,12 @@ class Invoice(models.Model):
     Represents a sales invoice including supplier, customer, and payment details.
     Acts as the aggregate root for invoice items.
     """
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="invoices",
+        verbose_name="Vlastník",
+    )
     # Core invoice identification and dates
     number = models.CharField(
         max_length=20,
