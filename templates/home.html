@@ -73,7 +73,9 @@
           class="flex flex-col gap-4"
         >
           {% csrf_token %}
-          <input type="hidden" name="turnstile" id="turnstile-token">
+          <input type="hidden" name="cf_turnstile_response" id="turnstile-token">
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="hidden">
+          
           {{ form.non_field_errors }}
 
           <input
@@ -107,17 +109,13 @@
             class="input-entry"
           />
 
-          <div class="mt-4 flex justify-center">
+          <!-- Cloudflare Turnstile (visible, auto-managed) -->
+          <div class="mt-6 flex justify-center">
             <div
               class="cf-turnstile"
               data-sitekey="{{ TURNSTILE_SITE_KEY }}"
-              data-callback="turnstileCallback"
-            ></div>
-            <script>
-              function turnstileCallback(token) {
-                document.getElementById("turnstile-token").value = token;
-              }
-            </script>
+              data-callback="turnstileCallback">
+            </div>
           </div>
 
           <button type="submit" class="btn-entry">Registrovať sa</button>
@@ -180,4 +178,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  function turnstileCallback(token) {
+    document.getElementById("turnstile-token").value = token;
+  }
+</script>
 {% endblock %}

@@ -13,23 +13,35 @@ BASE_INPUT_CLASS = (
     "focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
 )
 
+
 class TurnstileField(forms.Field):
     def validate(self, value):
         super().validate(value)
-        response = requests.post(
-            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-            data={
-                "secret": settings.TURNSTILE_SECRET_KEY,
-                "response": value,
-            },
-            timeout=5,
-        ).json()
 
+        try:
+            response = requests.post(
+                "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+                data={
+                    "secret": settings.TURNSTILE_SECRET_KEY,
+                    "response": value,
+                },
+                timeout=5,
+            ).json()
+        except Exception:
+            raise forms.ValidationError("Overenie zlyhalo. Skúste znova.")
         if not response.get("success"):
             raise forms.ValidationError("Overenie proti spamu zlyhalo.")
 
+
 class UserRegisterForm(UserCreationForm):
-    turnstile = TurnstileField(required=True)
+    cf_turnstile_response = TurnstileField(required=True)
+    website = forms.CharField(required=False, widget=forms.HiddenInput)
+
+    def clean_website(self):
+        if self.cleaned_data.get("website"):
+            raise forms.ValidationError("")
+
+        return ""
 
     class Meta:
         model = User
