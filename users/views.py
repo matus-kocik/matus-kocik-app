@@ -28,7 +28,7 @@ class UserLoginView(LoginView):
 class UserRegisterView(FormView):
     """
     User registration view.
-    Creates a user, logs them in immediately, and redirects to home.
+    Creates an inactive user and sends an activation email.
     """
 
     template_name = "home.html"
@@ -92,7 +92,10 @@ class ActivateAccountView(View):
             messages.success(
                 request, "Účet bol úspešne aktivovaný. Teraz sa môžeš prihlásiť."
             )
-
             return redirect("home")
 
+        messages.error(
+            request,
+            "Aktivačný odkaz je neplatný alebo už bol použitý."
+        )
         return redirect("home")
