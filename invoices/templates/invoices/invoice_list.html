@@ -1,74 +1,55 @@
 <!-- Invoice list view -->
-{% extends "base.html" %} {% block content %}
-<!-- Page layout wrapper -->
-<div class="min-h-screen p-6 bg-[#003D5B]">
-  <div
-    class="max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-6 shadow-2xl shadow-black/40"
-  >
-    <!-- Page header with title and primary action -->
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-3xl font-extrabold text-[#EDAE49]">Faktúry</h1>
-
-      <!-- Create new invoice action -->
-      <a href="{% url 'invoice_create' %}" class="btn-primary">
-        + Nová faktúra
-      </a>
+{% extends "base.html" %}
+{% block content %}
+    <!-- Page layout wrapper -->
+    <div class="min-h-screen p-6 bg-[#003D5B]">
+        <div class="max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-6 shadow-2xl shadow-black/40">
+            <!-- Page header with title and primary action -->
+            <div class="flex items-center justify-between mb-6">
+                <h1 class="text-3xl font-extrabold text-[#EDAE49]">Faktúry</h1>
+                <!-- Create new invoice action -->
+                <a href="{% url 'invoice_create' %}" class="btn-primary">+ Nová faktúra</a>
+            </div>
+            <div class="overflow-x-auto">
+                <!-- Invoice table -->
+                <table class="w-full text-left text-white">
+                    <thead class="bg-[#003D5B] text-white/80">
+                        <tr>
+                            <th class="px-4 py-3">Číslo</th>
+                            <th class="px-4 py-3">Odberateľ</th>
+                            <th class="px-4 py-3">Dátum</th>
+                            <th class="px-4 py-3">Suma</th>
+                            <th class="px-4 py-3 text-right">Akcie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Invoice rows -->
+                        {% for invoice in invoices %}
+                            <tr class="border-b border-white/10 hover:bg-[#003D5B]/40 transition">
+                                <td class="px-4 py-3 font-mono">{{ invoice.number }}</td>
+                                <td class="px-4 py-3">{{ invoice.customer.name }}</td>
+                                <td class="px-4 py-3">{{ invoice.issue_date }}</td>
+                                <td class="px-4 py-3 font-semibold">{{ invoice.total }} €</td>
+                                <!-- Row actions: update, PDF export, delete -->
+                                <td class="px-4 py-3 text-right space-x-4">
+                                    <a href="{% url 'invoice_update' invoice.pk %}"
+                                       class="text-[#EDAE49] hover:underline">Upraviť</a>
+                                    <a href="{% url 'invoice_pdf' invoice.pk %}"
+                                       class="text-white/80 hover:underline"
+                                       target="_blank">PDF</a>
+                                    <a href="{% url 'invoice_delete' invoice.pk %}"
+                                       class="text-red-400 hover:underline">Zmazať</a>
+                                </td>
+                            </tr>
+                            <!-- Empty state -->
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="px-4 py-10 text-center text-white/70">Žiadne faktúry</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div class="overflow-x-auto">
-      <!-- Invoice table -->
-      <table class="w-full text-left text-white">
-        <thead class="bg-[#003D5B] text-white/80">
-          <tr>
-            <th class="px-4 py-3">Číslo</th>
-            <th class="px-4 py-3">Odberateľ</th>
-            <th class="px-4 py-3">Dátum</th>
-            <th class="px-4 py-3">Suma</th>
-            <th class="px-4 py-3 text-right">Akcie</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Invoice rows -->
-          {% for invoice in invoices %}
-          <tr class="border-b border-white/10 hover:bg-[#003D5B]/40 transition">
-            <td class="px-4 py-3 font-mono">{{ invoice.number }}</td>
-            <td class="px-4 py-3">{{ invoice.customer.name }}</td>
-            <td class="px-4 py-3">{{ invoice.issue_date }}</td>
-            <td class="px-4 py-3 font-semibold">{{ invoice.total }} €</td>
-            <!-- Row actions: update, PDF export, delete -->
-            <td class="px-4 py-3 text-right space-x-4">
-              <a
-                href="{% url 'invoice_update' invoice.pk %}"
-                class="text-[#EDAE49] hover:underline"
-              >
-                Upraviť
-              </a>
-              <a
-                href="{% url 'invoice_pdf' invoice.pk %}"
-                class="text-white/80 hover:underline"
-                target="_blank"
-              >
-                PDF
-              </a>
-              <a
-                href="{% url 'invoice_delete' invoice.pk %}"
-                class="text-red-400 hover:underline"
-              >
-                Zmazať
-              </a>
-            </td>
-          </tr>
-          <!-- Empty state -->
-          {% empty %}
-          <tr>
-            <td colspan="5" class="px-4 py-10 text-center text-white/70">
-              Žiadne faktúry
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 {% endblock %}

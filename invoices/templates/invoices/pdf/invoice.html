@@ -1,12 +1,12 @@
 <!-- Invoice PDF template -->
 <!-- Used for server-side PDF rendering (HTML -> PDF). -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="sk">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Faktúra {{ invoice.number }}</title>
-    <!-- Inline styles required for PDF rendering engines (no external CSS). -->
-    <style>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Faktúra {{ invoice.number }}</title>
+        <!-- Inline styles required for PDF rendering engines (no external CSS). -->
+        <style>
       body {
         font-family:
           DejaVu Sans,
@@ -83,119 +83,134 @@
         font-size: 11px;
         color: #374151;
       }
-    </style>
-  </head>
-
-  <body>
-    <!-- Invoice title -->
-    <h1>Faktúra č. {{ invoice.number }}</h1>
-
-    <!-- Supplier and customer details -->
-    <div class="row">
-      <div class="col">
-        <h2>Dodávateľ</h2>
-        <div class="block">
-          <div>
-            <span class="label">Názov:</span> {{ invoice.supplier.name }}
-          </div>
-          <div><span class="label">IČO:</span> {{ invoice.supplier.ico }}</div>
-          <!-- Optional supplier tax ID -->
-          {% if invoice.supplier.dic %}
-          <div><span class="label">DIČ:</span> {{ invoice.supplier.dic }}</div>
-          {% endif %} {% if invoice.supplier.ic_dph %}
-          <div>
-            <span class="label">IČ DPH:</span> {{ invoice.supplier.ic_dph }}
-          </div>
-          {% endif %}
-          <div>{{ invoice.supplier.street }}</div>
-          <div>{{ invoice.supplier.zip_code }} {{ invoice.supplier.city }}</div>
-          <div>{{ invoice.supplier.country }}</div>
+        </style>
+    </head>
+    <body>
+        <!-- Invoice title -->
+        <h1>Faktúra č. {{ invoice.number }}</h1>
+        <!-- Supplier and customer details -->
+        <div class="row">
+            <div class="col">
+                <h2>Dodávateľ</h2>
+                <div class="block">
+                    <div>
+                        <span class="label">Názov:</span> {{ invoice.supplier.name }}
+                    </div>
+                    <div>
+                        <span class="label">IČO:</span> {{ invoice.supplier.ico }}
+                    </div>
+                    <!-- Optional supplier tax ID -->
+                    {% if invoice.supplier.dic %}
+                        <div>
+                            <span class="label">DIČ:</span> {{ invoice.supplier.dic }}
+                        </div>
+                    {% endif %}
+                    {% if invoice.supplier.ic_dph %}
+                        <div>
+                            <span class="label">IČ DPH:</span> {{ invoice.supplier.ic_dph }}
+                        </div>
+                    {% endif %}
+                    <div>{{ invoice.supplier.street }}</div>
+                    <div>{{ invoice.supplier.zip_code }} {{ invoice.supplier.city }}</div>
+                    <div>{{ invoice.supplier.country }}</div>
+                </div>
+            </div>
+            <div class="col">
+                <h2>Odberateľ</h2>
+                <div class="block">
+                    <div>
+                        <span class="label">Názov:</span> {{ invoice.customer.name }}
+                    </div>
+                    <!-- Optional customer identification fields -->
+                    {% if invoice.customer.ico %}
+                        <div>
+                            <span class="label">IČO:</span> {{ invoice.customer.ico }}
+                        </div>
+                    {% endif %}
+                    {% if invoice.customer.dic %}
+                        <div>
+                            <span class="label">DIČ:</span> {{ invoice.customer.dic }}
+                        </div>
+                    {% endif %}
+                    {% if invoice.customer.ic_dph %}
+                        <div>
+                            <span class="label">IČ DPH:</span> {{ invoice.customer.ic_dph }}
+                        </div>
+                    {% endif %}
+                    <div>{{ invoice.customer.street }}</div>
+                    <div>{{ invoice.customer.zip_code }} {{ invoice.customer.city }}</div>
+                    <div>{{ invoice.customer.country }}</div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="col">
-        <h2>Odberateľ</h2>
-        <div class="block">
-          <div>
-            <span class="label">Názov:</span> {{ invoice.customer.name }}
-          </div>
-          <!-- Optional customer identification fields -->
-          {% if invoice.customer.ico %}
-          <div><span class="label">IČO:</span> {{ invoice.customer.ico }}</div>
-          {% endif %} {% if invoice.customer.dic %}
-          <div><span class="label">DIČ:</span> {{ invoice.customer.dic }}</div>
-          {% endif %} {% if invoice.customer.ic_dph %}
-          <div>
-            <span class="label">IČ DPH:</span> {{ invoice.customer.ic_dph }}
-          </div>
-          {% endif %}
-          <div>{{ invoice.customer.street }}</div>
-          <div>{{ invoice.customer.zip_code }} {{ invoice.customer.city }}</div>
-          <div>{{ invoice.customer.country }}</div>
+        <!-- Payment and date information -->
+        <h2>Platobné údaje</h2>
+        <div class="row">
+            <div class="col">
+                <div>
+                    <span class="label">Dátum vystavenia:</span> {{ invoice.issue_date }}
+                </div>
+                <div>
+                    <span class="label">Dátum splatnosti:</span> {{ invoice.due_date }}
+                </div>
+            </div>
+            <div class="col">
+                <div>
+                    <span class="label">IBAN:</span>
+                    {% if invoice.supplier.default_bank_account %}
+                        {{
+                        invoice.supplier.default_bank_account.iban }}
+                    {% endif %}
+                </div>
+                {% if invoice.variable_symbol %}
+                    <div>
+                        <span class="label">VS:</span> {{ invoice.variable_symbol }}
+                    </div>
+                {% endif %}
+                {% if invoice.constant_symbol %}
+                    <div>
+                        <span class="label">KS:</span> {{ invoice.constant_symbol }}
+                    </div>
+                {% endif %}
+                {% if invoice.specific_symbol %}
+                    <div>
+                        <span class="label">ŠS:</span> {{ invoice.specific_symbol }}
+                    </div>
+                {% endif %}
+            </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Payment and date information -->
-    <h2>Platobné údaje</h2>
-    <div class="row">
-      <div class="col">
-        <div>
-          <span class="label">Dátum vystavenia:</span> {{ invoice.issue_date }}
-        </div>
-        <div>
-          <span class="label">Dátum splatnosti:</span> {{ invoice.due_date }}
-        </div>
-      </div>
-      <div class="col">
-        <div>
-          <span class="label">IBAN:</span>
-          {% if invoice.supplier.default_bank_account %} {{
-          invoice.supplier.default_bank_account.iban }} {% endif %}
-        </div>
-        {% if invoice.variable_symbol %}
-        <div><span class="label">VS:</span> {{ invoice.variable_symbol }}</div>
-        {% endif %} {% if invoice.constant_symbol %}
-        <div><span class="label">KS:</span> {{ invoice.constant_symbol }}</div>
-        {% endif %} {% if invoice.specific_symbol %}
-        <div><span class="label">ŠS:</span> {{ invoice.specific_symbol }}</div>
+        <!-- Invoice line items table -->
+        <h2>Položky</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Názov</th>
+                    <th class="text-right">Množstvo</th>
+                    <th class="text-right">Cena</th>
+                    <th class="text-right">Spolu</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over invoice items -->
+                {% for item in invoice.items.all %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td class="text-right">{{ item.quantity }}</td>
+                        <td class="text-right">{{ item.unit_price }} €</td>
+                        <td class="text-right">{{ item.total }} €</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Final invoice total -->
+        <div class="total">Celkom na úhradu: {{ invoice.total }} €</div>
+        <!-- Optional invoice note -->
+        {% if invoice.note %}
+            <div class="note">
+                <strong>Poznámka:</strong>
+                <br />
+                {{ invoice.note|linebreaks }}
+            </div>
         {% endif %}
-      </div>
-    </div>
-
-    <!-- Invoice line items table -->
-    <h2>Položky</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Názov</th>
-          <th class="text-right">Množstvo</th>
-          <th class="text-right">Cena</th>
-          <th class="text-right">Spolu</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Iterate over invoice items -->
-        {% for item in invoice.items.all %}
-        <tr>
-          <td>{{ item.name }}</td>
-          <td class="text-right">{{ item.quantity }}</td>
-          <td class="text-right">{{ item.unit_price }} €</td>
-          <td class="text-right">{{ item.total }} €</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-
-    <!-- Final invoice total -->
-    <div class="total">Celkom na úhradu: {{ invoice.total }} €</div>
-
-    <!-- Optional invoice note -->
-    {% if invoice.note %}
-    <div class="note">
-      <strong>Poznámka:</strong><br />
-      {{ invoice.note|linebreaks }}
-    </div>
-    {% endif %}
-  </body>
+    </body>
 </html>

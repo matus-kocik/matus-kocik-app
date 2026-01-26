@@ -8,12 +8,13 @@ class Entity(models.Model):
     Reusable business entity.
     Can act as supplier or customer.
     """
+
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="entities",
     )
-    
+
     name = models.CharField(
         max_length=255,
         verbose_name="Názov subjektu",

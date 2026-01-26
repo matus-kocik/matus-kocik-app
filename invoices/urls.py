@@ -4,11 +4,11 @@
 from django.urls import path
 
 from .views import (
-    InvoiceListView,
     InvoiceCreateView,
-    InvoiceUpdateView,
     InvoiceDeleteView,
+    InvoiceListView,
     InvoicePDFView,
+    InvoiceUpdateView,
 )
 
 urlpatterns = [

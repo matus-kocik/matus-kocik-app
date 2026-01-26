@@ -1,7 +1,7 @@
 # Root URL configuration for the project.
 # Defines entry points and delegates app-specific routing.
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from django.views.generic import TemplateView
 
 # Top-level URL routes

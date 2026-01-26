@@ -1,11 +1,13 @@
 from django.contrib import admin
-from .models import Entity, BankAccount
+
+from .models import BankAccount, Entity
 
 
 class BankAccountInline(admin.TabularInline):
     """
     Inline admin for managing bank accounts directly on the entity detail page.
     """
+
     model = BankAccount
     extra = 1
     autocomplete_fields = ("entity",)

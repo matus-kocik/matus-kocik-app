@@ -6,8 +6,7 @@ across the application. All forms here must stay visually consistent with the re
 
 from django import forms
 
-from .models import Entity, BankAccount
-
+from .models import BankAccount, Entity
 
 # Shared UI contract for form inputs; intentionally matches invoices.forms.BASE_INPUT_CLASS
 BASE_INPUT_CLASS = "w-full rounded-xl bg-white/80 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
@@ -66,5 +65,7 @@ class BankAccountForm(forms.ModelForm):
         widgets = {
             "iban": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
             "swift": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
-            "is_default": forms.CheckboxInput(attrs={"class": "rounded text-[#EDAE49] focus:ring-[#EDAE49]"}),
+            "is_default": forms.CheckboxInput(
+                attrs={"class": "rounded text-[#EDAE49] focus:ring-[#EDAE49]"}
+            ),
         }

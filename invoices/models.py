@@ -1,6 +1,8 @@
-from django.db import models
-from django.conf import settings
 from decimal import Decimal
+
+from django.conf import settings
+from django.db import models
+
 from entities.models import Entity
 
 
@@ -9,6 +11,7 @@ class Invoice(models.Model):
     Represents a sales invoice including supplier, customer, and payment details.
     Acts as the aggregate root for invoice items.
     """
+
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -92,6 +95,20 @@ class Invoice(models.Model):
         verbose_name="Aktualizované",
     )
 
+    def __str__(self):
+        """
+        String representation used in admin and selections.
+        """
+        return self.number
+
+    def save(self, *args, **kwargs):
+        """
+        Ensure variable symbol defaults to invoice number on first save.
+        """
+        if not self.variable_symbol:
+            self.variable_symbol = self.number
+        super().save(*args, **kwargs)
+
     def recalculate_total(self):
         """
         Recalculate and persist the invoice total based on related items.
@@ -102,26 +119,13 @@ class Invoice(models.Model):
         )
         Invoice.objects.filter(pk=self.pk).update(total=total)
 
-    def save(self, *args, **kwargs):
-        """
-        Ensure variable symbol defaults to invoice number on first save.
-        """
-        if not self.variable_symbol:
-            self.variable_symbol = self.number
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        """
-        String representation used in admin and selections.
-        """
-        return self.number
-
 
 class InvoiceItem(models.Model):
     """
     Line item belonging to an invoice.
     Calculates its own total and keeps the parent invoice total in sync.
     """
+
     invoice = models.ForeignKey(
         Invoice,
         related_name="items",
@@ -149,6 +153,12 @@ class InvoiceItem(models.Model):
         verbose_name="Suma",
     )
 
+    def __str__(self):
+        """
+        Human-readable item label.
+        """
+        return self.name
+
     def save(self, *args, **kwargs):
         """
         Calculate item total before saving and update parent invoice total.
@@ -165,9 +175,3 @@ class InvoiceItem(models.Model):
         invoice = self.invoice
         super().delete(*args, **kwargs)
         invoice.recalculate_total()
-
-    def __str__(self):
-        """
-        Human-readable item label.
-        """
-        return self.name

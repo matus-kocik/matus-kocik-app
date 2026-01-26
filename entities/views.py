@@ -2,16 +2,16 @@
 # These views provide basic CRUD operations for reusable entities
 # that can later be referenced from invoices and other modules.
 
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
-
 from urllib.parse import urlparse, urlunparse
-from django.http import QueryDict
 
-from .models import Entity
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import QueryDict
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+
 from .forms import EntityForm
+from .models import Entity
 
 
 class EntityListView(LoginRequiredMixin, ListView):
@@ -19,6 +19,7 @@ class EntityListView(LoginRequiredMixin, ListView):
     List view showing all business entities.
     Acts as a central directory for suppliers and customers.
     """
+
     model = Entity
     template_name = "entities/entity_list.html"
     context_object_name = "entities"
@@ -32,6 +33,7 @@ class EntityCreateView(LoginRequiredMixin, CreateView):
     Create a new business entity.
     Used when adding a new supplier or customer.
     """
+
     model = Entity
     form_class = EntityForm
     template_name = "entities/entity_form.html"
@@ -60,9 +62,7 @@ class EntityCreateView(LoginRequiredMixin, CreateView):
             if field_name:
                 query[field_name] = str(self.object.pk)
 
-            return redirect(
-                urlunparse(parts._replace(query=query.urlencode()))
-            )
+            return redirect(urlunparse(parts._replace(query=query.urlencode())))
 
         return super().form_valid(form)
 
@@ -72,6 +72,7 @@ class EntityUpdateView(LoginRequiredMixin, UpdateView):
     Update an existing business entity.
     Allows editing of identification and address details.
     """
+
     model = Entity
     form_class = EntityForm
     template_name = "entities/entity_form.html"
@@ -86,6 +87,7 @@ class EntityDeleteView(LoginRequiredMixin, DeleteView):
     Permanently delete a business entity.
     (Later can be changed to soft-delete if needed.)
     """
+
     model = Entity
     template_name = "entities/entity_confirm_delete.html"
     success_url = reverse_lazy("entities:entity_list")

@@ -1,36 +1,27 @@
-{% extends "base.html" %} {% block content %}
-<!-- Page layout wrapper -->
-<div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
-  <div
-    class="w-full max-w-md bg-[#30638E] rounded-3xl p-8 text-center shadow-2xl shadow-black/40"
-  >
-    <!-- Confirmation title -->
-    <h1 class="text-2xl font-bold text-white mb-4">Zmazať subjekt</h1>
-
-    <!-- Confirmation message -->
-    <p class="text-white/80 mb-8">
-      Naozaj chceš zmazať subjekt
-      <span class="font-semibold text-white"> {{ object.name }} </span>
-      ?
-    </p>
-
-    <!-- Delete confirmation form -->
-    <form method="post" class="flex items-center justify-center gap-4">
-      {% csrf_token %}
-
-      <!-- Confirm deletion -->
-      <button
-        type="submit"
-        class="rounded-xl px-6 py-3 bg-red-500 text-white font-bold shadow-lg shadow-red-500/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400"
-      >
-        Áno, zmazať
-      </button>
-
-      <!-- Cancel -->
-      <a href="{% url 'entities:entity_list' %}" class="btn-primary">
-        Nie, späť
-      </a>
-    </form>
-  </div>
-</div>
+{% extends "base.html" %}
+{% block content %}
+    <!-- Page layout wrapper -->
+    <div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
+        <div class="w-full max-w-md bg-[#30638E] rounded-3xl p-8 text-center shadow-2xl shadow-black/40">
+            <!-- Confirmation title -->
+            <h1 class="text-2xl font-bold text-white mb-4">Zmazať subjekt</h1>
+            <!-- Confirmation message -->
+            <p class="text-white/80 mb-8">
+                Naozaj chceš zmazať subjekt
+                <span class="font-semibold text-white">{{ object.name }}</span>
+                ?
+            </p>
+            <!-- Delete confirmation form -->
+            <form method="post" class="flex items-center justify-center gap-4">
+                {% csrf_token %}
+                <!-- Confirm deletion -->
+                <button type="submit"
+                        class="rounded-xl px-6 py-3 bg-red-500 text-white font-bold shadow-lg shadow-red-500/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+                    Áno, zmazať
+                </button>
+                <!-- Cancel -->
+                <a href="{% url 'entities:entity_list' %}" class="btn-primary">Nie, späť</a>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -1,17 +1,16 @@
-from django.contrib.auth.views import LoginView
-from django.views.generic import FormView
-from django.urls import reverse_lazy
-
-from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMultiAlternatives
 from django.shortcuts import redirect
-from django.conf import settings
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views import View
-from django.contrib.auth import get_user_model
-from django.contrib import messages
+from django.views.generic import FormView
 
 from .forms import UserRegisterForm
 
@@ -21,6 +20,7 @@ class UserLoginView(LoginView):
     Final login view for the application.
     Uses a custom template and production-ready behavior.
     """
+
     template_name = "home.html"
     redirect_authenticated_user = True
 
@@ -30,6 +30,7 @@ class UserRegisterView(FormView):
     User registration view.
     Creates a user, logs them in immediately, and redirects to home.
     """
+
     template_name = "home.html"
     form_class = UserRegisterForm
     success_url = reverse_lazy("home")
@@ -69,8 +70,7 @@ class UserRegisterView(FormView):
         email.send()
 
         messages.success(
-            request,
-            "Registrácia prebehla úspešne. Skontroluj email a potvrď účet."
+            request, "Registrácia prebehla úspešne. Skontroluj email a potvrď účet."
         )
 
         return super().form_valid(form)
@@ -90,8 +90,7 @@ class ActivateAccountView(View):
             user.save()
 
             messages.success(
-                request,
-                "Účet bol úspešne aktivovaný. Teraz sa môžeš prihlásiť."
+                request, "Účet bol úspešne aktivovaný. Teraz sa môžeš prihlásiť."
             )
 
             return redirect("home")

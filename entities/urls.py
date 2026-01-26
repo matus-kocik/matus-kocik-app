@@ -4,10 +4,10 @@
 from django.urls import path
 
 from .views import (
-    EntityListView,
     EntityCreateView,
-    EntityUpdateView,
     EntityDeleteView,
+    EntityListView,
+    EntityUpdateView,
 )
 
 app_name = "entities"

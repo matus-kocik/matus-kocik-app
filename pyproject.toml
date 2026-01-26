@@ -1,12 +1,36 @@
 [project]
 name = "matus-kocik-app"
 version = "0.1.0"
-description = "Add your description here"
+description = "My APP"
 readme = "README.md"
 requires-python = ">=3.13"
+authors = [
+    { name = "Matus Kocik", email = "matuskocik@gmail.com" }
+]
+license = "MIT"
 dependencies = [
     "django>=5.2,<5.3",
     "python-decouple>=3.8",
     "requests>=2.32.5",
     "weasyprint>=68.0",
 ]
+
+[dependency-groups]
+dev = [
+    "django-extensions>=4.1",
+    "djlint>=1.36.4",
+    "ruff>=0.14.14",
+]
+
+[tool.ruff]
+line-length = 88
+exclude = ["migrations", "static", "media"]
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "DJ"]
+fixable = ["ALL"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"

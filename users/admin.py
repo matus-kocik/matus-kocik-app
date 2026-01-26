@@ -3,9 +3,9 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import CustomUser
 
+
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-
     list_display = ["email", "full_name", "is_active", "is_staff", "date_joined"]
     list_display_links = ["email"]
     list_editable = ["is_active", "is_staff"]
@@ -49,5 +49,3 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
-
-

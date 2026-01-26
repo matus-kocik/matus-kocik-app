@@ -1,5 +1,5 @@
-from django import forms
 import requests
+from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
@@ -27,8 +27,8 @@ class TurnstileField(forms.Field):
                 },
                 timeout=5,
             ).json()
-        except Exception:
-            raise forms.ValidationError("Overenie zlyhalo. Skúste znova.")
+        except Exception as exc:
+            raise forms.ValidationError("Overenie zlyhalo. Skúste znova.") from exc
         if not response.get("success"):
             raise forms.ValidationError("Overenie proti spamu zlyhalo.")
 
@@ -47,34 +47,44 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ("email", "first_name", "last_name", "password1", "password2")
         widgets = {
-            "email": forms.EmailInput(attrs={
-                "class": BASE_INPUT_CLASS,
-                "placeholder": "Email",
-            }),
-            "first_name": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS,
-                "placeholder": "Meno",
-            }),
-            "last_name": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS,
-                "placeholder": "Priezvisko",
-            }),
+            "email": forms.EmailInput(
+                attrs={
+                    "class": BASE_INPUT_CLASS,
+                    "placeholder": "Email",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": BASE_INPUT_CLASS,
+                    "placeholder": "Meno",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": BASE_INPUT_CLASS,
+                    "placeholder": "Priezvisko",
+                }
+            ),
         }
 
     password1 = forms.CharField(
         label="Heslo",
-        widget=forms.PasswordInput(attrs={
-            "class": BASE_INPUT_CLASS,
-            "placeholder": "Heslo",
-        }),
+        widget=forms.PasswordInput(
+            attrs={
+                "class": BASE_INPUT_CLASS,
+                "placeholder": "Heslo",
+            }
+        ),
     )
 
     password2 = forms.CharField(
         label="Heslo znova",
-        widget=forms.PasswordInput(attrs={
-            "class": BASE_INPUT_CLASS,
-            "placeholder": "Heslo znova",
-        }),
+        widget=forms.PasswordInput(
+            attrs={
+                "class": BASE_INPUT_CLASS,
+                "placeholder": "Heslo znova",
+            }
+        ),
     )
 
     def save(self, commit=True):

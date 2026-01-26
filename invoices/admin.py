@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from .models import Invoice, InvoiceItem
 
-
 # Admin configuration for invoices.
 # This file intentionally contains only configuration (no business logic).
 
@@ -12,6 +11,7 @@ class InvoiceItemInline(admin.TabularInline):
     Inline configuration for invoice line items.
     Allows editing items directly on the invoice admin page.
     """
+
     model = InvoiceItem
     extra = 0
 
@@ -22,6 +22,7 @@ class InvoiceAdmin(admin.ModelAdmin):
     Admin configuration for Invoice.
     Focused on clarity and safe editing.
     """
+
     list_display = (
         "number",
         "supplier",
@@ -89,6 +90,7 @@ class InvoiceItemAdmin(admin.ModelAdmin):
     Admin configuration for standalone invoice item view.
     Mostly useful for debugging; items are usually edited inline.
     """
+
     list_display = ("name", "invoice", "quantity", "unit_price", "total")
     search_fields = ("name",)
     ordering = ("invoice",)

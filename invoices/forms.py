@@ -3,10 +3,9 @@
 from django import forms
 from django.forms import inlineformset_factory
 
-from .models import Invoice, InvoiceItem
-
 from entities.models import Entity
 
+from .models import Invoice, InvoiceItem
 
 # Shared Tailwind CSS classes for form inputs.
 # Centralized here to keep widget definitions consistent and maintainable.
@@ -19,10 +18,12 @@ class InvoiceForm(forms.ModelForm):
     Model form for creating and editing invoices.
     Handles only field presentation and basic HTML input configuration.
     """
+
     class Meta:
         """
         Meta configuration mapping Invoice model fields to form widgets.
         """
+
         model = Invoice
         fields = (
             "number",
@@ -37,44 +38,26 @@ class InvoiceForm(forms.ModelForm):
             "note",
         )
         widgets = {
-            "number": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "issue_date": forms.DateInput(attrs={
-                "type": "date",
-                "class": BASE_INPUT_CLASS
-            }),
-            "delivery_date": forms.DateInput(attrs={
-                "type": "date",
-                "class": BASE_INPUT_CLASS
-            }),
-            "due_date": forms.DateInput(attrs={
-                "type": "date",
-                "class": BASE_INPUT_CLASS
-            }),
-            "supplier": forms.Select(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "customer": forms.Select(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "variable_symbol": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "constant_symbol": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "specific_symbol": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "note": forms.Textarea(attrs={
-                "class": BASE_INPUT_CLASS,
-                "rows": 4
-            }),
+            "number": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "issue_date": forms.DateInput(
+                attrs={"type": "date", "class": BASE_INPUT_CLASS}
+            ),
+            "delivery_date": forms.DateInput(
+                attrs={"type": "date", "class": BASE_INPUT_CLASS}
+            ),
+            "due_date": forms.DateInput(
+                attrs={"type": "date", "class": BASE_INPUT_CLASS}
+            ),
+            "supplier": forms.Select(attrs={"class": BASE_INPUT_CLASS}),
+            "customer": forms.Select(attrs={"class": BASE_INPUT_CLASS}),
+            "variable_symbol": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "constant_symbol": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "specific_symbol": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "note": forms.Textarea(attrs={"class": BASE_INPUT_CLASS, "rows": 4}),
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
         if user is not None:
             self.fields["supplier"].queryset = Entity.objects.filter(owner=user)
@@ -86,26 +69,26 @@ class InvoiceItemForm(forms.ModelForm):
     Form for a single invoice line item.
     Used primarily within an inline formset.
     """
+
     class Meta:
         """
         Meta configuration for invoice item fields and widgets.
         """
+
         model = InvoiceItem
         fields = ("name", "quantity", "unit_price")
         widgets = {
-            "name": forms.TextInput(attrs={
-                "class": BASE_INPUT_CLASS
-            }),
-            "quantity": forms.NumberInput(attrs={
-                "class": BASE_INPUT_NUMBER_CLASS,
-                "step": "any",
-                "min": "0"
-            }),
-            "unit_price": forms.NumberInput(attrs={
-                "class": BASE_INPUT_NUMBER_CLASS + " font-mono",
-                "step": "any",
-                "min": "0"
-            }),
+            "name": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "quantity": forms.NumberInput(
+                attrs={"class": BASE_INPUT_NUMBER_CLASS, "step": "any", "min": "0"}
+            ),
+            "unit_price": forms.NumberInput(
+                attrs={
+                    "class": BASE_INPUT_NUMBER_CLASS + " font-mono",
+                    "step": "any",
+                    "min": "0",
+                }
+            ),
         }
 
 

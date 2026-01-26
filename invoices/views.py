@@ -1,17 +1,23 @@
 # Views for managing invoices (CRUD + PDF export).
 # Views handle HTTP flow and orchestration; business logic lives in models.
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, ListView, DeleteView, DetailView
-from django.db import transaction
-from django.shortcuts import redirect
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-from weasyprint import HTML
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from .models import Invoice
-from .forms import InvoiceForm, InvoiceItemFormSet
+from django.db import transaction
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.utils import timezone
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
+from weasyprint import HTML
+
+from .forms import InvoiceForm, InvoiceItemFormSet
+from .models import Invoice
 
 
 class InvoiceListView(LoginRequiredMixin, ListView):
@@ -19,6 +25,7 @@ class InvoiceListView(LoginRequiredMixin, ListView):
     List view showing all non-deleted invoices.
     Acts as the main overview screen.
     """
+
     model = Invoice
     template_name = "invoices/invoice_list.html"
     context_object_name = "invoices"
@@ -27,11 +34,9 @@ class InvoiceListView(LoginRequiredMixin, ListView):
         """
         Exclude soft-deleted invoices and show newest first.
         """
-        return (
-            Invoice.objects
-            .filter(is_deleted=False, owner=self.request.user)
-            .order_by("-created_at")
-        )
+        return Invoice.objects.filter(
+            is_deleted=False, owner=self.request.user
+        ).order_by("-created_at")
 
 
 class InvoiceCreateView(LoginRequiredMixin, CreateView):
@@ -39,6 +44,7 @@ class InvoiceCreateView(LoginRequiredMixin, CreateView):
     Create view for a new invoice together with its line items.
     Handles invoice number generation and atomic save of invoice + items.
     """
+
     model = Invoice
     form_class = InvoiceForm
     template_name = "invoices/invoice_form.html"
@@ -116,6 +122,7 @@ class InvoiceUpdateView(LoginRequiredMixin, UpdateView):
     """
     Update view for an existing invoice and its items.
     """
+
     model = Invoice
     form_class = InvoiceForm
     template_name = "invoices/invoice_form.html"
@@ -174,6 +181,7 @@ class InvoiceDeleteView(LoginRequiredMixin, DeleteView):
     """
     Soft-delete view that hides an invoice without removing it from the database.
     """
+
     model = Invoice
     template_name = "invoices/invoice_confirm_delete.html"
     success_url = reverse_lazy("invoice_list")
@@ -195,6 +203,7 @@ class InvoicePDFView(LoginRequiredMixin, DetailView):
     """
     Render an invoice as a PDF document using an HTML template.
     """
+
     model = Invoice
 
     def get_queryset(self):
@@ -206,12 +215,13 @@ class InvoicePDFView(LoginRequiredMixin, DetailView):
         """
         invoice = self.get_object()
         html_string = render_to_string(
-            "invoices/pdf/invoice.html",
-            {"invoice": invoice}
+            "invoices/pdf/invoice.html", {"invoice": invoice}
         )
         html = HTML(string=html_string, base_url=request.build_absolute_uri())
         pdf = html.write_pdf()
 
         response = HttpResponse(pdf, content_type="application/pdf")
-        response["Content-Disposition"] = f'inline; filename="invoice_{invoice.number}.pdf"'
+        response["Content-Disposition"] = (
+            f'inline; filename="invoice_{invoice.number}.pdf"'
+        )
         return response

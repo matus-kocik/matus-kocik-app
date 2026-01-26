@@ -3,20 +3,18 @@ Django settings for config project.
 """
 
 from pathlib import Path
+
 from decouple import config
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# SECURITY
 SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", cast=bool)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: v.split(","))
 CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=lambda v: v.split(","))
 
 
-# Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -30,6 +28,16 @@ INSTALLED_APPS = [
     "invoices",
     "entities",
 ]
+
+# Development-only apps
+if DEBUG:
+    try:
+        import django_extensions  # noqa: F401
+
+        INSTALLED_APPS.append("django_extensions")
+    except ImportError:
+        # django-extensions is not installed (e.g. in production)
+        pass
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
