@@ -1,0 +1,12 @@
+{
+    "name": "Matus Kocik App",
+    "short_name": "Koco",
+    "description": "MK application",
+    "lang": "sk",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "background_color": "#ffffff",
+    "theme_color": "#003D5B"
+}

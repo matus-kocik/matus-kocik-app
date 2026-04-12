@@ -1,0 +1,15 @@
+# =============================
+# robots.txt for MK app
+# =============================
+
+User-agent: *
+
+# Block sensitive / non-public areas
+Disallow: /admin/
+Disallow: /media/
+
+# Allow everything else
+Allow: /
+
+# Sitemap (dev/local)
+Sitemap: https://www.matuskocik.com/sitemap.xml

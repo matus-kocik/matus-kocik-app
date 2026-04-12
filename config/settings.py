@@ -4,15 +4,23 @@ Django settings for config project.
 
 from pathlib import Path
 
-from decouple import config
+from decouple import Config, RepositoryEnv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+config = Config(RepositoryEnv(BASE_DIR.parent / ".env"))
+
 
 SECRET_KEY = config("SECRET_KEY")
-DEBUG = config("DEBUG", cast=bool)
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=lambda v: v.split(","))
-CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", cast=lambda v: v.split(","))
+DEBUG = config("DEBUG", default=False, cast=bool)
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS", default="", cast=lambda v: [h.strip() for h in v.split(",") if h]
+)
+CSRF_TRUSTED_ORIGINS = config(
+    "CSRF_TRUSTED_ORIGINS", default="", cast=lambda v: [h.strip() for h in v.split(",") if h]
+)
+if DEBUG:
+    ALLOWED_HOSTS += ["127.0.0.1", "localhost"]
 
 
 INSTALLED_APPS = [
@@ -25,6 +33,7 @@ INSTALLED_APPS = [
     # Local apps
     "users",
     "core",
+    "common",
     "invoices",
     "entities",
 ]
@@ -54,7 +63,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 # Authentication settings
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "home"
 
 # Root URL configuration
@@ -79,38 +88,51 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-"""
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": config("DB_ENGINE"),
-        "NAME": config("DB_NAME"),
-        "USER": config("DB_USER"),
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": config("DB_HOST"),
-        "PORT": config("DB_PORT"),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
-"""
-
-# Database
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": config("DB_ENGINE"),
+            "NAME": config("DB_NAME"),
+            "USER": config("DB_USER"),
+            "PASSWORD": config("DB_PASSWORD"),
+            "HOST": config("DB_HOST"),
+            "PORT": config("DB_PORT"),
+        }
     }
-}
 
-EMAIL_BACKEND = config("EMAIL_BACKEND")
-EMAIL_HOST = config("EMAIL_HOST")
-EMAIL_PORT = config("EMAIL_PORT", cast=int)
-EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
-EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
-EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
+
+if DEBUG:
+    EMAIL_HOST = config("EMAIL_TEST_HOST", default="")
+    EMAIL_PORT = config("EMAIL_TEST_PORT", cast=int, default=587)
+    EMAIL_USE_SSL = config("EMAIL_TEST_USE_SSL", cast=bool, default=False)
+    EMAIL_USE_TLS = config("EMAIL_TEST_USE_TLS", cast=bool, default=True)
+    EMAIL_HOST_USER = config("EMAIL_TEST_HOST_USER", default="")
+    EMAIL_HOST_PASSWORD = config("EMAIL_TEST_HOST_PASSWORD", default="")
+    DEFAULT_FROM_EMAIL = config("EMAIL_TEST_FROM_EMAIL", default="")
+
+    CONTACT_RECEIVER_EMAIL = config("CONTACT_TEST_RECEIVER_EMAIL", default=EMAIL_HOST_USER)
+    APPLICATION_RECEIVER_EMAIL = config("APPLICATION_TEST_RECEIVER_EMAIL", default=EMAIL_HOST_USER)
+else:
+    EMAIL_HOST = config("EMAIL_HOST")
+    EMAIL_PORT = config("EMAIL_PORT", cast=int)
+    EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
+    EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
+    EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+    CONTACT_RECEIVER_EMAIL = config("CONTACT_RECEIVER_EMAIL")
+    APPLICATION_RECEIVER_EMAIL = config("APPLICATION_RECEIVER_EMAIL", default=CONTACT_RECEIVER_EMAIL)
 
 
 # Password validation
@@ -152,13 +174,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Security headers (production-safe, nevadia ani lokálne)
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
 # Use X-Forwarded-Proto header to determine if the request is secure (for deployments behind a proxy)
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+USE_X_FORWARDED_HOST = True
 
 # Cloudflare Turnstile
 TURNSTILE_SITE_KEY = config("TURNSTILE_SITE_KEY", default="")

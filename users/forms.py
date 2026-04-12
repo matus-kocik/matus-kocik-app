@@ -34,7 +34,7 @@ class TurnstileField(forms.Field):
 
 
 class UserRegisterForm(UserCreationForm):
-    cf_turnstile_response = TurnstileField(required=True)
+    turnstile = TurnstileField(required=True)
     website = forms.CharField(required=False, widget=forms.HiddenInput)
 
     def clean_website(self):

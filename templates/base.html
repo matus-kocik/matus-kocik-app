@@ -8,6 +8,7 @@
         {% load static %}
         <!-- Global compiled CSS (Tailwind output) -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <link rel="manifest" href="{% static 'site.webmanifest' %}">
     </head>
     <!-- Page body -->
     <body class="bg-[#003D5B]">
@@ -68,9 +69,5 @@
         {% endif %}
         <!-- Main page content will be injected here -->
         {% block content %}{% endblock %}
-        <!-- Cloudflare Turnstile -->
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-                async
-                defer></script>
     </body>
 </html>

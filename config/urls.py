@@ -1,13 +1,19 @@
 # Root URL configuration for the project.
 # Defines entry points and delegates app-specific routing.
+from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+if settings.DEBUG:
+    admin_url = "admin/"
+else:
+    admin_url = getattr(settings, "ADMIN_URL", "admin/")
+
 # Top-level URL routes
 urlpatterns = [
     # Django admin interface
-    path("admin/", admin.site.urls),
+    path(admin_url, admin.site.urls),
     # Public home / landing page
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     # Users application routes

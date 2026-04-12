@@ -1,7 +1,7 @@
 [project]
 name = "matus-kocik-app"
 version = "0.1.0"
-description = "My APP"
+description = "Koco APP - KocoOS"
 readme = "README.md"
 requires-python = ">=3.13"
 authors = [
@@ -9,28 +9,42 @@ authors = [
 ]
 license = "MIT"
 dependencies = [
-    "django>=5.2,<5.3",
+    "django>=6.0,<7.0",
+    "django-countries>=7.6.1",
+    "django-ratelimit>=4.1.0",
+    "dnspython>=2.7.0",
+    "phonenumbers>=9.0.9",
+    "psycopg2-binary>=2.9.11",
     "python-decouple>=3.8",
-    "requests>=2.32.5",
+    "requests>=2.32.4",
+    "pillow>=11.3.0",
     "weasyprint>=68.0",
 ]
 
 [dependency-groups]
 dev = [
+    "black>=25.1.0",
     "django-extensions>=4.1",
     "djlint>=1.36.4",
-    "ruff>=0.14.14",
+    "isort>=6.0.1",
+    "ruff>=0.12.3",
+    "pytest>=9.0.3",
+    "pytest-django>=4.12.0",
+    "pytest-cov>=7.1.0",
 ]
+
+[tool.black]
+line-length = 88
+
+[tool.isort]
+profile = "black"
 
 [tool.ruff]
 line-length = 88
 exclude = ["migrations", "static", "media"]
-target-version = "py313"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "B", "DJ"]
-fixable = ["ALL"]
-ignore = ["E501"]
+select = ["E", "F", "I"]
+fixable = ["I"]
+ignore = ["D", "ANN", "E501"]
 
-[tool.ruff.format]
-quote-style = "double"
