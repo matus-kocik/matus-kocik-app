@@ -19,6 +19,7 @@ dependencies = [
     "requests>=2.32.4",
     "pillow>=11.3.0",
     "weasyprint>=68.0",
+    "django-tinymce>=5.0.0",
 ]
 
 [dependency-groups]

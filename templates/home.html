@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="min-h-screen flex items-center justify-center bg-[#003D5B] p-6">
+    <div class="min-h-screen flex items-center justify-center bg-white/60 p-6">
         <!-- SHARED OUTER CARD -->
-        <div class="w-full max-w-5xl rounded-3xl bg-[#30638E] shadow-2xl p-6 relative">
+        <div class="w-full max-w-5xl rounded-3xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 p-6 relative">
             {% if user.is_authenticated %}
                 <!-- LOGOUT WRAPPER (top-right of card) -->
                 <div class="absolute top-6 right-6 z-20">
@@ -12,7 +12,7 @@
                         <button type="submit"
                                 aria-label="Odhlásiť sa"
                                 title="Odhlásiť sa"
-                                class="inline-flex items-center justify-center rounded-lg px-3 py-2 text-[#EDAE49] hover:text-[#EDAE49]/80 focus:outline-none focus:ring-2 focus:ring-[#00798C] cursor-pointer">
+                                class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 flex items-center justify-center text-[#EDAE49] hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer transition">
                             <span class="text-xl leading-none">⎋ Odhlásiť sa</span>
                         </button>
                     </form>
@@ -25,11 +25,32 @@
                          alt="Matúš Kočik"
                          class="w-40 h-40 mx-auto rounded-full object-cover ring-4 ring-[#EDAE49] shadow-lg shadow-[#EDAE49]/30 mb-8" />
                     <h1 class="text-4xl md:text-5xl font-extrabold text-[#EDAE49] mb-10">Matúš Kočik</h1>
+                    <a href="https://wpacz-sk.com/" target="_blank"
+                       class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
+
+                        <img src="{% static 'images/wpa-logo-black-192.png' %}" class="w-10 h-10" />
+
+                        <span>WPA CZ-SK</span>
+                    </a>
+                    <a href="/blog/"
+                       class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
+
+                        <svg class="w-10 h-10 stroke-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13l-3.402 1.134 1.134-3.402a4.5 4.5 0 011.13-1.897L16.862 4.487zM19.5 7.125L16.875 4.5M18 14.25v4.125A2.625 2.625 0 0115.375 21H5.625A2.625 2.625 0 013 18.375V8.625A2.625 2.625 0 015.625 6H9.75" />
+                        </svg>
+
+                        <span>Blog</span>
+                    </a>
                     <a href="https://github.com/matus-kocik"
                        target="_blank"
-                       class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C]">
-                        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-                             class="w-8 h-8" />
+                       class="group flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
+                        <svg class="w-10 h-10 fill-black" viewBox="0 0 128 128">
+                            <g>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"/>
+                            </g>
+                        </svg>
                         <span>GitHub</span>
                     </a>
                 </div>
@@ -43,6 +64,7 @@
                         <a href="{% url 'invoice_list' %}" class="btn-entry-link">Prejsť do aplikácie</a>
                     {% else %}
                         {% if request.GET.mode == "register" %}
+                            {% comment %}
                             <h2 class="text-3xl font-bold text-[#EDAE49] mb-4">Registrácia</h2>
                             <p class="text-white/80 mb-6">Vytvor si účet a môžeš ísť na vec.</p>
                             <form method="post"
@@ -84,6 +106,7 @@
                                 <a href="{% url 'home' %}"
                                    class="font-bold text-[#EDAE49] hover:underline">Prihlásiť sa</a>
                             </div>
+                            {% endcomment %}
                         {% else %}
                             <h2 class="text-3xl font-bold text-[#EDAE49] mb-4">Vstup do aplikácie</h2>
                             <p class="text-white/80 mb-6">Prihlás sa a pokračuj v aplikácii.</p>
@@ -97,19 +120,17 @@
                                        class="input-entry" />
                                 <button type="submit" class="btn-entry">Prihlásiť sa</button>
                             </form>
+                            {% comment %}
                             <div class="mt-6 text-sm text-white/80 text-center">
                                 Nemáš účet?
                                 <a href="{% url 'home' %}?mode=register"
                                    class="font-bold text-[#EDAE49] hover:underline">Registrovať sa</a>
                             </div>
+                            {% endcomment %}
                         {% endif %}
                     {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block extra_js %}
-    <script src="{% static 'js/turnstile.min.js' %}"></script>
 {% endblock %}

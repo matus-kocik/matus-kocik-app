@@ -9,7 +9,7 @@ from django import forms
 from .models import BankAccount, Entity
 
 # Shared UI contract for form inputs; intentionally matches invoices.forms.BASE_INPUT_CLASS
-BASE_INPUT_CLASS = "w-full rounded-xl bg-white/80 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
+BASE_INPUT_CLASS = "w-full rounded-xl bg-white/90 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
 
 
 class EntityForm(forms.ModelForm):

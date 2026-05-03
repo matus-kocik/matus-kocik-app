@@ -18,19 +18,17 @@ class TurnstileField(forms.Field):
     def validate(self, value):
         super().validate(value)
 
-        try:
-            response = requests.post(
-                "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-                data={
-                    "secret": settings.TURNSTILE_SECRET_KEY,
-                    "response": value,
-                },
-                timeout=5,
-            ).json()
-        except Exception as exc:
-            raise forms.ValidationError("Overenie zlyhalo. Skúste znova.") from exc
+        response = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": settings.TURNSTILE_SECRET_KEY,
+                "response": value,
+            },
+            timeout=5,
+        ).json()
+
         if not response.get("success"):
-            raise forms.ValidationError("Overenie proti spamu zlyhalo.")
+            raise forms.ValidationError("Ověření proti spamu selhalo.")
 
 
 class UserRegisterForm(UserCreationForm):
@@ -39,7 +37,7 @@ class UserRegisterForm(UserCreationForm):
 
     def clean_website(self):
         if self.cleaned_data.get("website"):
-            raise forms.ValidationError("")
+            raise forms.ValidationError("Spam detekovaný.")
 
         return ""
 

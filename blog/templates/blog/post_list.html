@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mt-6">
+    <div class="bg-[#254E70] border border-white/10 rounded-3xl p-8 shadow-xl shadow-black/40 mb-4">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#EDAE49] text-center">Blog</h1>
+    </div>
+
+    <div class="space-y-6">
+    {% for post in posts %}
+        <div class="p-6 rounded-2xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
+            <a href="{% url 'post_detail' post.slug %}" class="block">
+                <h2 class="text-2xl md:text-3xl font-bold text-[#EDAE49] mb-2">
+                    {{ post.title }}
+                </h2>
+                <p class="text-sm text-white/60 mb-4">
+                    {{ post.created_at|date:"d.m.Y" }}
+                </p>
+                <p class="text-white/90 leading-relaxed">
+                    {{ post.content|striptags|truncatewords:25 }}
+                </p>
+            </a>
+        </div>
+    {% empty %}
+        <div class="text-center py-12">
+            <p class="text-white/60 text-lg">Zatiaľ tu nie sú žiadne články.</p>
+            <p class="text-white/40 text-sm mt-2">Prvý príde čoskoro 👀</p>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

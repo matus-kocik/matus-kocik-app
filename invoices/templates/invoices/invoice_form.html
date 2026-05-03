@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <!-- Page layout wrapper -->
-    <div class="min-h-screen p-6 bg-[#003D5B]">
-        <div class="max-w-5xl xl:max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-8 shadow-2xl shadow-black/40">
+    <div class="min-h-screen p-6 bg-white/60">
+        <div class="max-w-5xl xl:max-w-6xl mx-auto bg-[#254E70] border border-white/10 rounded-3xl p-8 shadow-xl shadow-black/40">
             <!-- Main invoice form -->
             <form method="post" class="space-y-8">
                 {% csrf_token %}
@@ -25,7 +25,7 @@
                     <div class="mt-4 border-b border-white/20"></div>
                 </div>
                 <!-- Customer (entity selection) -->
-                <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Odberateľ</h2>
                     <div class="mt-4 mb-10 border-b border-white/20"></div>
                     <div class="grid grid-cols-1 gap-6">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <!-- Supplier (entity selection) -->
-                <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Dodávateľ</h2>
                     <div class="mt-4 mb-10 border-b border-white/20"></div>
                     <div class="grid grid-cols-1 gap-6">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <!-- Payment details (dates, bank, symbols) -->
-                <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Platobné údaje</h2>
                     <div class="mt-4 mb-10 border-b border-white/20"></div>
                     {{ form.non_field_errors }}
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <!-- Free text note shown on invoice / PDF -->
-                <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Poznámka</h2>
                     <div class="mt-4 mb-10 border-b border-white/20"></div>
                     <div>
@@ -107,14 +107,14 @@
                     </div>
                 </div>
                 <!-- Invoice items (inline formset) -->
-                <div class="bg-[#003D5B]/60 rounded-2xl p-6">
+                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
                     <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Položky</h2>
                     <div class="mt-4 mb-10 border-b border-white/20"></div>
                     {{ formset.management_form }}
                     <!-- Invoice item rows -->
                     <div class="space-y-4">
                         {% for item_form in formset %}
-                            <div class="bg-[#30638E] rounded-xl p-4 border border-white/10">
+                            <div class="bg-[#254E70] rounded-xl p-4 border border-white/10 shadow-md shadow-black/30">
                                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                                     <div class="md:col-span-2">
                                         <label class="block text-white/80 mb-1">{{ item_form.name.label }}</label>

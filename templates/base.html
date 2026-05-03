@@ -11,7 +11,7 @@
         <link rel="manifest" href="{% static 'site.webmanifest' %}">
     </head>
     <!-- Page body -->
-    <body class="bg-[#003D5B]">
+    <body class="bg-white/60">
         {% if messages %}
         <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-lg px-4">
             <div class="flex flex-col gap-3">
@@ -41,15 +41,15 @@
                         <!-- Center navigation -->
                         <nav class="flex items-center gap-2">
                             <a href="{% url 'home' %}"
-                               class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition">
+                                class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
                                 Dashboard
                             </a>
                             <a href="{% url 'invoice_list' %}"
-                               class="px-4 py-2 rounded-xl bg-[#30638E] text-white text-base font-semibold hover:bg-[#003D5B]/60 transition">
+                               class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
                                 Faktúry
                             </a>
                             <a href="{% url 'entities:entity_list' %}"
-                               class="px-4 py-2 rounded-xl bg-[#30638E] text-white/80 text-base font-semibold hover:bg-[#003D5B]/60 transition">
+                               class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
                                 Subjekty
                             </a>
                         </nav>
@@ -59,7 +59,7 @@
                             <button type="submit"
                                     title="Odhlásiť sa"
                                     aria-label="Odhlásiť sa"
-                                    class="px-4 py-2 rounded-xl bg-[#30638E] flex items-center justify-center text-[#EDAE49] hover:bg-[#003D5B]/70 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer">
+                                    class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 flex items-center justify-center text-[#EDAE49] hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer transition">
                                 ⎋ Odhlásiť sa
                             </button>
                         </form>
@@ -69,5 +69,7 @@
         {% endif %}
         <!-- Main page content will be injected here -->
         {% block content %}{% endblock %}
+        <script src="{% static 'js/turnstile.min.js' %}" defer></script>
+        {% block extra_js %}{% endblock %}
     </body>
 </html>

@@ -21,7 +21,6 @@ class Invoice(models.Model):
     # Core invoice identification and dates
     number = models.CharField(
         max_length=20,
-        unique=True,
         verbose_name="Číslo faktúry",
     )
 
@@ -29,8 +28,22 @@ class Invoice(models.Model):
     due_date = models.DateField(verbose_name="Dátum splatnosti")
 
     delivery_date = models.DateField(
+        blank=True,
+        null=True,
         verbose_name="Dátum dodania",
     )
+    class Meta:
+        ordering = ["-issue_date", "-created_at"]
+        indexes = [
+            models.Index(fields=["owner", "number"]),
+        ]
+        constraints = [
+            models.UniqueConstraint(fields=["owner", "number"], name="unique_invoice_per_owner"),
+        ]
+    def clean(self):
+        if self.due_date < self.issue_date:
+            from django.core.exceptions import ValidationError
+            raise ValidationError("Dátum splatnosti nemôže byť pred dátumom vystavenia.")
 
     supplier = models.ForeignKey(
         Entity,
@@ -113,10 +126,9 @@ class Invoice(models.Model):
         """
         Recalculate and persist the invoice total based on related items.
         """
-        total = sum(
-            (item.total for item in self.items.all()),
-            Decimal("0"),
-        )
+        if not self.pk:
+            return
+        total = sum((item.total for item in self.items.all()), Decimal("0"))
         Invoice.objects.filter(pk=self.pk).update(total=total)
 
 
@@ -175,3 +187,6 @@ class InvoiceItem(models.Model):
         invoice = self.invoice
         super().delete(*args, **kwargs)
         invoice.recalculate_total()
+
+    class Meta:
+        ordering = ["id"]

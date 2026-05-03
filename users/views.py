@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponseForbidden
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
@@ -30,6 +31,9 @@ class UserRegisterView(FormView):
     User registration view.
     Creates an inactive user and sends an activation email.
     """
+
+    def dispatch(self, request, *args, **kwargs):
+        return HttpResponseForbidden("Registrácia je vypnutá")
 
     template_name = "home.html"
     form_class = UserRegisterForm
@@ -74,6 +78,9 @@ class UserRegisterView(FormView):
         )
 
         return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 
 class ActivateAccountView(View):

@@ -1,6 +1,5 @@
+from django.conf import settings
 from django.db import models
-
-from config import settings
 
 
 class Entity(models.Model):
@@ -64,6 +63,7 @@ class Entity(models.Model):
     class Meta:
         verbose_name = "Subjekt"
         verbose_name_plural = "Subjekty"
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -109,6 +109,12 @@ class BankAccount(models.Model):
     class Meta:
         verbose_name = "Bankový účet"
         verbose_name_plural = "Bankové účty"
+        ordering = ["-is_default"]
 
     def __str__(self):
         return f"{self.iban}"
+
+    def save(self, *args, **kwargs):
+        if self.is_default:
+            BankAccount.objects.filter(entity=self.entity, is_default=True).exclude(pk=self.pk).update(is_default=False)
+        super().save(*args, **kwargs)

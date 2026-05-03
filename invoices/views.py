@@ -57,12 +57,15 @@ class InvoiceCreateView(LoginRequiredMixin, CreateView):
         initial = super().get_initial()
         year = timezone.now().year
         last_invoice = (
-            Invoice.objects.filter(number__startswith=str(year))
+            Invoice.objects.filter(
+                owner=self.request.user,
+                number__startswith=str(year),
+            )
             .order_by("-number")
             .first()
         )
 
-        if last_invoice:
+        if last_invoice and last_invoice.number[-4:].isdigit():
             last_seq = int(last_invoice.number[-4:])
             next_seq = last_seq + 1
         else:
@@ -106,9 +109,12 @@ class InvoiceCreateView(LoginRequiredMixin, CreateView):
             self.object.save()
 
             # Save invoice first; save items only if the formset is valid and not empty
-            if formset.is_valid() and formset.has_changed():
-                formset.instance = self.object
-                formset.save()
+            if formset.is_valid():
+                if formset.has_changed():
+                    formset.instance = self.object
+                    formset.save()
+            else:
+                return self.form_invalid(form)
 
             self.object.recalculate_total()
 
@@ -170,11 +176,12 @@ class InvoiceUpdateView(LoginRequiredMixin, UpdateView):
             if formset.is_valid():
                 formset.instance = self.object
                 formset.save()
-                self.object.recalculate_total()
             else:
                 return self.form_invalid(form)
 
-        return super().form_valid(form)
+            self.object.recalculate_total()
+
+        return redirect(self.get_success_url())
 
 
 class InvoiceDeleteView(LoginRequiredMixin, DeleteView):

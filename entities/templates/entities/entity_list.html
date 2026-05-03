@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block title %}Subjekty{% endblock %}
 {% block content %}
-    <div class="min-h-screen p-6 bg-[#003D5B]">
-        <div class="max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-6 shadow-2xl shadow-black/40">
+    <div class="min-h-screen p-6 bg-white/60">
+        <div class="max-w-6xl mx-auto bg-[#254E70] border border-white/10 rounded-3xl p-6 shadow-xl shadow-black/40">
             <div class="flex items-center justify-between mb-6">
-                <h1 class="text-3xl font-bold text-white">Subjekty</h1>
+                <h1 class="text-3xl font-bold text-[#EDAE49]">Subjekty</h1>
                 <a href="{% url 'entities:entity_create' %}" class="btn-primary">+ Nový subjekt</a>
             </div>
-            <table class="w-full text-left text-white">
-                <thead class="bg-[#003D5B] text-white/80">
+            <table class="w-full text-left text-white/90">
+                <thead class="bg-black/20 text-white/80">
                     <tr>
                         <th class="px-4 py-3">Názov</th>
                         <th class="px-4 py-3">IČO</th>
@@ -20,7 +20,7 @@
                 <tbody>
                     {% if entities %}
                         {% for entity in entities %}
-                            <tr class="border-b border-white/10 hover:bg-[#003D5B]/40 transition">
+                            <tr class="border-b border-white/10 hover:bg-white/5 transition">
                                 <td class="px-4 py-3 font-medium">{{ entity.name }}</td>
                                 <td class="px-4 py-3">{{ entity.ico|default:"—" }}</td>
                                 <td class="px-4 py-3">{{ entity.dic|default:"—" }}</td>
@@ -35,7 +35,7 @@
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="5" class="px-4 py-10 text-center text-white/70">Zatiaľ nemáš žiadne subjekty.</td>
+                            <td colspan="5" class="px-4 py-10 text-center text-white/60">Zatiaľ nemáš žiadne subjekty.</td>
                         </tr>
                     {% endif %}
                 </tbody>

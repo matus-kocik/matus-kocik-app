@@ -2,8 +2,8 @@
 {% extends "base.html" %}
 {% block content %}
     <!-- Page layout wrapper -->
-    <div class="min-h-screen p-6 bg-[#003D5B]">
-        <div class="max-w-6xl mx-auto bg-[#30638E] rounded-3xl p-6 shadow-2xl shadow-black/40">
+    <div class="min-h-screen p-6">
+        <div class="max-w-6xl mx-auto bg-[#254E70] border border-white/10 rounded-3xl p-6 shadow-xl shadow-black/40">
             <!-- Page header with title and primary action -->
             <div class="flex items-center justify-between mb-6">
                 <h1 class="text-3xl font-extrabold text-[#EDAE49]">Faktúry</h1>
@@ -12,8 +12,8 @@
             </div>
             <div class="overflow-x-auto">
                 <!-- Invoice table -->
-                <table class="w-full text-left text-white">
-                    <thead class="bg-[#003D5B] text-white/80">
+                <table class="w-full text-left text-white/90">
+                    <thead class="bg-black/20 text-white/80">
                         <tr>
                             <th class="px-4 py-3">Číslo</th>
                             <th class="px-4 py-3">Odberateľ</th>
@@ -25,7 +25,7 @@
                     <tbody>
                         <!-- Invoice rows -->
                         {% for invoice in invoices %}
-                            <tr class="border-b border-white/10 hover:bg-[#003D5B]/40 transition">
+                            <tr class="border-b border-white/10 hover:bg-white/5 transition">
                                 <td class="px-4 py-3 font-mono">{{ invoice.number }}</td>
                                 <td class="px-4 py-3">{{ invoice.customer.name }}</td>
                                 <td class="px-4 py-3">{{ invoice.issue_date }}</td>
@@ -44,7 +44,7 @@
                             <!-- Empty state -->
                         {% empty %}
                             <tr>
-                                <td colspan="5" class="px-4 py-10 text-center text-white/70">Žiadne faktúry</td>
+                                <td colspan="5" class="px-4 py-10 text-center text-white/60">Žiadne faktúry</td>
                             </tr>
                         {% endfor %}
                     </tbody>

@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     "common",
     "invoices",
     "entities",
+    "blog",
+    "tinymce",
 ]
 
 # Development-only apps
@@ -63,7 +65,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 
 # Authentication settings
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 # Root URL configuration
@@ -111,28 +113,13 @@ else:
 
 EMAIL_BACKEND = config("EMAIL_BACKEND", default="django.core.mail.backends.smtp.EmailBackend")
 
-if DEBUG:
-    EMAIL_HOST = config("EMAIL_TEST_HOST", default="")
-    EMAIL_PORT = config("EMAIL_TEST_PORT", cast=int, default=587)
-    EMAIL_USE_SSL = config("EMAIL_TEST_USE_SSL", cast=bool, default=False)
-    EMAIL_USE_TLS = config("EMAIL_TEST_USE_TLS", cast=bool, default=True)
-    EMAIL_HOST_USER = config("EMAIL_TEST_HOST_USER", default="")
-    EMAIL_HOST_PASSWORD = config("EMAIL_TEST_HOST_PASSWORD", default="")
-    DEFAULT_FROM_EMAIL = config("EMAIL_TEST_FROM_EMAIL", default="")
-
-    CONTACT_RECEIVER_EMAIL = config("CONTACT_TEST_RECEIVER_EMAIL", default=EMAIL_HOST_USER)
-    APPLICATION_RECEIVER_EMAIL = config("APPLICATION_TEST_RECEIVER_EMAIL", default=EMAIL_HOST_USER)
-else:
-    EMAIL_HOST = config("EMAIL_HOST")
-    EMAIL_PORT = config("EMAIL_PORT", cast=int)
-    EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
-    EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
-    EMAIL_HOST_USER = config("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
-    DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
-
-    CONTACT_RECEIVER_EMAIL = config("CONTACT_RECEIVER_EMAIL")
-    APPLICATION_RECEIVER_EMAIL = config("APPLICATION_RECEIVER_EMAIL", default=CONTACT_RECEIVER_EMAIL)
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = config("EMAIL_PORT", cast=int)
+EMAIL_USE_SSL = config("EMAIL_USE_SSL", cast=bool)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
 
 # Password validation
@@ -153,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-LANGUAGE_CODE = "cs"
+LANGUAGE_CODE = "sk"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
@@ -186,3 +173,27 @@ USE_X_FORWARDED_HOST = True
 # Cloudflare Turnstile
 TURNSTILE_SITE_KEY = config("TURNSTILE_SITE_KEY", default="")
 TURNSTILE_SECRET_KEY = config("TURNSTILE_SECRET_KEY", default="")
+
+
+# TinyMCE configuration (minimal + power)
+TINYMCE_DEFAULT_CONFIG = {
+    "height": 350,
+    "menubar": False,
+
+    "plugins": "lists link code table",
+
+    "toolbar": (
+        "undo redo | "
+        "bold italic | "
+        "styles | "
+        "bullist numlist | "
+        "link | "
+        "table | "
+        "code"
+    ),
+
+    "extended_valid_elements": "iframe[src|width|height|frameborder|allowfullscreen]",
+}
+
+# Allow iframe embeds
+X_FRAME_OPTIONS = "ALLOWALL"

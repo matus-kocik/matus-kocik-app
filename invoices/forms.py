@@ -9,7 +9,7 @@ from .models import Invoice, InvoiceItem
 
 # Shared Tailwind CSS classes for form inputs.
 # Centralized here to keep widget definitions consistent and maintainable.
-BASE_INPUT_CLASS = "w-full rounded-xl bg-white/80 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
+BASE_INPUT_CLASS = "w-full rounded-xl bg-white/90 text-[#003D5B] px-4 py-3 placeholder:text-[#003D5B]/60 focus:outline-none focus:ring-2 focus:ring-[#EDAE49]"
 BASE_INPUT_NUMBER_CLASS = BASE_INPUT_CLASS + " text-right"
 
 
@@ -38,7 +38,7 @@ class InvoiceForm(forms.ModelForm):
             "note",
         )
         widgets = {
-            "number": forms.TextInput(attrs={"class": BASE_INPUT_CLASS}),
+            "number": forms.TextInput(attrs={"class": BASE_INPUT_CLASS, "readonly": "readonly"}),
             "issue_date": forms.DateInput(
                 attrs={"type": "date", "class": BASE_INPUT_CLASS}
             ),
@@ -65,6 +65,17 @@ class InvoiceForm(forms.ModelForm):
 
 
 class InvoiceItemForm(forms.ModelForm):
+    def clean_quantity(self):
+        value = self.cleaned_data.get("quantity")
+        if value is not None and value <= 0:
+            raise forms.ValidationError("Množstvo musí byť väčšie ako 0.")
+        return value
+
+    def clean_unit_price(self):
+        value = self.cleaned_data.get("unit_price")
+        if value is not None and value < 0:
+            raise forms.ValidationError("Cena nemôže byť záporná.")
+        return value
     """
     Form for a single invoice line item.
     Used primarily within an inline formset.
@@ -99,4 +110,6 @@ InvoiceItemFormSet = inlineformset_factory(
     form=InvoiceItemForm,
     extra=1,
     can_delete=True,
+    min_num=1,
+    validate_min=True,
 )
