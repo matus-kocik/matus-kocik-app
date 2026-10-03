@@ -1,37 +1,163 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mt-6">
+
+<div class="mx-auto mt-6 max-w-5xl px-4 pb-12 xl:max-w-6xl">
+
     {% if post.image %}
-        <div class="w-full mb-6 relative">
-            <img src="{{ post.image.url }}"
-                class="w-full max-h-125 object-cover rounded-2xl" />
-            <div class="absolute inset-0 bg-black/20 rounded-2xl"></div>
+
+        <div class="relative mb-6 w-full overflow-hidden rounded-3xl">
+
+            <img
+                src="{{ post.image.url }}"
+                alt="{{ post.title }}"
+                class="
+                    max-h-125
+                    w-full
+                    object-cover
+                "
+            >
+
+            <div
+                class="
+                    absolute
+                    inset-0
+                    bg-black/10
+                "
+            ></div>
+
         </div>
+
     {% endif %}
-    <div class="bg-[#254E70] border border-white/10 rounded-3xl p-6 shadow-xl shadow-black/40">
-        <a href="{% url 'post_list' %}" class="text-sm text-white/60 hover:text-white mb-6 inline-block">
-            ← Späť na blog
-        </a>
 
-        <h1 class="text-3xl md:text-4xl font-bold text-[#EDAE49] mb-4 max-w-3xl mx-auto">
-            {{ post.title }}
-        </h1>
 
-        <p class="text-sm text-white/60 mb-8 max-w-3xl mx-auto">
-            {{ post.created_at|date:"d.m.Y" }}
-        </p>
+    <!-- ARTICLE CARD -->
+    <article
+        class="
+            rounded-3xl
+            border border-[#D88CB5]
+            bg-[#F8EAF2]
+            p-6
+            shadow-sm
+            md:p-10
+        "
+    >
 
-        <div class="prose max-w-3xl mx-auto prose-invert text-white/90 mt-6 
-            leading-relaxed 
-            prose-p:mb-6 prose-p:text-xl
-            prose-headings:mt-10 prose-headings:mb-5 
-            prose-h2:text-3xl prose-h2:font-bold 
-            prose-h3:text-2xl prose-h3:font-semibold
-            [&_ul]:list-disc [&_ul]:ml-6 [&_ul]:mb-6 
-            [&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:mb-6">
-            {{ post.content|safe }}
+        <div class="mx-auto max-w-3xl">
+
+            <!-- BACK -->
+            <a
+                href="{% url 'post_list' %}"
+                class="
+                    mb-8
+                    inline-flex
+                    items-center
+                    gap-2
+                    text-sm
+                    font-semibold
+                    text-[#B96594]
+                    transition-colors
+                    hover:text-[#4E8BC9]
+                "
+            >
+                ← Späť na blog
+            </a>
+
+
+            <!-- TITLE -->
+            <h1
+                class="
+                    mb-4
+                    text-3xl
+                    font-bold
+                    tracking-tight
+                    text-[#3F78B2]
+                    md:text-4xl
+                "
+            >
+                {{ post.title }}
+            </h1>
+
+
+            <!-- DATE -->
+            <p
+                class="
+                    mb-8
+                    text-sm
+                    font-medium
+                    text-[#B96594]
+                "
+            >
+                {{ post.created_at|date:"d.m.Y" }}
+            </p>
+
+
+            <!-- DIVIDER -->
+            <div
+                class="
+                    mb-8
+                    h-1
+                    w-20
+                    rounded-full
+                    bg-[#D88CB5]
+                "
+            ></div>
+
+
+            <!-- CONTENT -->
+            <div
+                class="
+                    prose
+                    max-w-none
+                    leading-relaxed
+                    text-[#4F5963]
+
+                    prose-p:mb-6
+                    prose-p:text-xl
+
+                    prose-headings:mt-10
+                    prose-headings:mb-5
+                    prose-headings:text-[#3F78B2]
+
+                    prose-h2:text-3xl
+                    prose-h2:font-bold
+
+                    prose-h3:text-2xl
+                    prose-h3:font-semibold
+
+                    prose-a:font-semibold
+                    prose-a:text-[#B96594]
+
+                    prose-strong:text-[#3F78B2]
+
+                    [&_ul]:mb-6
+                    [&_ul]:ml-6
+                    [&_ul]:list-disc
+
+                    [&_ol]:mb-6
+                    [&_ol]:ml-6
+                    [&_ol]:list-decimal
+                "
+            >
+                {{ post.content|safe }}
+            </div>
+
         </div>
+
+    </article>
+
+
+    <!-- COLOR PALETTE -->
+    <div class="mt-6 grid grid-cols-5 gap-2">
+
+        <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+        <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+        <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+        <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+        <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
     </div>
+
 </div>
+
 {% endblock %}

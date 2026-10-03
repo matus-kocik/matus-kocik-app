@@ -1,139 +1,636 @@
 {% extends "base.html" %}
+
 {% load static %}
+
 {% block content %}
-    <div class="min-h-screen flex items-center justify-center bg-white/60 p-6">
-        <!-- SHARED OUTER CARD -->
-        <div class="w-full max-w-5xl rounded-3xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 p-6 relative">
-            {% if user.is_authenticated %}
-                <!-- LOGOUT WRAPPER (top-right of card) -->
-                <div class="absolute top-6 right-6 z-20">
-                    <form method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit"
-                                aria-label="Odhlásiť sa"
-                                title="Odhlásiť sa"
-                                class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 flex items-center justify-center text-[#EDAE49] hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer transition">
-                            <span class="text-xl leading-none">⎋ Odhlásiť sa</span>
-                        </button>
-                    </form>
-                </div>
-            {% endif %}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <!-- LEFT: ORIGINAL PROFILE CARD (UNCHANGED) -->
-                <div class="p-8 text-center">
-                    <img src="{% static 'images/ja_avatar.webp' %}"
-                         alt="Matúš Kočik"
-                         class="w-40 h-40 mx-auto rounded-full object-cover ring-4 ring-[#EDAE49] shadow-lg shadow-[#EDAE49]/30 mb-8" />
-                    <h1 class="text-4xl md:text-5xl font-extrabold text-[#EDAE49] mb-10">Matúš Kočik</h1>
-                    <a href="https://wpacz-sk.com/" target="_blank"
-                       class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
 
-                        <img src="{% static 'images/wpa-logo-black-192.png' %}" class="w-10 h-10" />
+<div class="min-h-screen bg-white px-6 py-12 lg:py-16">
 
-                        <span>WPA CZ-SK</span>
-                    </a>
-                    {% comment %}
+    <div class="mx-auto max-w-6xl">
 
-                    <a href="/blog/"
-                       class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
+        <!-- MAIN CARD -->
+        <div
+            class="
+                grid
+                overflow-hidden
+                rounded-4xl
+                border border-[#DDE4EB]
+                bg-white
+                shadow-sm
+                lg:grid-cols-2
+            "
+        >
 
-                        <svg class="w-10 h-10 stroke-black" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-                          <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13l-3.402 1.134 1.134-3.402a4.5 4.5 0 011.13-1.897L16.862 4.487zM19.5 7.125L16.875 4.5M18 14.25v4.125A2.625 2.625 0 0115.375 21H5.625A2.625 2.625 0 013 18.375V8.625A2.625 2.625 0 015.625 6H9.75" />
-                        </svg>
+            <!-- LEFT SIDE -->
+            <section
+                class="
+                    bg-[#E7F0F8]
+                    p-8
+                    md:p-12
+                    lg:p-14
+                "
+            >
 
-                        <span>Blog</span>
-                    </a>
-                    {% endcomment %}
-                    <a href="https://github.com/matus-kocik"
-                       target="_blank"
-                       class="group flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
-                        <svg class="w-10 h-10 fill-black" viewBox="0 0 128 128">
-                            <g>
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"/>
-                            </g>
-                        </svg>
-                        <span>GitHub</span>
-                    </a>
-                </div>
-                <!-- RIGHT: ENTRY CARD (UNCHANGED) -->
-                <div class="p-8 text-white relative">
-                    {% if user.is_authenticated %}
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-2">
-                            Zdar <span class="text-[#EDAE49]">{{ user.first_name }}</span>
-                        </h2>
-                        <p class="text-base md:text-lg text-white/80 mb-6">Môžeš pokračovať v aplikácii.</p>
-                        <a href="{% url 'invoice_list' %}" class="btn-entry-link">Prejsť do aplikácie</a>
-                    {% else %}
-                        {% if request.GET.mode == "register" %}
-                            {% comment %}
-                            <h2 class="text-3xl font-bold text-[#EDAE49] mb-4">Registrácia</h2>
-                            <p class="text-white/80 mb-6">Vytvor si účet a môžeš ísť na vec.</p>
-                            <form method="post"
-                                  action="{% url 'register' %}"
-                                  class="flex flex-col gap-4">
-                                {% csrf_token %}
-                                <input type="hidden" name="turnstile" id="turnstile-token">
-                                <input type="text"
-                                       name="website"
-                                       tabindex="-1"
-                                       autocomplete="off"
-                                       class="hidden">
-                                {{ form.non_field_errors }}
-                                <input type="text" name="first_name" placeholder="Meno" class="input-entry" />
-                                <input type="text"
-                                       name="last_name"
-                                       placeholder="Priezvisko"
-                                       class="input-entry" />
-                                <input type="email" name="email" placeholder="Email" class="input-entry" />
-                                <input type="password"
-                                       name="password1"
-                                       placeholder="Heslo"
-                                       class="input-entry" />
-                                <input type="password"
-                                       name="password2"
-                                       placeholder="Zopakuj heslo"
-                                       class="input-entry" />
-                                <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-                                <!-- Cloudflare Turnstile (visible, auto-managed) -->
-                                <div class="mt-6 flex justify-center">
-                                    <div class="cf-turnstile"
-                                         data-sitekey="{{ TURNSTILE_SITE_KEY }}"
-                                         data-callback="turnstileCallback"></div>
+                <div class="mx-auto max-w-md">
+
+                    <!-- AVATAR + NAME -->
+                    <div class="mb-9 text-center">
+
+                        <img
+                            src="{% static 'images/ja_avatar.webp' %}"
+                            alt="Matúš Kočik"
+                            class="
+                                mx-auto
+                                h-32
+                                w-32
+                                rounded-full
+                                object-cover
+                                shadow-md
+                                ring-4
+                                ring-[#F2A15F]
+                            "
+                        >
+
+                        <h1
+                            class="
+                                mt-6
+                                text-4xl
+                                font-bold
+                                tracking-tight
+                                text-[#3F78B2]
+                                md:text-5xl
+                            "
+                        >
+                            Matúš Kočik
+                        </h1>
+
+                    </div>
+
+
+                    <!-- LINKS -->
+                    <div class="flex flex-col gap-4">
+
+
+                        <!-- WPA CZ-SK -->
+                        <a
+                            href="https://wpacz-sk.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="
+                                project-coral
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                    "
+                                >
+
+                                    <img
+                                        src="{% static 'images/wpa-logo-black-192.png' %}"
+                                        alt="WPA CZ-SK"
+                                        class="h-9 w-9"
+                                    >
+
                                 </div>
-                                <button type="submit" class="btn-entry">Registrovať sa</button>
-                            </form>
-                            <div class="mt-6 text-sm text-white/80 text-center">
-                                Už máš účet?
-                                <a href="{% url 'home' %}"
-                                   class="font-bold text-[#EDAE49] hover:underline">Prihlásiť sa</a>
+
+                                <span class="font-bold">
+                                    WPA CZ-SK
+                                </span>
+
                             </div>
-                            {% endcomment %}
-                        {% else %}
-                            <h2 class="text-3xl font-bold text-[#EDAE49] mb-4">Vstup do aplikácie</h2>
-                            <p class="text-white/80 mb-6">Prihlás sa a pokračuj v aplikácii.</p>
-                            <form method="post" action="{% url 'login' %}" class="flex flex-col gap-4">
-                                {% csrf_token %}
-                                {% if form.errors %}<div class="text-sm text-red-300">Nesprávny email alebo heslo.</div>{% endif %}
-                                <input type="email" name="username" placeholder="Email" class="input-entry" />
-                                <input type="password"
-                                       name="password"
-                                       placeholder="Heslo"
-                                       class="input-entry" />
-                                <button type="submit" class="btn-entry">Prihlásiť sa</button>
-                            </form>
-                            {% comment %}
-                            <div class="mt-6 text-sm text-white/80 text-center">
-                                Nemáš účet?
-                                <a href="{% url 'home' %}?mode=register"
-                                   class="font-bold text-[#EDAE49] hover:underline">Registrovať sa</a>
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- BLOG -->
+                        <a
+                            href="/blog/"
+                            class="
+                                project-pink
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                        text-2xl
+                                    "
+                                >
+                                    ✎
+                                </div>
+
+                                <span class="font-bold">
+                                    Blog
+                                </span>
+
                             </div>
-                            {% endcomment %}
-                        {% endif %}
-                    {% endif %}
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- GITHUB -->
+                        <a
+                            href="https://github.com/matus-kocik"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="
+                                project-blue
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                    "
+                                >
+
+                                    <svg
+                                        class="h-9 w-9 fill-current"
+                                        viewBox="0 0 128 128"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            clip-rule="evenodd"
+                                            d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"
+                                        />
+                                    </svg>
+
+                                </div>
+
+                                <span class="font-bold">
+                                    GitHub
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- VSEMBA -->
+                        <a
+                            href="/vsemba/"
+                            class="
+                                project-cyan
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                        text-xl
+                                        font-bold
+                                    "
+                                >
+                                    VŠ
+                                </div>
+
+                                <span class="font-bold">
+                                    VŠEMBA
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- LINKEDIN -->
+                        <a
+                            href="https://www.linkedin.com/in/mat%C3%BA%C5%A1-ko%C4%8Dik-227b43436/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="
+                                project-blue
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                    "
+                                >
+
+                                    <svg
+                                        class="h-7 w-7 fill-current"
+                                        viewBox="0 0 24 24"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9H7.12v11.452z"
+                                        />
+                                    </svg>
+
+                                </div>
+
+                                <span class="font-bold">
+                                    LinkedIn
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+
+                        <!-- INSTAGRAM -->
+                        <a
+                            href="https://www.instagram.com/matus.kocik/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="
+                                project-pink
+                                group
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                px-5
+                                py-5
+                            "
+                        >
+
+                            <div class="flex items-center gap-4">
+
+                                <div
+                                    class="
+                                        flex
+                                        h-12
+                                        w-12
+                                        items-center
+                                        justify-center
+                                        rounded-xl
+                                        bg-white/70
+                                    "
+                                >
+
+                                    <svg
+                                        class="h-7 w-7 fill-none stroke-current"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        aria-hidden="true"
+                                    >
+                                        <rect
+                                            x="3"
+                                            y="3"
+                                            width="18"
+                                            height="18"
+                                            rx="5"
+                                        />
+                                        <circle
+                                            cx="12"
+                                            cy="12"
+                                            r="4"
+                                        />
+                                        <circle
+                                            cx="17.5"
+                                            cy="6.5"
+                                            r="1"
+                                            class="fill-current stroke-none"
+                                        />
+                                    </svg>
+
+                                </div>
+
+                                <span class="font-bold">
+                                    Instagram
+                                </span>
+
+                            </div>
+
+                            <span
+                                class="
+                                    text-2xl
+                                    transition-transform
+                                    group-hover:translate-x-1
+                                "
+                            >
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
                 </div>
-            </div>
+
+            </section>
+
+
+            <!-- RIGHT SIDE -->
+            <section
+                class="
+                    relative
+                    flex
+                    items-center
+                    bg-[#FFF1E5]
+                    p-8
+                    md:p-12
+                    lg:p-14
+                "
+            >
+
+                {% if user.is_authenticated %}
+
+                    <!-- LOGOUT -->
+                    <div class="absolute right-6 top-6">
+
+                        <form
+                            method="post"
+                            action="{% url 'logout' %}"
+                        >
+
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="
+                                    rounded-xl
+                                    border
+                                    border-[#F2A15F]
+                                    bg-white/70
+                                    px-4
+                                    py-2
+                                    text-sm
+                                    font-semibold
+                                    text-[#D8782C]
+                                    transition-all
+                                    duration-200
+                                    hover:bg-white
+                                    cursor-pointer
+                                "
+                            >
+                                Odhlásiť sa
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <div class="w-full max-w-md">
+
+                        <h2
+                            class="
+                                text-3xl
+                                font-bold
+                                tracking-tight
+                                text-[#3F78B2]
+                                md:text-4xl
+                            "
+                        >
+                            Zdar {{ user.first_name }}
+                        </h2>
+
+                        <p
+                            class="
+                                mb-8
+                                mt-4
+                                text-base
+                                text-[#776B60]
+                            "
+                        >
+                            Môžeš pokračovať v aplikácii.
+                        </p>
+
+                        <a
+                            href="{% url 'invoice_list' %}"
+                            class="btn-entry-link"
+                        >
+                            Prejsť do aplikácie
+                        </a>
+
+                    </div>
+
+
+                {% else %}
+
+                    <div class="w-full max-w-md">
+
+                        <h2
+                            class="
+                                text-3xl
+                                font-bold
+                                tracking-tight
+                                text-[#3F78B2]
+                                md:text-4xl
+                            "
+                        >
+                            Vstup do aplikácie
+                        </h2>
+
+                        <p
+                            class="
+                                mb-8
+                                mt-4
+                                text-base
+                                text-[#776B60]
+                            "
+                        >
+                            Prihlás sa a pokračuj v aplikácii.
+                        </p>
+
+
+                        <form
+                            method="post"
+                            action="{% url 'login' %}"
+                            class="flex flex-col gap-4"
+                        >
+
+                            {% csrf_token %}
+
+                            {% if form.errors %}
+
+                                <div
+                                    class="
+                                        rounded-xl
+                                        border
+                                        border-[#F27C73]
+                                        bg-[#FCEAE7]
+                                        px-4
+                                        py-3
+                                        text-sm
+                                        text-[#B6544D]
+                                    "
+                                >
+                                    Nesprávny email alebo heslo.
+                                </div>
+
+                            {% endif %}
+
+
+                            <input
+                                type="email"
+                                name="username"
+                                placeholder="Email"
+                                class="input-entry"
+                            >
+
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Heslo"
+                                class="input-entry"
+                            >
+
+
+                            <button
+                                type="submit"
+                                class="btn-entry"
+                            >
+                                Prihlásiť sa
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
         </div>
+
+
+        <!-- COLOR PALETTE -->
+        <div class="mt-6 grid grid-cols-5 gap-2">
+
+            <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+            <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+            <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+            <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+            <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
+        </div>
+
     </div>
+
+</div>
+
 {% endblock %}

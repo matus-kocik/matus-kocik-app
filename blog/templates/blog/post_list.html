@@ -1,32 +1,338 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mt-6">
-    <div class="bg-[#254E70] border border-white/10 rounded-3xl p-8 shadow-xl shadow-black/40 mb-4">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#EDAE49] text-center">Blog</h1>
+
+<div class="mx-auto mt-6 max-w-5xl px-4 pb-12 xl:max-w-6xl">
+
+    <!-- BLOG HEADER -->
+    <div
+        class="
+            mb-6
+            rounded-3xl
+            border border-[#D88CB5]
+            bg-[#F8EAF2]
+            p-8
+            shadow-sm
+        "
+    >
+
+        <h1
+            class="
+                text-center
+                text-3xl
+                font-bold
+                tracking-tight
+                text-[#3F78B2]
+                md:text-4xl
+            "
+        >
+            Blog
+        </h1>
+
     </div>
 
+
+    <!-- POSTS -->
     <div class="space-y-6">
-    {% for post in posts %}
-        <div class="p-6 rounded-2xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
-            <a href="{% url 'post_detail' post.slug %}" class="block">
-                <h2 class="text-2xl md:text-3xl font-bold text-[#EDAE49] mb-2">
-                    {{ post.title }}
-                </h2>
-                <p class="text-sm text-white/60 mb-4">
-                    {{ post.created_at|date:"d.m.Y" }}
+
+        {% for post in posts %}
+
+            <!-- ORANGE -->
+            {% if forloop.counter0|divisibleby:"5" %}
+
+                <article
+                    class="
+                        rounded-2xl
+                        border border-[#F2A15F]
+                        bg-[#FFF1E5]
+                        p-6
+                        shadow-sm
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                    "
+                >
+
+                    <a
+                        href="{% url 'post_detail' post.slug %}"
+                        class="block"
+                    >
+
+                        <h2
+                            class="
+                                mb-2
+                                text-2xl
+                                font-bold
+                                tracking-tight
+                                text-[#D8782C]
+                                md:text-3xl
+                            "
+                        >
+                            {{ post.title }}
+                        </h2>
+
+                        <p
+                            class="
+                                mb-4
+                                text-sm
+                                font-medium
+                                text-[#B47B50]
+                            "
+                        >
+                            {{ post.created_at|date:"d.m.Y" }}
+                        </p>
+
+                        <p
+                            class="
+                                leading-relaxed
+                                text-[#4F5963]
+                            "
+                        >
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+                    </a>
+
+                </article>
+
+
+            <!-- PINK -->
+            {% elif forloop.counter0|divisibleby:"4" %}
+
+                <article
+                    class="
+                        rounded-2xl
+                        border border-[#D88CB5]
+                        bg-[#F8EAF2]
+                        p-6
+                        shadow-sm
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                    "
+                >
+
+                    <a
+                        href="{% url 'post_detail' post.slug %}"
+                        class="block"
+                    >
+
+                        <h2
+                            class="
+                                mb-2
+                                text-2xl
+                                font-bold
+                                tracking-tight
+                                text-[#B96594]
+                                md:text-3xl
+                            "
+                        >
+                            {{ post.title }}
+                        </h2>
+
+                        <p class="mb-4 text-sm font-medium text-[#B96594]">
+                            {{ post.created_at|date:"d.m.Y" }}
+                        </p>
+
+                        <p class="leading-relaxed text-[#4F5963]">
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+                    </a>
+
+                </article>
+
+
+            <!-- CYAN / GREEN -->
+            {% elif forloop.counter0|divisibleby:"3" %}
+
+                <article
+                    class="
+                        rounded-2xl
+                        border border-[#66B7C2]
+                        bg-[#E5F6F7]
+                        p-6
+                        shadow-sm
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                    "
+                >
+
+                    <a
+                        href="{% url 'post_detail' post.slug %}"
+                        class="block"
+                    >
+
+                        <h2
+                            class="
+                                mb-2
+                                text-2xl
+                                font-bold
+                                tracking-tight
+                                text-[#3D929E]
+                                md:text-3xl
+                            "
+                        >
+                            {{ post.title }}
+                        </h2>
+
+                        <p class="mb-4 text-sm font-medium text-[#3D929E]">
+                            {{ post.created_at|date:"d.m.Y" }}
+                        </p>
+
+                        <p class="leading-relaxed text-[#4F5963]">
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+                    </a>
+
+                </article>
+
+
+            <!-- BLUE -->
+            {% elif forloop.counter0|divisibleby:"2" %}
+
+                <article
+                    class="
+                        rounded-2xl
+                        border border-[#4E8BC9]
+                        bg-[#E7F0F8]
+                        p-6
+                        shadow-sm
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                    "
+                >
+
+                    <a
+                        href="{% url 'post_detail' post.slug %}"
+                        class="block"
+                    >
+
+                        <h2
+                            class="
+                                mb-2
+                                text-2xl
+                                font-bold
+                                tracking-tight
+                                text-[#3F78B2]
+                                md:text-3xl
+                            "
+                        >
+                            {{ post.title }}
+                        </h2>
+
+                        <p class="mb-4 text-sm font-medium text-[#4E8BC9]">
+                            {{ post.created_at|date:"d.m.Y" }}
+                        </p>
+
+                        <p class="leading-relaxed text-[#4F5963]">
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+                    </a>
+
+                </article>
+
+
+            <!-- CORAL -->
+            {% else %}
+
+                <article
+                    class="
+                        rounded-2xl
+                        border border-[#F27C73]
+                        bg-[#FCEAE7]
+                        p-6
+                        shadow-sm
+                        transition-all
+                        duration-200
+                        hover:-translate-y-0.5
+                        hover:shadow-md
+                    "
+                >
+
+                    <a
+                        href="{% url 'post_detail' post.slug %}"
+                        class="block"
+                    >
+
+                        <h2
+                            class="
+                                mb-2
+                                text-2xl
+                                font-bold
+                                tracking-tight
+                                text-[#C85F57]
+                                md:text-3xl
+                            "
+                        >
+                            {{ post.title }}
+                        </h2>
+
+                        <p class="mb-4 text-sm font-medium text-[#C85F57]">
+                            {{ post.created_at|date:"d.m.Y" }}
+                        </p>
+
+                        <p class="leading-relaxed text-[#4F5963]">
+                            {{ post.content|striptags|truncatewords:25 }}
+                        </p>
+
+                    </a>
+
+                </article>
+
+            {% endif %}
+
+
+        {% empty %}
+
+            <!-- EMPTY STATE - CYAN -->
+            <div
+                class="
+                    rounded-3xl
+                    border border-[#66B7C2]
+                    bg-[#E5F6F7]
+                    py-12
+                    text-center
+                    shadow-sm
+                "
+            >
+
+                <p
+                    class="
+                        text-lg
+                        font-semibold
+                        text-[#3D929E]
+                    "
+                >
+                    Zatiaľ tu nie sú žiadne články.
                 </p>
-                <p class="text-white/90 leading-relaxed">
-                    {{ post.content|striptags|truncatewords:25 }}
-                </p>
-            </a>
-        </div>
-    {% empty %}
-        <div class="text-center py-12">
-            <p class="text-white/60 text-lg">Zatiaľ tu nie sú žiadne články.</p>
-            <p class="text-white/40 text-sm mt-2">Prvý príde čoskoro 👀</p>
-        </div>
-    {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
     </div>
+
+
+    <!-- COLOR PALETTE -->
+    <div class="mt-6 grid grid-cols-5 gap-2">
+
+        <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+        <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+        <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+        <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+        <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
+    </div>
+
 </div>
+
 {% endblock %}

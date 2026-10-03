@@ -25,6 +25,11 @@ urlpatterns = [
     path("entities/", include("entities.urls")),
     path("blog/", include("blog.urls")),
     path("tinymce/", include("tinymce.urls")),
+    path(
+        "vsemba/",
+        TemplateView.as_view(template_name="vsemba/vsemba_list.html"),
+        name="vsemba",
+    ),
 ]
 
 

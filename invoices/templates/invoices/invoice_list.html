@@ -1,19 +1,63 @@
 <!-- Invoice list view -->
 {% extends "base.html" %}
+
 {% block content %}
-    <!-- Page layout wrapper -->
-    <div class="min-h-screen p-6">
-        <div class="max-w-6xl mx-auto bg-[#254E70] border border-white/10 rounded-3xl p-6 shadow-xl shadow-black/40">
-            <!-- Page header with title and primary action -->
-            <div class="flex items-center justify-between mb-6">
-                <h1 class="text-3xl font-extrabold text-[#EDAE49]">Faktúry</h1>
-                <!-- Create new invoice action -->
-                <a href="{% url 'invoice_create' %}" class="btn-primary">+ Nová faktúra</a>
+
+<div class="min-h-screen p-6">
+
+    <div class="max-w-6xl mx-auto">
+
+        <!-- HEADER -->
+        <div
+            class="
+                mb-6
+                rounded-3xl
+                border border-[#F2A15F]
+                bg-[#FFF1E5]
+                p-6
+                shadow-sm
+            "
+        >
+            <div class="flex items-center justify-between">
+
+                <h1 class="text-3xl font-extrabold text-[#F2A15F]">
+                    Faktúry
+                </h1>
+
+                <a
+                    href="{% url 'invoice_create' %}"
+                    class="btn-primary"
+                >
+                    + Nová faktúra
+                </a>
+
             </div>
+        </div>
+
+
+        <!-- INVOICE TABLE -->
+        <div
+            class="
+                overflow-hidden
+                rounded-3xl
+                border border-[#66B7C2]
+                bg-[#E5F6F7]
+                shadow-sm
+            "
+        >
+
             <div class="overflow-x-auto">
-                <!-- Invoice table -->
-                <table class="w-full text-left text-white/90">
-                    <thead class="bg-black/20 text-white/80">
+
+                <table class="w-full text-left text-[#4E8BC9]">
+
+                    <thead
+                        class="
+                            border-b border-[#66B7C2]
+                            bg-[#D9F1F3]
+                            text-[#4E8BC9]
+                        "
+                    >
+
                         <tr>
                             <th class="px-4 py-3">Číslo</th>
                             <th class="px-4 py-3">Odberateľ</th>
@@ -21,35 +65,110 @@
                             <th class="px-4 py-3">Suma</th>
                             <th class="px-4 py-3 text-right">Akcie</th>
                         </tr>
+
                     </thead>
+
+
                     <tbody>
-                        <!-- Invoice rows -->
+
                         {% for invoice in invoices %}
-                            <tr class="border-b border-white/10 hover:bg-white/5 transition">
-                                <td class="px-4 py-3 font-mono">{{ invoice.number }}</td>
-                                <td class="px-4 py-3">{{ invoice.customer.name }}</td>
-                                <td class="px-4 py-3">{{ invoice.issue_date }}</td>
-                                <td class="px-4 py-3 font-semibold">{{ invoice.total }} €</td>
-                                <!-- Row actions: update, PDF export, delete -->
-                                <td class="px-4 py-3 text-right space-x-4">
-                                    <a href="{% url 'invoice_update' invoice.pk %}"
-                                       class="text-[#EDAE49] hover:underline">Upraviť</a>
-                                    <a href="{% url 'invoice_pdf' invoice.pk %}"
-                                       class="text-white/80 hover:underline"
-                                       target="_blank">PDF</a>
-                                    <a href="{% url 'invoice_delete' invoice.pk %}"
-                                       class="text-red-400 hover:underline">Zmazať</a>
+
+                            <tr
+                                class="
+                                    border-b border-[#66B7C2]/40
+                                    transition
+                                    hover:bg-white/40
+                                "
+                            >
+
+                                <td class="px-4 py-3 font-mono">
+                                    {{ invoice.number }}
                                 </td>
+
+                                <td class="px-4 py-3">
+                                    {{ invoice.customer.name }}
+                                </td>
+
+                                <td class="px-4 py-3">
+                                    {{ invoice.issue_date }}
+                                </td>
+
+                                <td class="px-4 py-3 font-semibold">
+                                    {{ invoice.total }} €
+                                </td>
+
+                                <td class="px-4 py-3 text-right space-x-4">
+
+                                    <a
+                                        href="{% url 'invoice_update' invoice.pk %}"
+                                        class="text-[#F2A15F] hover:underline"
+                                    >
+                                        Upraviť
+                                    </a>
+
+                                    <a
+                                        href="{% url 'invoice_pdf' invoice.pk %}"
+                                        class="text-[#4E8BC9] hover:underline"
+                                        target="_blank"
+                                    >
+                                        PDF
+                                    </a>
+
+                                    <a
+                                        href="{% url 'invoice_delete' invoice.pk %}"
+                                        class="text-[#F27C73] hover:underline"
+                                    >
+                                        Zmazať
+                                    </a>
+
+                                </td>
+
                             </tr>
-                            <!-- Empty state -->
+
+
                         {% empty %}
+
                             <tr>
-                                <td colspan="5" class="px-4 py-10 text-center text-white/60">Žiadne faktúry</td>
+
+                                <td
+                                    colspan="5"
+                                    class="
+                                        px-4
+                                        py-10
+                                        text-center
+                                        font-medium
+                                        text-[#4E8BC9]
+                                    "
+                                >
+                                    Žiadne faktúry
+                                </td>
+
                             </tr>
+
                         {% endfor %}
+
                     </tbody>
+
                 </table>
+
             </div>
+
         </div>
+
+
+        <!-- COLOR PALETTE -->
+        <div class="mt-6 grid grid-cols-5 gap-2">
+
+            <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+            <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+            <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+            <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+            <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
+        </div>
+
     </div>
+
+</div>
+
 {% endblock %}

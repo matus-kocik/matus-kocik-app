@@ -1,75 +1,222 @@
-<!-- Base layout template -->
-<!-- Provides common HTML structure, global styles, and content block -->
 <!DOCTYPE html>
-<html class="dark">
-    <head>
-        <title>MK WEB</title>
-        <!-- Load Django static files (CSS, JS, images) -->
-        {% load static %}
-        <!-- Global compiled CSS (Tailwind output) -->
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
-        <link rel="manifest" href="{% static 'site.webmanifest' %}">
-    </head>
-    <!-- Page body -->
-    <body class="bg-white/60">
-        {% if messages %}
-        <div class="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-lg px-4">
+<html lang="sk">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MK WEB</title>
+
+    {% load static %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/styles.css' %}"
+    >
+
+    <link
+        rel="manifest"
+        href="{% static 'site.webmanifest' %}"
+    >
+</head>
+
+
+<body class="min-h-screen bg-white text-[#252525]">
+
+
+    <!-- MESSAGES -->
+    {% if messages %}
+
+        <div
+            class="
+                fixed
+                top-6
+                left-1/2
+                z-50
+                w-full
+                max-w-lg
+                -translate-x-1/2
+                px-4
+            "
+        >
+
             <div class="flex flex-col gap-3">
+
                 {% for message in messages %}
+
                     <div
-                        class="rounded-2xl px-6 py-5 text-base font-semibold shadow-2xl border
-                        {% if message.tags == 'success' %}
-                            bg-green-600 text-white border-green-400
-                        {% elif message.tags == 'error' %}
-                            bg-red-600 text-white border-red-400
-                        {% elif message.tags == 'warning' %}
-                            bg-yellow-500 text-black border-yellow-300
-                        {% else %}
-                            bg-blue-600 text-white border-blue-400
-                        {% endif %}
-                        ">
+                        class="
+                            rounded-2xl
+                            border
+                            px-6 py-4
+                            text-sm
+                            font-semibold
+                            shadow-lg
+
+                            {% if message.tags == 'success' %}
+                                border-[#66B7C2]
+                                bg-[#E5F6F7]
+                                text-[#66B7C2]
+
+                            {% elif message.tags == 'error' %}
+                                border-[#F27C73]
+                                bg-[#FCEAE7]
+                                text-[#F27C73]
+
+                            {% elif message.tags == 'warning' %}
+                                border-[#F2A15F]
+                                bg-[#FFF1E5]
+                                text-[#F2A15F]
+
+                            {% else %}
+                                border-[#4E8BC9]
+                                bg-[#E7F0F8]
+                                text-[#4E8BC9]
+                            {% endif %}
+                        "
+                    >
+
                         {{ message }}
+
                     </div>
+
                 {% endfor %}
+
             </div>
+
         </div>
-        {% endif %}
-        {% if request.user.is_authenticated and request.resolver_match.url_name != 'home' %}
-            <header class="top-8 z-40 mt-6">
-                <div class="max-w-5xl xl:max-w-6xl mx-auto px-4 mb-2">
-                    <div class="rounded-2xl px-4 h-14 flex items-center justify-between">
-                        <!-- Center navigation -->
-                        <nav class="flex items-center gap-2">
-                            <a href="{% url 'home' %}"
-                                class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
-                                Dashboard
-                            </a>
-                            <a href="{% url 'invoice_list' %}"
-                               class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
-                                Faktúry
-                            </a>
-                            <a href="{% url 'entities:entity_list' %}"
-                               class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 text-white/90 text-base font-semibold hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 transition">
-                                Subjekty
-                            </a>
-                        </nav>
-                        <!-- Logout (right) -->
-                        <form method="post" action="{% url 'logout' %}">
-                            {% csrf_token %}
-                            <button type="submit"
-                                    title="Odhlásiť sa"
-                                    aria-label="Odhlásiť sa"
-                                    class="px-4 py-2 rounded-xl bg-[#254E70] border border-white/10 shadow-xl shadow-black/40 flex items-center justify-center text-[#EDAE49] hover:shadow-2xl hover:-translate-y-0.5 hover:opacity-95 hover:ring-1 hover:ring-[#EDAE49]/30 focus:outline-none focus:ring-2 focus:ring-[#EDAE49] cursor-pointer transition">
-                                ⎋ Odhlásiť sa
-                            </button>
-                        </form>
-                    </div>
+
+    {% endif %}
+
+
+
+    <!-- PRIVATE APP NAVIGATION -->
+    {% if request.user.is_authenticated and request.resolver_match.url_name != 'home' %}
+
+        <header class="pt-6">
+
+            <div class="mx-auto max-w-6xl">
+
+                <div
+                    class="
+                        flex
+                        items-center
+                        justify-between
+                        rounded-2xl
+                        border border-[#4E8BC9]
+                        bg-[#E7F0F8]
+                        px-5 py-3
+                        shadow-sm
+                    "
+                >
+
+                    <!-- LOGO -->
+                    <a
+                        href="{% url 'home' %}"
+                        class="
+                            text-xl
+                            font-bold
+                            tracking-tight
+                            text-[#4E8BC9]
+                        "
+                    >
+                        MK WEB
+                    </a>
+
+
+                    <!-- NAVIGATION -->
+                    <nav class="flex items-center gap-1">
+
+                        <a
+                            href="{% url 'home' %}"
+                            class="nav-link"
+                        >
+                            Dashboard
+                        </a>
+
+                        <a
+                            href="{% url 'invoice_list' %}"
+                            class="nav-link"
+                        >
+                            Faktúry
+                        </a>
+
+                        <a
+                            href="{% url 'entities:entity_list' %}"
+                            class="nav-link"
+                        >
+                            Subjekty
+                        </a>
+
+                    </nav>
+
+
+                    <!-- LOGOUT -->
+                    <form
+                        method="post"
+                        action="{% url 'logout' %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            title="Odhlásiť sa"
+                            aria-label="Odhlásiť sa"
+                            class="
+                                rounded-xl
+                                border border-[#F2A15F]
+                                bg-[#FFF1E5]
+                                px-4 py-2
+                                text-sm
+                                font-semibold
+                                text-[#F2A15F]
+                                transition-all
+                                duration-200
+                                hover:bg-[#FFE8D4]
+                                cursor-pointer
+                            "
+                        >
+                            Odhlásiť sa
+                        </button>
+
+                    </form>
+
                 </div>
-            </header>
-        {% endif %}
-        <!-- Main page content will be injected here -->
-        {% block content %}{% endblock %}
-        <script src="{% static 'js/turnstile.min.js' %}" defer></script>
-        {% block extra_js %}{% endblock %}
-    </body>
+
+            </div>
+
+        </header>
+
+    {% endif %}
+
+
+
+    <!-- PAGE CONTENT -->
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+
+    <!-- JS -->
+    <script
+        src="{% static 'js/turnstile.min.js' %}"
+        defer
+    ></script>
+
+
+    {% block extra_js %}
+    {% endblock %}
+
+
+</body>
+
 </html>

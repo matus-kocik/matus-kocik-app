@@ -1,46 +1,286 @@
 @import "tailwindcss";
 
-@layer components {
-    .btn-entry {
-    @apply mt-4 w-full rounded-xl
-        bg-[#EDAE49]
-        py-4
-        text-xl font-bold text-[#003D5B]
-        shadow-lg shadow-[#EDAE49]/30
-        transition-all duration-300
-        hover:-translate-y-0.5 hover:bg-[#68A357]
-        focus:outline-none focus:ring-4 focus:ring-[#00798C]
-        cursor-pointer;
+
+@layer base {
+
+    body {
+        @apply bg-white text-[#252525] antialiased;
     }
-    .btn-primary {
-    @apply inline-flex items-center justify-center
-        rounded-xl bg-[#EDAE49]
-        px-6 py-3
-        text-lg font-bold text-[#003D5B]
-        shadow-lg shadow-[#EDAE49]/30
-        transition-all duration-300
-        hover:-translate-y-0.5 hover:bg-[#68A357]
-        focus:outline-none focus:ring-4 focus:ring-[#00798C]
-        cursor-pointer;
-    }
-    .btn-entry-link {
-    @apply inline-flex items-center justify-center
-        rounded-xl bg-[#EDAE49]
-        px-8 py-4
-        text-xl font-bold text-[#003D5B]
-        shadow-lg shadow-[#EDAE49]/30
-        transition-all duration-300
-        hover:-translate-y-0.5 hover:bg-[#68A357]
-        focus:outline-none focus:ring-4 focus:ring-[#00798C]
-        cursor-pointer;
-}
-    .input-entry {
-    @apply block w-full rounded-xl
-        bg-white
-        px-5 py-4
-        text-lg text-[#003D5B]
-        placeholder:text-[#003D5B]/60
-        focus:outline-none focus:ring-2 focus:ring-[#EDAE49];
-    }
+
 }
 
+
+@layer components {
+
+
+    /* =========================================================
+       PRIMARY BUTTON
+       ========================================================= */
+
+    .btn-primary {
+        @apply inline-flex
+            min-h-12
+            items-center
+            justify-center
+            rounded-2xl
+            border border-[#F2A15F]
+            bg-[#FFF1E5]
+            px-6 py-3
+            text-base
+            font-bold
+            text-[#F2A15F]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#FFE8D4]
+            hover:shadow-md
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#F2A15F]/20
+            cursor-pointer;
+    }
+
+
+    /* =========================================================
+       SECONDARY BUTTON
+       ========================================================= */
+
+    .btn-secondary {
+        @apply inline-flex
+            min-h-12
+            items-center
+            justify-center
+            rounded-2xl
+            border border-[#4E8BC9]
+            bg-[#E7F0F8]
+            px-6 py-3
+            text-base
+            font-bold
+            text-[#4E8BC9]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#DCECF8]
+            hover:shadow-md
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#4E8BC9]/20
+            cursor-pointer;
+    }
+
+
+    /* =========================================================
+       DANGER BUTTON
+       ========================================================= */
+
+    .btn-danger {
+        @apply inline-flex
+            min-h-12
+            items-center
+            justify-center
+            rounded-2xl
+            border border-[#F27C73]
+            bg-[#FCEAE7]
+            px-6 py-3
+            text-base
+            font-bold
+            text-[#F27C73]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#F9DDD9]
+            hover:shadow-md
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#F27C73]/20
+            cursor-pointer;
+    }
+
+
+    /* =========================================================
+       LOGIN BUTTON
+       ========================================================= */
+
+    .btn-entry {
+        @apply mt-2
+            inline-flex
+            min-h-12
+            w-full
+            items-center
+            justify-center
+            rounded-2xl
+            border border-[#F2A15F]
+            bg-[#FFF1E5]
+            px-6 py-3
+            text-base
+            font-bold
+            text-[#F2A15F]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#FFE8D4]
+            hover:shadow-md
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#F2A15F]/20
+            cursor-pointer;
+    }
+
+
+    /* =========================================================
+       ENTRY LINK BUTTON
+       ========================================================= */
+
+    .btn-entry-link {
+        @apply inline-flex
+            min-h-12
+            items-center
+            justify-center
+            rounded-2xl
+            border border-[#F2A15F]
+            bg-[#FFF1E5]
+            px-6 py-3
+            text-base
+            font-bold
+            text-[#F2A15F]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#FFE8D4]
+            hover:shadow-md
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#F2A15F]/20
+            cursor-pointer;
+    }
+
+
+    /* =========================================================
+       INPUT
+       ========================================================= */
+
+    .input-entry {
+        @apply block
+            min-h-12
+            w-full
+            rounded-2xl
+            border border-[#4E8BC9]
+            bg-white
+            px-5 py-3
+            text-base
+            text-[#4E8BC9]
+            placeholder:text-[#4E8BC9]/60
+            transition-all
+            duration-200
+            focus:border-[#4E8BC9]
+            focus:outline-none
+            focus:ring-4
+            focus:ring-[#4E8BC9]/10;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .nav-link {
+        @apply inline-flex
+            items-center
+            justify-center
+            rounded-xl
+            px-4 py-2
+            text-sm
+            font-medium
+            text-[#4E8BC9]
+            transition-all
+            duration-200
+            hover:bg-[#E7F0F8]
+            hover:text-[#4E8BC9];
+    }
+
+
+    /* =========================================================
+       BLUE
+       ========================================================= */
+
+    .project-blue {
+        @apply border
+            border-[#4E8BC9]
+            bg-[#E7F0F8]
+            text-[#4E8BC9]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#DCECF8]
+            hover:shadow-md;
+    }
+
+
+    /* =========================================================
+       ORANGE
+       ========================================================= */
+
+    .project-orange {
+        @apply border
+            border-[#F2A15F]
+            bg-[#FFF1E5]
+            text-[#F2A15F]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#FFE8D4]
+            hover:shadow-md;
+    }
+
+
+    /* =========================================================
+       CYAN
+       ========================================================= */
+
+    .project-cyan {
+        @apply border
+            border-[#66B7C2]
+            bg-[#E5F6F7]
+            text-[#66B7C2]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#D9F1F3]
+            hover:shadow-md;
+    }
+
+
+    /* =========================================================
+       PINK
+       ========================================================= */
+
+    .project-pink {
+        @apply border
+            border-[#D88CB5]
+            bg-[#F8EAF2]
+            text-[#D88CB5]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#F3DCE9]
+            hover:shadow-md;
+    }
+
+
+    /* =========================================================
+       CORAL
+       ========================================================= */
+
+    .project-coral {
+        @apply border
+            border-[#F27C73]
+            bg-[#FCEAE7]
+            text-[#F27C73]
+            transition-all
+            duration-200
+            hover:-translate-y-0.5
+            hover:bg-[#F9DDD9]
+            hover:shadow-md;
+    }
+
+}

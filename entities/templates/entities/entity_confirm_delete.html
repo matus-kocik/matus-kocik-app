@@ -1,27 +1,99 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <!-- Page layout wrapper -->
-    <div class="min-h-screen flex items-center justify-center p-6 bg-[#003D5B]">
-        <div class="w-full max-w-md bg-[#30638E] rounded-3xl p-8 text-center shadow-2xl shadow-black/40">
-            <!-- Confirmation title -->
-            <h1 class="text-2xl font-bold text-white mb-4">Zmazať subjekt</h1>
-            <!-- Confirmation message -->
-            <p class="text-white/80 mb-8">
+
+<div class="flex min-h-screen items-center justify-center bg-white p-6">
+
+    <div class="w-full max-w-md">
+
+        <!-- DELETE CARD -->
+        <div
+            class="
+                rounded-3xl
+                border border-[#F27C73]
+                bg-[#FCEAE7]
+                p-8
+                text-center
+                shadow-sm
+            "
+        >
+
+            <h1
+                class="
+                    mb-4
+                    text-2xl
+                    font-bold
+                    text-[#F27C73]
+                "
+            >
+                Zmazať subjekt
+            </h1>
+
+
+            <p
+                class="
+                    mb-8
+                    text-[#4E8BC9]
+                "
+            >
                 Naozaj chceš zmazať subjekt
-                <span class="font-semibold text-white">{{ object.name }}</span>
+
+                <span class="font-bold text-[#F27C73]">
+                    {{ object.name }}
+                </span>
+
                 ?
             </p>
-            <!-- Delete confirmation form -->
-            <form method="post" class="flex items-center justify-center gap-4">
+
+
+            <form
+                method="post"
+                class="
+                    flex
+                    items-center
+                    justify-center
+                    gap-4
+                "
+            >
+
                 {% csrf_token %}
-                <!-- Confirm deletion -->
-                <button type="submit"
-                        class="rounded-xl px-6 py-3 bg-red-500 text-white font-bold shadow-lg shadow-red-500/40 transition-all duration-300 hover:-translate-y-0.5 hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-400">
+
+
+                <!-- DELETE -->
+                <button
+                    type="submit"
+                    class="btn-danger"
+                >
                     Áno, zmazať
                 </button>
-                <!-- Cancel -->
-                <a href="{% url 'entities:entity_list' %}" class="btn-primary">Nie, späť</a>
+
+
+                <!-- CANCEL -->
+                <a
+                    href="{% url 'entities:entity_list' %}"
+                    class="btn-secondary"
+                >
+                    Nie, späť
+                </a>
+
             </form>
+
         </div>
+
+
+        <!-- COLOR PALETTE -->
+        <div class="mt-6 grid grid-cols-5 gap-2">
+
+            <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+            <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+            <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+            <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+            <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
+        </div>
+
     </div>
+
+</div>
+
 {% endblock %}

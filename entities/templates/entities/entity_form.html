@@ -1,80 +1,229 @@
 {% extends "base.html" %}
+
 {% block content %}
-    <!-- Page layout wrapper -->
-    <div class="min-h-screen p-6 bg-white/60">
-        <!-- Main card -->
-        <div class="max-w-5xl xl:max-w-6xl mx-auto bg-[#254E70] border border-white/10 rounded-3xl p-8 shadow-xl shadow-black/40">
-            <!-- Page header -->
-            <div class="mb-10">
-                <h1 class="text-3xl font-extrabold text-[#EDAE49]">
-                    {% if object %}
-                        Subjekt
-                    {% else %}
-                        Nový subjekt
-                    {% endif %}
-                </h1>
-                <div class="mt-4 border-b border-white/20"></div>
-            </div>
-            <!-- Entity form -->
-            <form method="post" class="space-y-10">
-                {% csrf_token %}
-                <!-- Basic entity info -->
-                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Základné údaje</h2>
-                    <div class="mb-10 border-b border-white/20"></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.name.label }}</label>
-                            {{ form.name }}
-                        </div>
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.email.label }}</label>
-                            {{ form.email }}
-                        </div>
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.ico.label }}</label>
-                            {{ form.ico }}
-                        </div>
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.dic.label }}</label>
-                            {{ form.dic }}
-                        </div>
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.ic_dph.label }}</label>
-                            {{ form.ic_dph }}
-                        </div>
-                    </div>
-                </div>
-                <!-- Address -->
-                <div class="bg-[#254E70]/60 border border-white/10 rounded-2xl p-6">
-                    <h2 class="text-2xl font-bold text-[#EDAE49] mb-6 tracking-tight">Adresa</h2>
-                    <div class="mb-10 border-b border-white/20"></div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="md:col-span-2">
-                            <label class="block text-white/80 mb-1">{{ form.street.label }}</label>
-                            {{ form.street }}
-                        </div>
-                        <div>
-                            <label class="block text-white/80 mb-1">{{ form.zip_code.label }}</label>
-                            {{ form.zip_code }}
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="block text-white/80 mb-1">{{ form.city.label }}</label>
-                            {{ form.city }}
-                        </div>
-                        <div class="md:col-span-3">
-                            <label class="block text-white/80 mb-1">{{ form.country.label }}</label>
-                            {{ form.country }}
-                        </div>
-                    </div>
-                </div>
-                <!-- Primary actions -->
-                <div class="flex items-center gap-4">
-                    <button type="submit" class="btn-primary">Uložiť</button>
-                    <a href="{% url 'entities:entity_list' %}"
-                       class="text-white/80 hover:underline">Späť</a>
-                </div>
-            </form>
+
+<div class="min-h-screen bg-white p-6">
+
+    <div class="mx-auto max-w-6xl">
+
+        <!-- HEADER -->
+        <div
+            class="
+                mb-6
+                rounded-3xl
+                border border-[#4E8BC9]
+                bg-[#E7F0F8]
+                p-8
+                shadow-sm
+            "
+        >
+
+            <h1
+                class="
+                    text-3xl
+                    font-extrabold
+                    text-[#4E8BC9]
+                "
+            >
+                {% if object %}
+                    Subjekt
+                {% else %}
+                    Nový subjekt
+                {% endif %}
+            </h1>
+
         </div>
+
+
+        <form method="post" class="space-y-6">
+
+            {% csrf_token %}
+
+
+            <!-- BASIC INFO -->
+            <section
+                class="
+                    rounded-3xl
+                    border border-[#4E8BC9]
+                    bg-[#E7F0F8]
+                    p-6
+                    shadow-sm
+                "
+            >
+
+                <h2
+                    class="
+                        mb-6
+                        text-2xl
+                        font-bold
+                        tracking-tight
+                        text-[#4E8BC9]
+                    "
+                >
+                    Základné údaje
+                </h2>
+
+                <div
+                    class="
+                        mb-8
+                        h-1
+                        w-20
+                        rounded-full
+                        bg-[#4E8BC9]
+                    "
+                ></div>
+
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.name.label }}
+                        </label>
+                        {{ form.name }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.email.label }}
+                        </label>
+                        {{ form.email }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.ico.label }}
+                        </label>
+                        {{ form.ico }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.dic.label }}
+                        </label>
+                        {{ form.dic }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.ic_dph.label }}
+                        </label>
+                        {{ form.ic_dph }}
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ADDRESS -->
+            <section
+                class="
+                    rounded-3xl
+                    border border-[#66B7C2]
+                    bg-[#E5F6F7]
+                    p-6
+                    shadow-sm
+                "
+            >
+
+                <h2
+                    class="
+                        mb-6
+                        text-2xl
+                        font-bold
+                        tracking-tight
+                        text-[#66B7C2]
+                    "
+                >
+                    Adresa
+                </h2>
+
+                <div
+                    class="
+                        mb-8
+                        h-1
+                        w-20
+                        rounded-full
+                        bg-[#66B7C2]
+                    "
+                ></div>
+
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+
+                    <div class="md:col-span-2">
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.street.label }}
+                        </label>
+                        {{ form.street }}
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.zip_code.label }}
+                        </label>
+                        {{ form.zip_code }}
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.city.label }}
+                        </label>
+                        {{ form.city }}
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <label class="mb-2 block font-semibold text-[#4E8BC9]">
+                            {{ form.country.label }}
+                        </label>
+                        {{ form.country }}
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACTIONS -->
+            <div class="flex items-center gap-4">
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    Uložiť
+                </button>
+
+                <a
+                    href="{% url 'entities:entity_list' %}"
+                    class="
+                        font-medium
+                        text-[#4E8BC9]
+                        hover:underline
+                    "
+                >
+                    Späť
+                </a>
+
+            </div>
+
+
+            <!-- COLOR PALETTE -->
+            <div class="grid grid-cols-5 gap-2">
+
+                <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+                <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+                <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+                <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+                <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
+            </div>
+
+        </form>
+
     </div>
+
+</div>
+
 {% endblock %}
