@@ -21,7 +21,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <!-- LEFT: ORIGINAL PROFILE CARD (UNCHANGED) -->
                 <div class="p-8 text-center">
-                    <img src="{% static 'images/avatar.jpg' %}"
+                    <img src="{% static 'images/ja_avatar.webp' %}"
                          alt="Matúš Kočik"
                          class="w-40 h-40 mx-auto rounded-full object-cover ring-4 ring-[#EDAE49] shadow-lg shadow-[#EDAE49]/30 mb-8" />
                     <h1 class="text-4xl md:text-5xl font-extrabold text-[#EDAE49] mb-10">Matúš Kočik</h1>
@@ -32,6 +32,8 @@
 
                         <span>WPA CZ-SK</span>
                     </a>
+                    {% comment %}
+
                     <a href="/blog/"
                        class="flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
 
@@ -42,6 +44,7 @@
 
                         <span>Blog</span>
                     </a>
+                    {% endcomment %}
                     <a href="https://github.com/matus-kocik"
                        target="_blank"
                        class="group flex items-center justify-center gap-4 rounded-xl px-6 py-4 bg-[#EDAE49] text-[#003D5B] font-bold text-lg md:text-base border border-[#EDAE49]/60 transition-all duration-300 hover:bg-[#EDAE49]/90 focus:outline-none focus:ring-4 focus:ring-[#00798C] mt-4">
