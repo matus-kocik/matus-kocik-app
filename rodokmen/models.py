@@ -83,6 +83,11 @@ class Node(
         help_text="Manuálne poradie pri zobrazovaní uzlov",
     )
 
+    editor_note = models.TextField(
+        blank=True,
+        verbose_name="Poznámka redaktora",
+    )
+
     class Meta:
         ordering = ["order", "year_from", "name"]
         verbose_name = "Uzol"

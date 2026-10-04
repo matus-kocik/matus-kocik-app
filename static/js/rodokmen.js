@@ -114,6 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return djangoNodes.find((node) => node.id === nodeId);
     };
 
+    const getDjangoConnection = (connectionId) => {
+        return djangoConnections.find(
+            (connection) => connection.id === connectionId,
+        );
+    };
+
     const createHistoricalDate = (year) => {
         if (year === null || year === undefined) {
             return null;
@@ -154,6 +160,36 @@ document.addEventListener("DOMContentLoaded", () => {
         nodeDetail.classList.remove("hidden");
     };
 
+    const openConnectionDetail = (connectionId) => {
+        const connection = getDjangoConnection(connectionId);
+
+        if (!connection) {
+            return;
+        }
+
+        const sourceNode = getDjangoNode(connection.source);
+        const targetNode = getDjangoNode(connection.target);
+
+        if (!sourceNode || !targetNode) {
+            return;
+        }
+
+        nodeDetailType.textContent = "Prepojenie";
+
+        nodeDetailName.textContent =
+            `${sourceNode.name} → ${targetNode.name}`;
+
+        nodeDetailYears.textContent =
+            connection.connection_type_display;
+
+        nodeDetailYears.classList.remove("hidden");
+
+        nodeDetailDescription.textContent =
+            connection.description || "Bez popisu.";
+
+        nodeDetail.classList.remove("hidden");
+    };
+
     // =========================================================
     // VIS-NETWORK DATA
     // =========================================================
@@ -173,9 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
             from: connection.source,
             to: connection.target,
             label: connection.connection_type_display,
-            title:
-                connection.description ||
-                connection.connection_type_display,
         })),
     );
 
@@ -214,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 bindToWindow: false,
             },
 
-            zoomView: true,
+            zoomView: false,
             dragView: true,
             dragNodes: false,
             multiselect: false,
@@ -476,11 +509,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================================================
 
     network.on("click", (params) => {
-        if (params.nodes.length !== 1) {
+        if (params.nodes.length === 1) {
+            openNodeDetail(params.nodes[0]);
             return;
         }
 
-        openNodeDetail(params.nodes[0]);
+        if (params.edges.length === 1) {
+            openConnectionDetail(params.edges[0]);
+        }
     });
 
     network.on("doubleClick", (params) => {
@@ -638,37 +674,51 @@ document.addEventListener("DOMContentLoaded", () => {
     // TIMELINE
     // =========================================================
 
-    const timeline = new vis.Timeline(
-        timelineContainer,
-        timelineItems,
-        timelineGroups,
-        timelineOptions,
-    );
+    let timeline = null;
 
-    // =========================================================
-    // TIMELINE EVENTS
-    // =========================================================
-
-    timeline.on("select", (properties) => {
-        if (properties.items.length !== 1) {
+    const createTimeline = () => {
+        if (timeline) {
             return;
         }
 
-        openNodeDetail(properties.items[0]);
-    });
+        timeline = new vis.Timeline(
+            timelineContainer,
+            timelineItems,
+            timelineGroups,
+            timelineOptions,
+        );
 
-    timeline.on("doubleClick", (properties) => {
-        if (!properties.item) {
-            return;
-        }
+        // =====================================================
+        // TIMELINE EVENTS
+        // =====================================================
 
-        timeline.focus(properties.item, {
-            animation: {
-                duration: 400,
-                easingFunction: "easeInOutQuad",
-            },
+        timeline.on("select", (properties) => {
+            if (properties.items.length !== 1) {
+                return;
+            }
+
+            openNodeDetail(properties.items[0]);
         });
-    });
+
+        timeline.on("doubleClick", (properties) => {
+            if (!properties.item) {
+                return;
+            }
+
+            timeline.focus(properties.item, {
+                animation: {
+                    duration: 400,
+                    easingFunction: "easeInOutQuad",
+                },
+            });
+        });
+
+        if (timelineItems.length > 0) {
+            timeline.fit({
+                animation: false,
+            });
+        }
+    };
 
     // =========================================================
     // VIEW SWITCHER
@@ -700,13 +750,12 @@ document.addEventListener("DOMContentLoaded", () => {
         treeButton.classList.add("btn-secondary");
 
         requestAnimationFrame(() => {
-            timeline.redraw();
-
-            if (timelineItems.length > 0) {
-                timeline.fit({
-                    animation: false,
-                });
+            if (!timeline) {
+                createTimeline();
+                return;
             }
+
+            timeline.redraw();
         });
     });
 
@@ -718,7 +767,10 @@ document.addEventListener("DOMContentLoaded", () => {
         nodeDetail.classList.add("hidden");
 
         network.unselectAll();
-        timeline.setSelection([]);
+
+        if (timeline) {
+            timeline.setSelection([]);
+        }
     };
 
     nodeDetailClose.addEventListener("click", closeNodeDetail);

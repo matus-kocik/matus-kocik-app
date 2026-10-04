@@ -69,6 +69,12 @@ class NodeAdmin(admin.ModelAdmin):
                 "fields": (
                     "short_description",
                     "description",
+                    "editor_note",
+                ),
+                "description": (
+                    "Poznámka redaktora slúži na transparentné označenie "
+                    "redakčných alebo orientačných doplnení, ktoré nie sú "
+                    "priamo prevzaté zo zdrojovej literatúry."
                 ),
             },
         ),
@@ -101,9 +107,11 @@ class ConnectionAdmin(admin.ModelAdmin):
     )
 
     search_fields = (
-        "source__name",
-        "target__name",
+        "name",
+        "period_label",
+        "short_description",
         "description",
+        "editor_note",
     )
 
     autocomplete_fields = (

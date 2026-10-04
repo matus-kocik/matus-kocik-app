@@ -75,7 +75,7 @@
 
 
     /* ---------------------------------------------------------
-       CONCEPT
+        CONCEPT
        --------------------------------------------------------- */
 
     #economics-timeline .vis-item.timeline-concept {
@@ -93,7 +93,7 @@
 
 
     /* ---------------------------------------------------------
-       WORK
+        WORK
        --------------------------------------------------------- */
 
     #economics-timeline .vis-item.timeline-work {
@@ -111,7 +111,7 @@
 
 
     /* ---------------------------------------------------------
-       EVENT
+        EVENT
        --------------------------------------------------------- */
 
     #economics-timeline .vis-item.timeline-event {
@@ -127,13 +127,18 @@
         border-width: 2px !important;
     }
 
-
     /* ---------------------------------------------------------
-       CONTENT
-       --------------------------------------------------------- */
+    CONTENT
+    --------------------------------------------------------- */
 
     #economics-timeline .vis-item .vis-item-content {
         color: inherit !important;
+        overflow: visible !important;
+        white-space: nowrap !important;
+    }
+
+    #economics-timeline .vis-item .vis-item-overflow {
+        overflow: visible !important;
     }
 </style>
 {% endblock %}
@@ -243,6 +248,36 @@
             <p class="mt-1 text-sm text-[#776B60]">
                 Chronologický vývoj osobností, ekonomických škôl,
                 teórií, pojmov, diel a udalostí.
+            </p>
+        </div>
+
+        <!-- DEVELOPMENT WARNING -->
+        <div
+            class="
+                mx-4
+                mt-4
+                rounded-xl
+                border-2
+                border-[#F27C73]
+                bg-[#FCEAE7]
+                px-4
+                py-3
+                text-[#252525]
+            "
+        >
+            <p class="font-bold" style="color: #dc2626;">
+                UPOZORNENIE – ČASOVÁ OS JE VO VÝVOJI
+            </p>
+
+            <p class="mt-1 text-sm text-[#776B60]">
+                Časová os je momentálne experimentálna a nemusí zobrazovať
+                všetky údaje alebo časové obdobia optimálne. Na jej funkčnosti
+                a zobrazení sa bude ďalej pracovať.
+            </p>
+
+            <p class="mt-2 text-sm font-semibold text-[#F27C73]">
+                Hlavnou a aktuálne odporúčanou súčasťou projektu je
+                Rodokmeň ekonómie.
             </p>
         </div>
 
