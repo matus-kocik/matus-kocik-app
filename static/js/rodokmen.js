@@ -8,16 +8,74 @@ document.addEventListener("DOMContentLoaded", () => {
     const treeContainer = document.getElementById("economics-tree");
     const timelineContainer = document.getElementById("economics-timeline");
 
+    // =========================================================
+    // DETAIL ELEMENTS
+    // =========================================================
+
     const nodeDetail = document.getElementById("node-detail");
     const nodeDetailType = document.getElementById("node-detail-type");
     const nodeDetailName = document.getElementById("node-detail-name");
-    const nodeDetailYears = document.getElementById("node-detail-years");
+
+    const nodeDetailTemporal = document.getElementById(
+        "node-detail-temporal",
+    );
+
+    const nodeDetailYearFromWrapper = document.getElementById(
+        "node-detail-year-from-wrapper",
+    );
+    const nodeDetailYearFrom = document.getElementById(
+        "node-detail-year-from",
+    );
+
+    const nodeDetailYearToWrapper = document.getElementById(
+        "node-detail-year-to-wrapper",
+    );
+    const nodeDetailYearTo = document.getElementById(
+        "node-detail-year-to",
+    );
+
+    const nodeDetailPeriodWrapper = document.getElementById(
+        "node-detail-period-wrapper",
+    );
+    const nodeDetailPeriod = document.getElementById(
+        "node-detail-period",
+    );
+
+    const connectionDetailData = document.getElementById(
+        "connection-detail-data",
+    );
+    const connectionDetailType = document.getElementById(
+        "connection-detail-type",
+    );
+    const connectionDetailSource = document.getElementById(
+        "connection-detail-source",
+    );
+    const connectionDetailTarget = document.getElementById(
+        "connection-detail-target",
+    );
+
+    const nodeDetailShortDescriptionWrapper = document.getElementById(
+        "node-detail-short-description-wrapper",
+    );
+    const nodeDetailShortDescription = document.getElementById(
+        "node-detail-short-description",
+    );
+
+    const nodeDetailDescriptionWrapper = document.getElementById(
+        "node-detail-description-wrapper",
+    );
+    const nodeDetailDescriptionLabel = document.getElementById(
+        "node-detail-description-label",
+    );
     const nodeDetailDescription = document.getElementById(
         "node-detail-description",
     );
+
     const nodeDetailClose = document.getElementById("node-detail-close");
 
-    const nodesDataElement = document.getElementById("rodokmen-nodes-data");
+    const nodesDataElement = document.getElementById(
+        "rodokmen-nodes-data",
+    );
     const connectionsDataElement = document.getElementById(
         "rodokmen-connections-data",
     );
@@ -32,7 +90,21 @@ document.addEventListener("DOMContentLoaded", () => {
         !nodeDetail ||
         !nodeDetailType ||
         !nodeDetailName ||
-        !nodeDetailYears ||
+        !nodeDetailTemporal ||
+        !nodeDetailYearFromWrapper ||
+        !nodeDetailYearFrom ||
+        !nodeDetailYearToWrapper ||
+        !nodeDetailYearTo ||
+        !nodeDetailPeriodWrapper ||
+        !nodeDetailPeriod ||
+        !connectionDetailData ||
+        !connectionDetailType ||
+        !connectionDetailSource ||
+        !connectionDetailTarget ||
+        !nodeDetailShortDescriptionWrapper ||
+        !nodeDetailShortDescription ||
+        !nodeDetailDescriptionWrapper ||
+        !nodeDetailDescriptionLabel ||
         !nodeDetailDescription ||
         !nodeDetailClose ||
         !nodesDataElement ||
@@ -76,6 +148,30 @@ document.addEventListener("DOMContentLoaded", () => {
     // HELPERS
     // =========================================================
 
+    const hasValue = (value) => {
+        if (value === null || value === undefined) {
+            return false;
+        }
+
+        if (typeof value === "string") {
+            return value.trim() !== "";
+        }
+
+        return true;
+    };
+
+    const formatHistoricalYear = (year) => {
+        if (year === null || year === undefined) {
+            return "";
+        }
+
+        if (year < 0) {
+            return `${Math.abs(year)} pred n. l.`;
+        }
+
+        return `${year}`;
+    };
+
     const createNodePeriod = (node) => {
         if (node.period_label && node.period_label.trim()) {
             return node.period_label.trim();
@@ -90,14 +186,16 @@ document.addEventListener("DOMContentLoaded", () => {
             node.year_to !== null &&
             node.year_from !== node.year_to
         ) {
-            return `${node.year_from} – ${node.year_to}`;
+            return `${formatHistoricalYear(node.year_from)} – ${formatHistoricalYear(
+                node.year_to,
+            )}`;
         }
 
         if (node.year_from !== null) {
-            return `${node.year_from}`;
+            return formatHistoricalYear(node.year_from);
         }
 
-        return `${node.year_to}`;
+        return formatHistoricalYear(node.year_to);
     };
 
     const createNodeLabel = (node) => {
@@ -133,6 +231,46 @@ document.addEventListener("DOMContentLoaded", () => {
         return date;
     };
 
+    const setDetailValue = (wrapper, element, value) => {
+        if (hasValue(value)) {
+            element.textContent = value;
+            wrapper.classList.remove("hidden");
+            return true;
+        }
+
+        element.textContent = "";
+        wrapper.classList.add("hidden");
+
+        return false;
+    };
+
+    const resetDetail = () => {
+        nodeDetailType.textContent = "";
+        nodeDetailName.textContent = "";
+
+        nodeDetailYearFrom.textContent = "";
+        nodeDetailYearTo.textContent = "";
+        nodeDetailPeriod.textContent = "";
+
+        nodeDetailYearFromWrapper.classList.add("hidden");
+        nodeDetailYearToWrapper.classList.add("hidden");
+        nodeDetailPeriodWrapper.classList.add("hidden");
+        nodeDetailTemporal.classList.add("hidden");
+
+        connectionDetailType.textContent = "";
+        connectionDetailSource.textContent = "";
+        connectionDetailTarget.textContent = "";
+        connectionDetailData.classList.add("hidden");
+
+        nodeDetailShortDescription.textContent = "";
+        nodeDetailShortDescriptionWrapper.classList.add("hidden");
+
+        nodeDetailDescription.textContent = "";
+        nodeDetailDescriptionWrapper.classList.add("hidden");
+
+        nodeDetailDescriptionLabel.textContent = "Detailný popis";
+    };
+
     // =========================================================
     // NODE DETAIL
     // =========================================================
@@ -144,21 +282,57 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        resetDetail();
+
         nodeDetailType.textContent =
-            nodeTypeLabels[node.node_type] || node.node_type;
+            node.node_type_display ||
+            nodeTypeLabels[node.node_type] ||
+            node.node_type;
 
         nodeDetailName.textContent = node.name;
 
-        const period = createNodePeriod(node);
+        const hasYearFrom = setDetailValue(
+            nodeDetailYearFromWrapper,
+            nodeDetailYearFrom,
+            formatHistoricalYear(node.year_from),
+        );
 
-        nodeDetailYears.textContent = period;
-        nodeDetailYears.classList.toggle("hidden", !period);
+        const hasYearTo = setDetailValue(
+            nodeDetailYearToWrapper,
+            nodeDetailYearTo,
+            formatHistoricalYear(node.year_to),
+        );
 
-        nodeDetailDescription.textContent =
-            node.short_description || "Bez popisu.";
+        const hasPeriod = setDetailValue(
+            nodeDetailPeriodWrapper,
+            nodeDetailPeriod,
+            node.period_label,
+        );
+
+        if (hasYearFrom || hasYearTo || hasPeriod) {
+            nodeDetailTemporal.classList.remove("hidden");
+        }
+
+        setDetailValue(
+            nodeDetailShortDescriptionWrapper,
+            nodeDetailShortDescription,
+            node.short_description,
+        );
+
+        setDetailValue(
+            nodeDetailDescriptionWrapper,
+            nodeDetailDescription,
+            node.description,
+        );
+
+        nodeDetailDescriptionLabel.textContent = "Detailný popis";
 
         nodeDetail.classList.remove("hidden");
     };
+
+    // =========================================================
+    // CONNECTION DETAIL
+    // =========================================================
 
     const openConnectionDetail = (connectionId) => {
         const connection = getDjangoConnection(connectionId);
@@ -174,18 +348,32 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        resetDetail();
+
         nodeDetailType.textContent = "Prepojenie";
 
         nodeDetailName.textContent =
             `${sourceNode.name} → ${targetNode.name}`;
 
-        nodeDetailYears.textContent =
-            connection.connection_type_display;
+        connectionDetailType.textContent =
+            connection.connection_type_display ||
+            connection.connection_type ||
+            "";
 
-        nodeDetailYears.classList.remove("hidden");
+        connectionDetailSource.textContent = sourceNode.name;
+        connectionDetailTarget.textContent = targetNode.name;
 
-        nodeDetailDescription.textContent =
-            connection.description || "Bez popisu.";
+        connectionDetailData.classList.remove("hidden");
+
+        if (hasValue(connection.description)) {
+            nodeDetailDescription.textContent =
+                connection.description;
+
+            nodeDetailDescriptionLabel.textContent =
+                "Popis prepojenia";
+
+            nodeDetailDescriptionWrapper.classList.remove("hidden");
+        }
 
         nodeDetail.classList.remove("hidden");
     };
