@@ -387,7 +387,6 @@ document.addEventListener("DOMContentLoaded", () => {
             id: node.id,
             label: createNodeLabel(node),
             group: node.node_type,
-            title: node.short_description || node.name,
         })),
     );
 
