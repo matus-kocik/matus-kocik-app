@@ -32,28 +32,50 @@
     </div>
 
 
-    <!-- EMPTY STATE -->
-    <div
-        class="
-            rounded-3xl
-            border border-[#4E8BC9]
-            bg-[#E7F0F8]
-            px-6
-            py-14
-            text-center
-            shadow-sm
-        "
-    >
+    <!-- PROJECTS -->
+    <div class="space-y-6">
 
-        <p
+        <!-- ORANGE - RODOKMEŇ EKONÓMIE -->
+        <article
             class="
-                text-lg
-                font-semibold
-                text-[#4E8BC9]
+                rounded-2xl
+                border border-[#F2A15F]
+                bg-[#FFF1E5]
+                p-6
+                shadow-sm
+                transition-all
+                duration-200
+                hover:-translate-y-0.5
+                hover:shadow-md
             "
         >
-            Zatiaľ tu nie sú žiadne projekty.
-        </p>
+
+            <a
+                href="{% url 'rodokmen:rodokmen' %}"
+                class="block"
+            >
+
+                <h2
+                    class="
+                        mb-2
+                        text-2xl
+                        font-bold
+                        tracking-tight
+                        text-[#D8782C]
+                        md:text-3xl
+                    "
+                >
+                    Rodokmeň ekonómie
+                </h2>
+
+                <p class="leading-relaxed text-[#4F5963]">
+                    Vývoj ekonomického myslenia, ekonomických škôl,
+                    osobností a ich vzájomných súvislostí.
+                </p>
+
+            </a>
+
+        </article>
 
     </div>
 

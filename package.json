@@ -13,5 +13,9 @@
   "devDependencies": {
     "tailwindcss": "^4.1.11",
     "uglify-js": "^3.19.3"
+  },
+  "dependencies": {
+    "vis-network": "^10.1.2",
+    "vis-timeline": "^8.5.4"
   }
 }

@@ -1,0 +1,372 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/vis-network.min.css' %}"
+>
+<link
+    rel="stylesheet"
+    href="{% static 'css/vis-timeline-graph2d.min.css' %}"
+>
+
+<style>
+    /* =========================================================
+       TIMELINE – MK WEB COLORS
+       ========================================================= */
+
+    #economics-timeline {
+        min-height: 500px;
+    }
+
+    /* ---------------------------------------------------------
+       PERSON
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-person {
+        color: #252525 !important;
+        background-color: #FFF1E5 !important;
+        border-color: #F2A15F !important;
+    }
+
+    #economics-timeline .vis-item.timeline-person.vis-selected {
+        color: #252525 !important;
+        background-color: #FFE4CC !important;
+        border-color: #F2A15F !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       SCHOOL
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-school {
+        color: #252525 !important;
+        background-color: #E5F6F7 !important;
+        border-color: #66B7C2 !important;
+    }
+
+    #economics-timeline .vis-item.timeline-school.vis-selected {
+        color: #252525 !important;
+        background-color: #D2F0F2 !important;
+        border-color: #66B7C2 !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       THEORY
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-theory {
+        color: #252525 !important;
+        background-color: #E7F0F8 !important;
+        border-color: #4E8BC9 !important;
+    }
+
+    #economics-timeline .vis-item.timeline-theory.vis-selected {
+        color: #252525 !important;
+        background-color: #D6E7F5 !important;
+        border-color: #4E8BC9 !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       CONCEPT
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-concept {
+        color: #252525 !important;
+        background-color: #F2ECFA !important;
+        border-color: #9673C9 !important;
+    }
+
+    #economics-timeline .vis-item.timeline-concept.vis-selected {
+        color: #252525 !important;
+        background-color: #E8DDF6 !important;
+        border-color: #9673C9 !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       WORK
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-work {
+        color: #252525 !important;
+        background-color: #F8EAF2 !important;
+        border-color: #D88CB5 !important;
+    }
+
+    #economics-timeline .vis-item.timeline-work.vis-selected {
+        color: #252525 !important;
+        background-color: #F3DCE9 !important;
+        border-color: #D88CB5 !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       EVENT
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item.timeline-event {
+        color: #252525 !important;
+        background-color: #FCEAE7 !important;
+        border-color: #F27C73 !important;
+    }
+
+    #economics-timeline .vis-item.timeline-event.vis-selected {
+        color: #252525 !important;
+        background-color: #FADBD6 !important;
+        border-color: #F27C73 !important;
+        border-width: 2px !important;
+    }
+
+
+    /* ---------------------------------------------------------
+       CONTENT
+       --------------------------------------------------------- */
+
+    #economics-timeline .vis-item .vis-item-content {
+        color: inherit !important;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="mx-auto mt-6 max-w-5xl px-4 pb-12 xl:max-w-6xl">
+
+    <!-- HEADER -->
+    <section
+        class="
+            mb-6
+            rounded-3xl
+            border border-[#66B7C2]
+            bg-[#E5F6F7]
+            p-8
+            text-center
+            shadow-sm
+        "
+    >
+        <h1
+            class="
+                text-3xl
+                font-bold
+                tracking-tight
+                text-[#66B7C2]
+                md:text-4xl
+            "
+        >
+            Rodokmeň ekonómie
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-2xl text-sm text-[#776B60]">
+            Vývoj ekonomického myslenia, ekonomických škôl,
+            osobností a ich vzájomných súvislostí.
+        </p>
+    </section>
+
+
+    <!-- VIEW SWITCHER -->
+    <nav
+        class="mb-6 flex justify-center gap-2"
+        aria-label="Zobrazenie rodokmeňa"
+    >
+        <button
+            id="tree-button"
+            type="button"
+            class="btn-primary"
+        >
+            Rodokmeň
+        </button>
+
+        <button
+            id="timeline-button"
+            type="button"
+            class="btn-secondary"
+        >
+            Časová os
+        </button>
+    </nav>
+
+
+    <!-- TREE -->
+    <section
+        id="tree-view"
+        class="
+            overflow-hidden
+            rounded-3xl
+            border border-[#4E8BC9]
+            bg-white
+            shadow-sm
+        "
+    >
+        <div
+            id="economics-tree"
+            class="h-[600px] w-full"
+        ></div>
+    </section>
+
+
+    <!-- TIMELINE -->
+    <section
+        id="timeline-view"
+        class="
+            hidden
+            overflow-hidden
+            rounded-3xl
+            border border-[#D88CB5]
+            bg-white
+            shadow-sm
+        "
+    >
+        <div
+            class="
+                border-b
+                border-[#D88CB5]/30
+                bg-[#F8EAF2]
+                px-6
+                py-4
+            "
+        >
+            <h2 class="text-lg font-bold text-[#D88CB5]">
+                Časová os ekonomického myslenia
+            </h2>
+
+            <p class="mt-1 text-sm text-[#776B60]">
+                Chronologický vývoj osobností, ekonomických škôl,
+                teórií, pojmov, diel a udalostí.
+            </p>
+        </div>
+
+        <div
+            id="economics-timeline"
+            class="min-h-[500px] w-full"
+        ></div>
+    </section>
+
+
+    <!-- NODE DETAIL -->
+    <section
+        id="node-detail"
+        class="
+            mt-6
+            hidden
+            rounded-3xl
+            border border-[#F2A15F]
+            bg-[#FFF1E5]
+            p-6
+            shadow-sm
+        "
+    >
+        <div class="flex items-start justify-between gap-6">
+
+            <div>
+                <p
+                    id="node-detail-type"
+                    class="
+                        text-sm
+                        font-bold
+                        text-[#F2A15F]
+                    "
+                ></p>
+
+                <h2
+                    id="node-detail-name"
+                    class="
+                        mt-2
+                        text-2xl
+                        font-bold
+                        text-[#252525]
+                    "
+                ></h2>
+
+                <p
+                    id="node-detail-years"
+                    class="
+                        mt-4
+                        text-sm
+                        font-semibold
+                        text-[#776B60]
+                    "
+                ></p>
+
+                <p
+                    id="node-detail-description"
+                    class="
+                        mt-1
+                        max-w-3xl
+                        text-sm
+                        leading-6
+                        text-[#776B60]
+                    "
+                ></p>
+            </div>
+
+            <button
+                id="node-detail-close"
+                type="button"
+                class="
+                    inline-flex
+                    size-10
+                    shrink-0
+                    self-start
+                    items-center
+                    justify-center
+                    rounded-xl
+                    border border-[#F2A15F]
+                    bg-white
+                    p-0
+                    text-lg
+                    font-bold
+                    leading-none
+                    text-[#F2A15F]
+                    transition-all
+                    duration-200
+                    hover:bg-[#FFE8D4]
+                    focus:outline-none
+                    focus:ring-4
+                    focus:ring-[#F2A15F]/20
+                    cursor-pointer
+                "
+                aria-label="Zavrieť detail"
+            >
+                ×
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- COLOR PALETTE -->
+    <div class="mt-6 grid grid-cols-6 gap-2">
+        <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+        <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+        <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+        <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+        <div class="h-2 rounded-full bg-[#9673C9]"></div>
+        <div class="h-2 rounded-full bg-[#F27C73]"></div>
+    </div>
+
+</div>
+
+
+<!-- DJANGO DATA -->
+{{ nodes|json_script:"rodokmen-nodes-data" }}
+{{ connections|json_script:"rodokmen-connections-data" }}
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/vis-network.min.js' %}"></script>
+<script src="{% static 'js/vis-timeline-graph2d.min.js' %}"></script>
+<script src="{% static 'js/rodokmen.min.js' %}"></script>
+{% endblock %}

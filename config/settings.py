@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "invoices",
     "entities",
     "blog",
+    "rodokmen",
     "tinymce",
 ]
 

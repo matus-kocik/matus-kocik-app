@@ -30,6 +30,10 @@ urlpatterns = [
         TemplateView.as_view(template_name="vsemba/vsemba_list.html"),
         name="vsemba",
     ),
+    path(
+        "vsemba/rodokmen-ekonomie/",
+        include("rodokmen.urls"),
+    ),
 ]
 
 
