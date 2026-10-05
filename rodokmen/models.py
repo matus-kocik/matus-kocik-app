@@ -113,6 +113,7 @@ class Connection(
         AUTHOR = "author", "Autor"
         REACTED_TO = "reacted_to", "Reakcia na"
         OPPOSED = "opposed", "Vymedzil sa voči"
+        CRITICIZED = "criticized", "Kritizoval"
         RELATED = "related", "Súvisí s"
         BELONGS_TO = "belongs_to", "Patrí do"
         FOLLOWED = "followed", "Nadviazal na"
