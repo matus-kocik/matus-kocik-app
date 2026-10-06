@@ -17,11 +17,13 @@ class Node(
     of economic thought.
     """
 
+
     class NodeType(models.TextChoices):
         PERSON = "person", "Osobnosť"
         SCHOOL = "school", "Ekonomická škola"
         THEORY = "theory", "Teória / smer"
         CONCEPT = "concept", "Pojem / koncept"
+        METHOD = "method", "Metóda / prístup"
         WORK = "work", "Dielo"
         EVENT = "event", "Udalosť"
 

@@ -131,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         school: "Ekonomická škola",
         theory: "Teória / smer",
         concept: "Pojem / koncept",
+        method: "Metóda / prístup",
         work: "Dielo",
         event: "Udalosť",
     };
@@ -139,9 +140,10 @@ document.addEventListener("DOMContentLoaded", () => {
         school: 1,
         theory: 2,
         concept: 3,
-        person: 4,
-        work: 5,
-        event: 6,
+        method: 4,
+        person: 5,
+        work: 6,
+        event: 7,
     };
 
     // =========================================================
@@ -609,6 +611,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
             },
 
+            method: {
+                color: {
+                    background: "#EDF5EF",
+                    border: "#70A87D",
+
+                    highlight: {
+                        background: "#DFEDE2",
+                        border: "#70A87D",
+                    },
+
+                    hover: {
+                        background: "#DFEDE2",
+                        border: "#70A87D",
+                    },
+                },
+
+                font: {
+                    color: "#70A87D",
+                    size: 16,
+                },
+            },
+
             work: {
                 color: {
                     background: "#F8EAF2",
@@ -744,19 +768,24 @@ document.addEventListener("DOMContentLoaded", () => {
             order: 3,
         },
         {
+            id: timelineGroupIds.method,
+            content: "Metódy / prístupy",
+            order: 4,
+        },
+        {
             id: timelineGroupIds.person,
             content: "Osobnosti",
-            order: 4,
+            order: 5,
         },
         {
             id: timelineGroupIds.work,
             content: "Diela",
-            order: 5,
+            order: 6,
         },
         {
             id: timelineGroupIds.event,
             content: "Udalosti",
-            order: 6,
+            order: 7,
         },
     ]);
 
@@ -788,8 +817,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 group: timelineGroupIds[node.node_type],
                 className: `timeline-${node.node_type}`,
                 title: `${node.name}${createNodePeriod(node)
-                        ? ` — ${createNodePeriod(node)}`
-                        : ""
+                    ? ` — ${createNodePeriod(node)}`
+                    : ""
                     }`,
             };
 
