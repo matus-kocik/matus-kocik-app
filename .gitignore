@@ -17,6 +17,11 @@ env.example
 env.prod
 env
 
+# Investment risk-return analysis scripts
+!analysis/investment_risk_return/scripts/
+!analysis/investment_risk_return/scripts/*.pypyvenv.cfg
+analysis/investment_risk_return/data/raw/
+
 ### Django ###
 *.log
 *.pot
@@ -597,8 +602,6 @@ pyrightconfig.json
 [Ll]ib
 [Ll]ib64
 [Ll]ocal
-[Ss]cripts
-pyvenv.cfg
 pip-selfcheck.json
 
 ### VisualStudioCode ###
