@@ -15,6 +15,7 @@
     "uglify-js": "^3.19.3"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "vis-network": "^10.1.2",
     "vis-timeline": "^8.5.4"
   }

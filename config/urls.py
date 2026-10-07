@@ -34,6 +34,10 @@ urlpatterns = [
         "vsemba/rodokmen-ekonomie/",
         include("rodokmen.urls"),
     ),
+    path(
+        "vsemba/riziko-a-vynos-investicii/",
+        include("investicie.urls"),
+    ),
 ]
 
 
