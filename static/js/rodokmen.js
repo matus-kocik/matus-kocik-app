@@ -201,13 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const createNodeLabel = (node) => {
-        const period = createNodePeriod(node);
-
-        if (!period) {
-            return node.name;
-        }
-
-        return `${node.name}\n${period}`;
+        return node.name;
     };
 
     const getDjangoNode = (nodeId) => {
