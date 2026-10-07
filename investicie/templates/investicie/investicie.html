@@ -1,1279 +1,2557 @@
 {% extends "base.html" %}
+
 {% load static %}
 
+
+
 {% block title %}
+
 Riziko a výnos investícií
+
 {% endblock %}
+
+
 
 {% block content %}
 
+
+
 <div class="mx-auto mt-6 max-w-5xl px-4 pb-12 xl:max-w-6xl">
 
+
+
   <!-- =====================================================
+
        HEADER
+
        ===================================================== -->
+
+
 
   <section
+
     class="rounded-3xl border border-[#66B7C2] bg-[#E5F6F7] text-center shadow-sm"
+
     style="padding: 32px"
+
   >
+
     <h1 class="text-3xl font-bold tracking-tight text-[#66B7C2] md:text-4xl">
+
       Riziko a výnos investícií: porovnanie akcií a dlhopisov
+
     </h1>
 
+
+
     <p
-      class="mx-auto mt-3 max-w-3xl text-sm leading-relaxed text-[#776B60] md:text-base"
+
+      class="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-[#776B60]"
+
     >
+
       Empirické porovnanie akciových a dlhopisových investícií v USA,
+
       Európe a Nemecku v období 2008 – 2025.
+
     </p>
+
   </section>
 
+
+
   <!-- =====================================================
+
        PROJECT INFORMATION
+
        ===================================================== -->
+
+
 
   <section class="grid gap-4 md:grid-cols-2" style="margin-top: 24px">
 
+
+
     <div
+
       class="rounded-2xl border border-[#F2A15F] bg-[#FFF1E5] shadow-sm"
+
       style="padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#F2A15F]">Trhy</p>
+
       <p class="mt-2 text-base text-[#776B60]">
+
         USA · Európa · Nemecko
+
       </p>
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#66B7C2] bg-[#E5F6F7] shadow-sm"
+
       style="padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#66B7C2]">Triedy aktív</p>
+
       <p class="mt-2 text-base text-[#776B60]">
+
         Akcie · Dlhopisy
+
       </p>
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#D88CB5] bg-[#F8EAF2] shadow-sm"
+
       style="padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#D88CB5]">
+
         Počiatočná investícia
+
       </p>
+
       <p class="mt-2 text-base text-[#776B60]">
+
         10 000 €
+
       </p>
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#F27C73] bg-[#FCEAE7] shadow-sm"
+
       style="padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#F27C73]">
+
         Typ analýzy
+
       </p>
+
       <p class="mt-2 text-base text-[#776B60]">
+
         Výnos · Riziko
+
       </p>
+
     </div>
+
+
 
   </section>
 
+
+
     <!-- =========================================================
+
         RESEARCH QUESTION AND HYPOTHESIS
+
         ========================================================= -->
 
+
+
     <section
+
     class="mt-6 rounded-2xl border border-[#D88CB5] bg-[#FDF3F8] p-6 shadow-sm md:p-8"
+
     >
+
     <div>
+
         <p class="text-sm font-semibold text-[#D88CB5]">
+
         Výskumný rámec
+
         </p>
+
+
 
         <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
         Výskumná otázka a hypotéza
+
         </h2>
 
-        <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
         Analýza porovnáva dlhodobý výnos a riziko akciových
+
         a dlhopisových investícií v sledovaných regiónoch.
+
         </p>
+
     </div>
+
+
 
     <div class="mt-6 grid gap-4 md:grid-cols-2">
 
+
+
         <!-- Výskumná otázka -->
+
         <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white p-6"
+
         >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
             Výskumná otázka
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
             Dosahujú akciové investície v dlhodobom horizonte
+
             vyšší výnos ako dlhopisové investície a je tento
+
             vyšší výnos spojený s vyššou mierou rizika?
+
         </p>
+
         </div>
+
+
 
         <!-- Hypotéza H1 -->
+
         <div
+
         class="rounded-2xl border border-[#F2A15F] bg-white p-6"
+
         >
+
         <p class="text-sm font-semibold text-[#F2A15F]">
+
             Hypotéza H1
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
             Akciové investície dosahujú v dlhodobom horizonte
+
             vyšší priemerný výnos ako dlhopisové investície,
+
             pričom sú zároveň spojené s vyššou mierou
+
             investičného rizika.
+
         </p>
+
         </div>
 
+
+
     </div>
+
     </section>
 
+
+
   <!-- =====================================================
+
        ANALYSIS RESULTS
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#4E8BC9] bg-[#E7F0F8] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#4E8BC9]">
+
       Porovnanie aktív
+
     </p>
+
+
 
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Výsledky analýzy
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Základné porovnanie výnosu a rizika sledovaných investícií
+
       v období 2008 – 2025.
+
     </p>
 
+
+
     <div
+
       class="overflow-x-auto rounded-2xl border border-[#4E8BC9] bg-white shadow-sm"
+
       style="margin-top: 24px"
+
     >
+
       <table class="w-full min-w-200">
 
+
+
         <thead class="bg-[#E7F0F8]">
+
           <tr class="text-left text-sm text-[#4E8BC9]">
+
             <th class="px-5 py-4 font-semibold">Aktívum</th>
+
             <th class="px-5 py-4 text-right font-semibold">CAGR</th>
+
             <th class="px-5 py-4 text-right font-semibold">Volatilita</th>
+
             <th class="px-5 py-4 text-right font-semibold">Výnos / riziko</th>
+
             <th class="px-5 py-4 text-right font-semibold">Max. pokles</th>
+
             <th class="px-5 py-4 text-right font-semibold">Hodnota 10 000 €</th>
+
           </tr>
+
         </thead>
+
+
 
         <tbody class="text-sm text-[#252525]">
+
           {% for row in results %}
+
           <tr class="border-t border-[#E7F0F8] first:border-t-0">
 
+
+
             <td class="px-5 py-4 font-semibold">
+
               {{ row.display_name }}
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right">
+
               {{ row.cagr_pct|floatformat:2 }} %
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right">
+
               {{ row.volatility_pct|floatformat:2 }} %
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right">
+
               {{ row.return_risk_ratio|floatformat:2 }}
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right">
+
               {{ row.max_drawdown_pct|floatformat:2 }} %
+
             </td>
+
+
 
             <td class="px-5 py-4 text-right font-semibold text-[#4E8BC9]">
+
               {{ row.final_investment|floatformat:0 }} €
+
             </td>
 
+
+
           </tr>
+
           {% endfor %}
+
         </tbody>
 
+
+
       </table>
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#4E8BC9] bg-white"
+
       style="margin-top: 20px; padding: 18px 20px"
+
     >
-      <p class="text-sm leading-relaxed text-[#776B60]">
+
+      <p class="text-base leading-relaxed text-[#776B60]">
+
         <span class="font-semibold text-[#4E8BC9]">CAGR</span>
+
         predstavuje priemernú ročnú mieru rastu.
+
         Maximálny pokles vyjadruje najväčší prepad hodnoty investície
+
         od predchádzajúceho maxima počas sledovaného obdobia.
+
       </p>
+
     </div>
+
+
 
   </section>
 
+
+
   <!-- =====================================================
+
        INVESTMENT GROWTH
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#F2A15F] bg-[#FFF1E5] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#F2A15F]">
+
       Historický vývoj
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Vývoj investície v čase
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Vývoj jednorazovej investície 10 000 € do jednotlivých
+
       sledovaných aktív v období 2008 – 2025.
+
     </p>
 
+
+
     <div
+
       class="rounded-2xl border border-[#F2A15F] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 500px">
+
         <canvas id="investment-growth-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        RISK VS RETURN
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#66B7C2] bg-[#E5F6F7] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#66B7C2]">
+
       Efektivita investície
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Riziko a výnos
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Porovnanie priemerného ročného výnosu a volatility.
+
       Vyššia poloha znamená vyšší výnos, poloha viac vpravo
+
       predstavuje vyššiu volatilitu.
+
     </p>
 
+
+
     <div
+
       class="rounded-2xl border border-[#66B7C2] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 460px">
+
         <canvas id="risk-return-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        FINAL INVESTMENT
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#D88CB5] bg-[#F8EAF2] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#D88CB5]">
+
       Výsledná hodnota
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Hodnota investície 10 000 €
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Porovnanie konečnej hodnoty rovnakej počiatočnej investície
+
       10 000 € na konci sledovaného obdobia.
+
     </p>
 
+
+
     <div
+
       class="rounded-2xl border border-[#D88CB5] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 440px">
+
         <canvas id="final-investment-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        MAX DRAWDOWN
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#F27C73] bg-[#FCEAE7] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#F27C73]">
+
       Pokles hodnoty
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Maximálny pokles
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Najväčší percentuálny prepad hodnoty jednotlivých investícií
+
       od predchádzajúceho maxima počas sledovaného obdobia.
+
     </p>
 
+
+
     <div
+
       class="rounded-2xl border border-[#F27C73] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 440px">
+
         <canvas id="drawdown-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        CAGR VS VOLATILITY
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#4E8BC9] bg-[#E7F0F8] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#4E8BC9]">
+
       Priame porovnanie
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Výnos a volatilita
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Priame porovnanie priemerného ročného výnosu a volatility
+
       jednotlivých sledovaných aktív.
+
     </p>
 
+
+
     <div
+
       class="rounded-2xl border border-[#4E8BC9] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 440px">
+
         <canvas id="return-volatility-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        ANNUAL RETURNS
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#F2A15F] bg-[#FFF1E5] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#F2A15F]">
+
       Výnosy podľa rokov
+
     </p>
 
+
+
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Ročné výnosy
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Porovnanie výnosov jednotlivých sledovaných aktív v každom
+
       kalendárnom roku obdobia 2008 – 2025.
+
     </p>
+
+
 
     <div
+
       class="rounded-2xl border border-[#F2A15F] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 500px">
+
         <canvas id="annual-returns-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        DRAWDOWN OVER TIME
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#F27C73] bg-[#FCEAE7] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#F27C73]">
+
       Pokles od maxima
+
     </p>
+
+
 
     <h2 class="mt-1 text-2xl font-bold tracking-tight text-[#252525]">
+
       Drawdown v čase
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Vývoj percentuálneho poklesu jednotlivých investícií
+
       od ich predchádzajúceho maxima počas obdobia 2008 – 2025.
+
     </p>
+
+
 
     <div
+
       class="rounded-2xl border border-[#F27C73] bg-white shadow-sm"
+
       style="margin-top: 24px; padding: 24px"
+
     >
+
       <div class="relative w-full" style="height: 500px">
+
         <canvas id="drawdown-time-chart"></canvas>
+
       </div>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        ASSET CLASS SUMMARY
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#66B7C2] bg-[#E8F7F8]"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#66B7C2]">
+
       Triedy aktív
+
     </p>
+
+
 
     <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
       Akcie vs. dlhopisy
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Súhrnné porovnanie priemerných výsledkov akciových
+
       a dlhopisových investícií v sledovaných regiónoch.
+
     </p>
+
+
 
     <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 
+
+
       <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
           Akcie
+
         </p>
+
+
 
         <div class="mt-5 space-y-4">
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerný CAGR</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.stocks.cagr_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerná volatilita</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.stocks.volatility_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Výnos / riziko</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.stocks.return_risk_ratio|floatformat:2 }}
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerný max. pokles</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.stocks.max_drawdown_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
+
+
 
           <div
+
             class="flex items-center justify-between gap-4 border-t border-[#E8F7F8] pt-4"
+
           >
+
             <span class="text-sm font-semibold text-[#776B60]">
+
               Priemerná hodnota 10 000 €
+
             </span>
 
+
+
             <strong class="text-lg text-[#4E8BC9]">
+
               {{ asset_class_summary.stocks.final_investment|floatformat:0 }} €
+
             </strong>
+
           </div>
 
+
+
         </div>
+
       </div>
+
+
 
       <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
           Dlhopisy
+
         </p>
+
+
 
         <div class="mt-5 space-y-4">
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerný CAGR</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.bonds.cagr_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerná volatilita</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.bonds.volatility_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Výnos / riziko</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.bonds.return_risk_ratio|floatformat:2 }}
+
             </strong>
+
           </div>
 
+
+
           <div class="flex items-center justify-between gap-4">
+
             <span class="text-sm text-[#776B60]">Priemerný max. pokles</span>
+
             <strong class="text-[#252525]">
+
               {{ asset_class_summary.bonds.max_drawdown_pct|floatformat:2 }} %
+
             </strong>
+
           </div>
+
+
 
           <div
+
             class="flex items-center justify-between gap-4 border-t border-[#E8F7F8] pt-4"
+
           >
+
             <span class="text-sm font-semibold text-[#776B60]">
+
               Priemerná hodnota 10 000 €
+
             </span>
 
+
+
             <strong class="text-lg text-[#4E8BC9]">
+
               {{ asset_class_summary.bonds.final_investment|floatformat:0 }} €
+
             </strong>
+
           </div>
 
+
+
         </div>
+
       </div>
+
+
 
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        REGION SUMMARY
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#4E8BC9] bg-[#E7F0F8]"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#4E8BC9]">
+
       Regionálne porovnanie
+
     </p>
+
+
 
     <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
       USA vs. Európa vs. Nemecko
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Priemerné výsledky akciovej a dlhopisovej investície
+
       v jednotlivých sledovaných regiónoch.
+
     </p>
 
+
+
     <div
+
       class="mt-6 overflow-x-auto rounded-2xl border border-[#4E8BC9] bg-white"
+
     >
+
       <table class="w-full min-w-200">
 
+
+
         <thead class="bg-[#E7F0F8]">
+
           <tr class="text-left text-sm text-[#4E8BC9]">
+
             <th class="px-5 py-4 font-semibold">Región</th>
+
             <th class="px-5 py-4 text-right font-semibold">CAGR</th>
+
             <th class="px-5 py-4 text-right font-semibold">Volatilita</th>
+
             <th class="px-5 py-4 text-right font-semibold">Výnos / riziko</th>
+
             <th class="px-5 py-4 text-right font-semibold">Max. pokles</th>
+
             <th class="px-5 py-4 text-right font-semibold">Hodnota 10 000 €</th>
+
           </tr>
+
         </thead>
 
+
+
         <tbody>
+
           {% for region in region_summary %}
+
           <tr class="border-t border-[#E7F0F8] text-sm">
 
+
+
             <td class="px-5 py-4 font-semibold text-[#252525]">
+
               {{ region.name }}
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right text-[#252525]">
+
               {{ region.cagr_pct|floatformat:2 }} %
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right text-[#252525]">
+
               {{ region.volatility_pct|floatformat:2 }} %
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right text-[#252525]">
+
               {{ region.return_risk_ratio|floatformat:2 }}
+
             </td>
 
+
+
             <td class="px-5 py-4 text-right text-[#252525]">
+
               {{ region.max_drawdown_pct|floatformat:2 }} %
+
             </td>
+
+
 
             <td class="px-5 py-4 text-right font-semibold text-[#4E8BC9]">
+
               {{ region.final_investment|floatformat:0 }} €
+
             </td>
 
+
+
           </tr>
+
           {% endfor %}
+
         </tbody>
 
+
+
       </table>
+
     </div>
+
   </section>
 
+
+
   <!-- =====================================================
+
        ANALYSIS CONCLUSION
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#F2A15F] bg-[#FFF1E5]"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#F2A15F]">
+
       Záver analýzy
+
     </p>
+
+
 
     <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
       Hlavné výsledky
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Súhrn najvýraznejších výsledkov porovnania sledovaných
+
       investícií v období 2008 – 2025.
+
     </p>
+
+
 
     <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 
+
+
       <div
+
         class="rounded-2xl border border-[#F2A15F] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#F2A15F]">
+
           Najvyšší CAGR
+
         </p>
 
+
+
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.highest_return.display_name }}
+
         </p>
 
+
+
         <p class="mt-1 text-2xl font-bold text-[#4E8BC9]">
+
           {{ analysis_conclusion.highest_return.cagr_pct|floatformat:2 }} %
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
           Najnižšia volatilita
+
         </p>
 
+
+
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.lowest_volatility.display_name }}
+
         </p>
 
+
+
         <p class="mt-1 text-2xl font-bold text-[#4E8BC9]">
+
           {{ analysis_conclusion.lowest_volatility.volatility_pct|floatformat:2 }} %
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#D88CB5] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#D88CB5]">
+
           Najlepší pomer výnos / riziko
+
         </p>
 
+
+
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.best_return_risk.display_name }}
+
         </p>
 
+
+
         <p class="mt-1 text-2xl font-bold text-[#4E8BC9]">
+
           {{ analysis_conclusion.best_return_risk.return_risk_ratio|floatformat:2 }}
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#4E8BC9] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#4E8BC9]">
+
           Najvyššia konečná hodnota
+
         </p>
 
+
+
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.highest_final_value.display_name }}
+
         </p>
+
+
 
         <p class="mt-1 text-2xl font-bold text-[#4E8BC9]">
+
           {{ analysis_conclusion.highest_final_value.final_investment|floatformat:0 }} €
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#F27C73] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#F27C73]">
+
           Najhlbší maximálny pokles
+
         </p>
 
+
+
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.deepest_drawdown.display_name }}
+
         </p>
+
+
 
         <p class="mt-1 text-2xl font-bold text-[#F27C73]">
+
           {{ analysis_conclusion.deepest_drawdown.max_drawdown_pct|floatformat:2 }} %
+
         </p>
+
       </div>
+
+
 
       <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white"
+
         style="padding: 22px"
+
       >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
           Najmenší maximálny pokles
+
         </p>
+
+
 
         <p class="mt-2 text-lg font-bold text-[#252525]">
+
           {{ analysis_conclusion.smallest_drawdown.display_name }}
+
         </p>
+
+
 
         <p class="mt-1 text-2xl font-bold text-[#4E8BC9]">
+
           {{ analysis_conclusion.smallest_drawdown.max_drawdown_pct|floatformat:2 }} %
+
         </p>
+
       </div>
 
+
+
     </div>
 
+
+
     <div
+
       class="mt-6 rounded-2xl border border-[#F2A15F] bg-white"
+
       style="padding: 24px"
+
     >
-      <p class="text-sm leading-relaxed text-[#776B60]">
+
+      <p class="text-base leading-relaxed text-[#776B60]">
+
         Analýza ukazuje výrazný rozdiel medzi výnosovým potenciálom
+
         a rizikom jednotlivých tried aktív. Najvyšší priemerný ročný
+
         výnos dosiahli
+
         <strong class="text-[#252525]">
+
           {{ analysis_conclusion.highest_return.display_name }}
+
         </strong>,
+
         zatiaľ čo najnižšiu volatilitu vykázali
+
         <strong class="text-[#252525]">
+
           {{ analysis_conclusion.lowest_volatility.display_name }}
+
         </strong>.
+
         Najlepší pomer výnosu k volatilite dosiahli
+
         <strong class="text-[#252525]">
+
           {{ analysis_conclusion.best_return_risk.display_name }}
+
         </strong>.
+
         Výsledky zároveň ukazujú, že vyšší potenciálny výnos môže byť
+
         spojený s výraznejšími priebežnými poklesmi hodnoty investície.
+
       </p>
+
     </div>
+
+
 
   </section>
 
+
+
   <!-- =====================================================
+
        METHODOLOGY
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#D88CB5] bg-[#F8EAF2] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#D88CB5]">
+
       Metodika
+
     </p>
+
+
 
     <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
       Metodika analýzy
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Analýza vychádza z denných historických trhových údajov
+
       vybraných akciových a dlhopisových benchmarkov za obdobie
+
       2008 – 2025.
+
     </p>
 
+
+
     <!-- =====================================================
+
          METHODOLOGY CARDS
+
          ===================================================== -->
+
+
 
     <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 
+
+
       <div
+
         class="rounded-2xl border border-[#4E8BC9] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#4E8BC9]">
+
           Dáta
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Historické denné trhové údaje sú získavané programovo
+
           prostredníctvom knižnice
+
           <strong class="text-[#252525]">yfinance</strong>.
+
           Sledované obdobie začína 1. januára 2008 a končí
+
           posledným dostupným obchodným dňom roku 2025.
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#F2A15F] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#F2A15F]">
+
           Výnos
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Výnos je hodnotený pomocou celkového zhodnotenia
+
           a ukazovateľa
+
           <strong class="text-[#252525]">CAGR</strong>,
+
           ktorý vyjadruje zloženú priemernú ročnú mieru rastu
+
           investície počas skutočnej dĺžky sledovaného obdobia.
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#F27C73] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#F27C73]">
+
           Riziko
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Riziko je hodnotené pomocou volatility denných výnosov
+
           a maximálneho drawdownu. Denná volatilita je anualizovaná
+
           násobením druhou odmocninou z
+
           <strong class="text-[#252525]">252 obchodných dní</strong>.
+
         </p>
+
       </div>
+
+
 
       <div
+
         class="rounded-2xl border border-[#66B7C2] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#66B7C2]">
+
           Modelová investícia
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Pre každú sledovanú sériu sa predpokladá jednorazová
+
           počiatočná investícia
+
           <strong class="text-[#252525]">10 000 €</strong>
+
           na začiatku dostupného obdobia bez ďalších vkladov
+
           alebo výberov.
+
         </p>
+
       </div>
+
+
 
     </div>
 
+
+
     <!-- =====================================================
+
          CALCULATIONS
+
          ===================================================== -->
 
+
+
     <div
+
       class="rounded-2xl border border-[#D88CB5] bg-white"
+
       style="margin-top: 20px; padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#D88CB5]">
+
         Použité ukazovatele
+
       </p>
+
+
 
       <div class="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             CAGR
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Zložená priemerná ročná miera rastu vypočítaná
+
             z počiatočnej a konečnej hodnoty série a skutočnej
+
             dĺžky obdobia.
+
           </p>
+
         </div>
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             Volatilita
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Smerodajná odchýlka denných percentuálnych výnosov
+
             anualizovaná pomocou √252.
+
           </p>
+
         </div>
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             Výnos / riziko
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Pomer CAGR k anualizovanej volatilite. Vyššia hodnota
+
             znamená vyšší historický výnos vzhľadom na nameranú
+
             volatilitu.
+
           </p>
+
         </div>
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             Drawdown
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Percentuálny pokles aktuálnej hodnoty série
+
             od jej dovtedajšieho historického maxima.
+
           </p>
+
         </div>
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             Maximálny drawdown
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Najhlbší zaznamenaný pokles od predchádzajúceho maxima
+
             počas celého sledovaného obdobia.
+
           </p>
+
         </div>
 
+
+
         <div>
+
           <p class="text-sm font-semibold text-[#252525]">
+
             Konečná hodnota investície
+
           </p>
-          <p class="mt-1 text-sm leading-relaxed text-[#776B60]">
+
+          <p class="mt-1 text-base leading-relaxed text-[#776B60]">
+
             Hodnota modelovej investície 10 000 € pri zmene ceny
+
             sledovanej série medzi prvým a posledným dostupným dňom.
+
           </p>
+
         </div>
+
+
 
       </div>
+
     </div>
 
+
+
     <!-- =====================================================
+
          BENCHMARKS
+
          ===================================================== -->
 
+
+
     <div
+
       class="overflow-x-auto rounded-2xl border border-[#D88CB5] bg-white"
+
       style="margin-top: 20px"
+
     >
+
       <table class="w-full min-w-150">
 
+
+
         <thead class="bg-[#F8EAF2]">
+
           <tr class="text-left text-sm text-[#D88CB5]">
+
             <th class="px-5 py-4 font-semibold">
+
               Trh
+
             </th>
+
             <th class="px-5 py-4 font-semibold">
+
               Trieda aktív
+
             </th>
+
             <th class="px-5 py-4 font-semibold">
+
               Symbol
+
             </th>
+
           </tr>
+
         </thead>
+
+
 
         <tbody class="text-sm text-[#252525]">
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">USA</td>
+
             <td class="px-5 py-4">Akcie</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               ^SP500TR
+
             </td>
+
           </tr>
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">USA</td>
+
             <td class="px-5 py-4">Dlhopisy</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               IEF
+
             </td>
+
           </tr>
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">Európa</td>
+
             <td class="px-5 py-4">Akcie</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               EXSA.DE
+
             </td>
+
           </tr>
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">Európa</td>
+
             <td class="px-5 py-4">Dlhopisy</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               X710.DE
+
             </td>
+
           </tr>
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">Nemecko</td>
+
             <td class="px-5 py-4">Akcie</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               ^GDAXI
+
             </td>
+
           </tr>
 
+
+
           <tr class="border-t border-[#F8EAF2]">
+
             <td class="px-5 py-4 font-semibold">Nemecko</td>
+
             <td class="px-5 py-4">Dlhopisy</td>
+
             <td class="px-5 py-4 font-semibold text-[#4E8BC9]">
+
               EXHD.DE
+
             </td>
+
           </tr>
+
+
 
         </tbody>
+
       </table>
+
     </div>
+
+
 
     <!-- =====================================================
+
          INTERPRETATION NOTE
+
          ===================================================== -->
 
+
+
     <div
+
       class="rounded-2xl border border-[#F2A15F] bg-[#FFF1E5]"
+
       style="margin-top: 20px; padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#F2A15F]">
+
         Poznámka k interpretácii
+
       </p>
 
-      <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+      <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
         Analýza používa vybrané trhové indexy a burzovo obchodované
+
         fondy ako reprezentantov jednotlivých trhov a tried aktív.
+
         Výsledky preto predstavujú historické porovnanie zvolených
+
         benchmarkov a nemožno ich interpretovať ako všeobecnú
+
         garanciu budúcej výkonnosti akciových alebo dlhopisových
+
         investícií.
+
       </p>
+
     </div>
 
-  </section>
+
 
   </section>
+
+
+
+  </section>
+
+
 
   <!-- =====================================================
+
        FINAL INTERPRETATION
+
        ===================================================== -->
 
+
+
   <section
+
     class="rounded-3xl border border-[#66B7C2] bg-[#E5F6F7] shadow-sm"
+
     style="margin-top: 24px; padding: 28px"
+
   >
+
     <p class="text-sm font-semibold text-[#66B7C2]">
+
       Interpretácia výsledkov
+
     </p>
+
+
 
     <h2 class="mt-2 text-2xl font-bold tracking-tight text-[#252525]">
+
       Čo ukázala analýza
+
     </h2>
 
-    <p class="mt-2 text-sm leading-relaxed text-[#776B60]">
+
+
+    <p class="mt-2 text-base leading-relaxed text-[#776B60]">
+
       Výsledky historického porovnania za obdobie 2008 – 2025 ukazujú,
+
       že medzi výnosom a rizikom sledovaných investícií existovali
+
       výrazné rozdiely.
+
     </p>
+
+
 
     <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
 
+
+
       <div
+
         class="rounded-2xl border border-[#F2A15F] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#F2A15F]">
+
           Výnos
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Najvyšší CAGR zo sledovaných investícií dosiahli
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.highest_return.display_name }}
+
           </strong>
+
           s hodnotou
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.highest_return.cagr_pct|floatformat:2 }} %
+
           </strong>.
+
           Rovnaká investícia zároveň dosiahla najvyššiu konečnú hodnotu
+
           modelovej investície 10 000 €.
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#F27C73] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#F27C73]">
+
           Riziko
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Najnižšiu volatilitu dosiahli
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.lowest_volatility.display_name }}
+
           </strong>
+
           s hodnotou
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.lowest_volatility.volatility_pct|floatformat:2 }} %
+
           </strong>.
+
           Najhlbší maximálny pokles bol zaznamenaný pri
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.deepest_drawdown.display_name }}
+
           </strong>.
+
         </p>
+
       </div>
 
+
+
       <div
+
         class="rounded-2xl border border-[#D88CB5] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#D88CB5]">
+
           Výnos vzhľadom na riziko
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Najvyšší pomer CAGR k volatilite dosiahli
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.best_return_risk.display_name }}
+
           </strong>
+
           s hodnotou
+
           <strong class="text-[#252525]">
+
             {{ analysis_conclusion.best_return_risk.return_risk_ratio|floatformat:2 }}
+
           </strong>.
+
           V rámci použitého ukazovateľa tak táto investícia poskytla
+
           najvyšší historický výnos vzhľadom na nameranú volatilitu.
+
         </p>
+
       </div>
+
+
 
       <div
+
         class="rounded-2xl border border-[#4E8BC9] bg-white"
+
         style="padding: 24px"
+
       >
+
         <p class="text-sm font-semibold text-[#4E8BC9]">
+
           Akcie a dlhopisy
+
         </p>
 
-        <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+        <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
           Akciové investície dosiahli v priemere vyšší CAGR
+
           <strong class="text-[#252525]">
+
             {{ asset_class_summary.stocks.cagr_pct|floatformat:2 }} %
+
           </strong>
+
           oproti
+
           <strong class="text-[#252525]">
+
             {{ asset_class_summary.bonds.cagr_pct|floatformat:2 }} %
+
           </strong>
+
           pri dlhopisoch. Zároveň však vykazovali vyššiu priemernú
+
           volatilitu a hlbšie maximálne poklesy.
+
         </p>
+
       </div>
 
+
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#66B7C2] bg-white"
+
       style="margin-top: 20px; padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#66B7C2]">
+
         Celkové zhodnotenie
+
       </p>
 
-      <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+      <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
         Historické výsledky sledovaného obdobia podporujú základný vzťah
+
         medzi výnosom a rizikom. Investície s vyšším výnosovým potenciálom
+
         boli spravidla sprevádzané vyššou volatilitou a výraznejšími
+
         priebežnými poklesmi hodnoty. Dlhopisové investície naopak
+
         vykazovali nižšiu volatilitu a menšie maximálne poklesy,
+
         ale zároveň dosahovali nižšie dlhodobé zhodnotenie.
+
       </p>
 
-      <p class="mt-3 text-sm leading-relaxed text-[#776B60]">
+
+
+      <p class="mt-3 text-base leading-relaxed text-[#776B60]">
+
         Výsledky preto nemožno hodnotiť iba podľa konečného výnosu.
+
         Pri posudzovaní investície je potrebné zohľadniť aj volatilitu,
+
         maximálny drawdown a schopnosť investora znášať priebežné poklesy
+
         hodnoty investície.
+
       </p>
+
     </div>
 
+
+
     <div
+
       class="rounded-2xl border border-[#F2A15F] bg-[#FFF1E5]"
+
       style="margin-top: 20px; padding: 24px"
+
     >
+
       <p class="text-sm font-semibold text-[#F2A15F]">
+
         Záver
+
       </p>
+
+
 
         <p class="mt-3 leading-relaxed text-[#776B60]">
+
             <strong>Výsledky analýzy podporujú stanovenú hypotézu H1.</strong>
+
             Akciové investície dosiahli v sledovanom období vyšší priemerný
+
             výnos ako dlhopisové investície, zároveň však vykazovali vyššiu
+
             volatilitu a hlbšie maximálne poklesy. Vyšší historický výnos
+
             akciových investícií bol teda v analyzovaných dátach spojený
+
             s vyššou mierou rizika.
+
         </p>
+
     </div>
+
+
 
   </section>
 
+
+
   <!-- =====================================================
+
        CHART DATA
+
        ===================================================== -->
+
+
 
   {{ growth_dates|json_script:"investment-growth-dates" }}
+
   {{ growth_series|json_script:"investment-growth-series" }}
+
   {{ summary_data|json_script:"investment-summary-data" }}
+
   {{ annual_years|json_script:"annual-return-years" }}
+
   {{ annual_series|json_script:"annual-return-series" }}
+
   {{ drawdown_dates|json_script:"drawdown-dates" }}
+
   {{ drawdown_series|json_script:"drawdown-series" }}
 
+
+
   <!-- =====================================================
+
        COLOR PALETTE
+
        ===================================================== -->
 
+
+
   <div class="grid grid-cols-5 gap-2" style="margin-top: 24px">
+
     <div class="h-2 rounded-full bg-[#F2A15F]"></div>
+
     <div class="h-2 rounded-full bg-[#D88CB5]"></div>
+
     <div class="h-2 rounded-full bg-[#66B7C2]"></div>
+
     <div class="h-2 rounded-full bg-[#4E8BC9]"></div>
+
     <div class="h-2 rounded-full bg-[#F27C73]"></div>
+
   </div>
+
+
 
 </div>
 
+
+
 {% endblock %}
+
+
 
 {% block extra_js %}
 
+
+
 <script src="{% static 'js/chart.min.js' %}" defer></script>
+
 <script src="{% static 'js/investment-risk-return.min.js' %}" defer></script>
+
+
 
 {% endblock %}
