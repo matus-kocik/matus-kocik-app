@@ -161,6 +161,63 @@
 
         </article>
 
+        <article
+            class="
+                rounded-2xl
+                border border-[#66B7C2]
+                bg-[#E5F6F8]
+                p-6
+                shadow-sm
+                transition-all
+                duration-200
+                hover:-translate-y-0.5
+                hover:shadow-md
+            "
+        >
+
+            <a
+                href="{% url 'manazerstvo_rizika:index' %}"
+                class="block"
+            >
+
+                <!-- SUBJECT -->
+                <p
+                    class="
+                        mb-2
+                        text-sm
+                        font-semibold
+                        text-[#66B7C2]
+                    "
+                >
+                    Manažérstvo rizika
+                </p>
+
+
+                <!-- TITLE -->
+                <h2
+                    class="
+                        mb-2
+                        text-2xl
+                        font-bold
+                        tracking-tight
+                        text-[#66B7C2]
+                        md:text-3xl
+                    "
+                >
+                    Podnikateľské riziká pri zváraní a montáži nerezových bazénov v podmienkach SZČO
+                </h2>
+
+
+                <!-- DESCRIPTION -->
+                <p class="leading-relaxed text-[#4F5963]">
+                    Analýza 15 podnikateľských rizík, matica hodnotenia, citlivosť
+                    a modelové ekonomické scenáre.
+                </p>
+
+            </a>
+
+        </article>
+
     </div>
 
 
@@ -179,5 +236,4 @@
 
 </div>
 
-<p class="mx-auto my-6 max-w-5xl px-4"><a class="font-semibold text-[#66B7C2]" href="{% url 'manazerstvo_rizika:index' %}">Manažérstvo rizika SZČO →</a></p>
 {% endblock %}
