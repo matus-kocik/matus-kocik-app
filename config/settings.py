@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "blog",
     "rodokmen",
     "investicie",
+    "manazerstvo_rizika",
     "tinymce",
 ]
 
