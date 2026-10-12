@@ -13,6 +13,8 @@ else:
 
 # Top-level URL routes
 urlpatterns = [
+    path("vsemba/manazerstvo-rizika/", include("manazerstvo_rizika.urls")),
+
     # Django admin interface
     path(admin_url, admin.site.urls),
     # Public home / landing page
