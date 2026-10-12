@@ -1,0 +1,963 @@
+{
+  "schema_version": 2,
+  "horizon_months": 12,
+  "sources": [
+    {
+      "name": "Register_rizik_SZCO.xlsx",
+      "sha256": "c0a7d2f706c4c51b7542be2d363602fec9685b25c60016bf2fdb75f9cc7be0a4"
+    },
+    {
+      "name": "Pripadova_studia_SZCO.docx",
+      "sha256": "617bb1fd6c7d89984f71ea8ba6d5ae1fdfffef0e7de0256bdccef90d4b65e933"
+    }
+  ],
+  "audit": {
+    "15_risks": true,
+    "distribution": true,
+    "word_distribution": true,
+    "word_top_risk": true,
+    "word_scale": true
+  },
+  "counts": {
+    "S": 11,
+    "M": 3,
+    "V": 1
+  },
+  "risks": [
+    {
+      "id": "R04",
+      "classification": "Technologické",
+      "title": "Nepasujúce alebo poškodené diely",
+      "cause": "Rozmerová nezhoda, deformácia alebo poškodenie pri dodaní.",
+      "consequence": "Dodatočné ustavovanie a úpravy; dlhší úkol, možné oneskorenie.",
+      "p": 3,
+      "n": 2,
+      "score": 6,
+      "band": "V",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: kontrola dielov podľa výkresu a skúšobné zostavenie; poškodenie zdokumentovať a odsúhlasiť postup.",
+      "cost_basis": "Čas kontroly; meradlá alebo oprava podľa ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky na kontrolu; chybnú dodávku riešiť s firmou.",
+      "responsibility": "SZČO; dodávateľ alebo firma pri nezhode dodávky.",
+      "monitoring": "Pri prevzatí a pred spojením: rozmery, hrúbka, poškodenie a čas úprav.",
+      "source_row": 12,
+      "rank": 1,
+      "sensitivity": [
+        {
+          "p": 2,
+          "n": 2,
+          "score": 4,
+          "band": "S",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 1,
+          "score": 3,
+          "band": "S",
+          "delta": -3
+        },
+        {
+          "p": 3,
+          "n": 3,
+          "score": 9,
+          "band": "V",
+          "delta": 3
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "classification": "Prevádzkové",
+      "title": "Nejasná alebo neaktuálna dokumentácia",
+      "cause": "Neoznámená zmena; nesúlad výkresu, dodávky a pokynov.",
+      "consequence": "Nesprávny výkon, dováranie a čas navyše; úhradu zmien dohodnúť.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Existujúce opatrenia: štúdium výkresov a plánu. Navrhované opatrenia: overenie revízie a písomné vyjasnenie nesúladu pred prácou.",
+      "cost_basis": "Čas prípravy; prípadná konzultácia podľa ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky; zmeny úkolu po dohode s objednávateľom.",
+      "responsibility": "SZČO; platnú dokumentáciu potvrdiť s kontaktnou osobou firmy.",
+      "monitoring": "Pred zákazkou a pri zmene: verzia výkresu a záznam odsúhlasenia.",
+      "source_row": 9,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "classification": "Prevádzkové",
+      "title": "Oneskorený materiál alebo nepripravené vstupy",
+      "cause": "Materiál alebo nadväzujúce práce nie sú pripravené na dohodnutý termín.",
+      "consequence": "Prestoj; pri pevnom úkole viac času a prípadné ďalšie noci.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Existujúce opatrenia: časový predstih a rezerva. Navrhované opatrenia: potvrdiť pripravenosť pred nástupom; dohodnúť úhradu čakania.",
+      "cost_basis": "Čas koordinácie; výška rezervy podľa kalkulácie zákazky.",
+      "funding": "Vlastné prostriedky; dohodnutá kompenzácia od firmy.",
+      "responsibility": "SZČO v koordinácii s dodávateľom a vedením montáže.",
+      "monitoring": "Pred cestou a denne: dostupnosť dielov, hodiny prestoja.",
+      "source_row": 10,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "classification": "Technologické",
+      "title": "Nezhodný zvar vyžadujúci opravu",
+      "cause": "Nevhodná príprava, ochrana alebo vykonanie zvaru.",
+      "consequence": "Bezplatná oprava vlastnej chyby; nižší výsledok na hodinu, spotreba a návrat.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: kontrola prípravy, plynu a postupu, priebežná kontrola zvarov a záznam opráv.",
+      "cost_basis": "Čas kontroly; spotrebné diely a školenie podľa potreby. Suma neurčená.",
+      "funding": "Vlastné prostriedky zahrnuté v kalkulácii úkolu.",
+      "responsibility": "SZČO; rozsah kontroly dohodnúť s objednávateľom.",
+      "monitoring": "Po etapách: počet a hodiny opráv, príčiny nezhôd.",
+      "source_row": 13,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "classification": "Kvalita a bezpečnosť",
+      "title": "Nedostatok zistený až po napustení",
+      "cause": "Nezhoda povrchu alebo zvaru nezachytená včas; nejasná výstupná kontrola.",
+      "consequence": "Sťažená oprava, opakovaný nástup; pri ostrej hrane možné porezanie používateľa.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: dohodnúť kontrolu zvarov a prístupných hrán pred napustením; nedostatky uzavrieť a zdokumentovať.",
+      "cost_basis": "Čas kontroly; prípadné skúšky podľa dohody a ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky; osobitné skúšky podľa dohodnutého rozsahu.",
+      "responsibility": "SZČO za vlastnú dodávku; prevzatie koordinovať s firmou.",
+      "monitoring": "Pred napustením: záznam kontroly a odstránenia nedostatkov.",
+      "source_row": 14,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "classification": "Technogénne",
+      "title": "Porucha zváracieho stroja, horáka alebo káblov",
+      "cause": "Opotrebovanie alebo poškodenie zariadenia, prerušené káble.",
+      "consequence": "Zastavenie zvárania; zložité a drahé obstaranie náhrady, čas a výdavky navyše.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: kontrola a údržba, ochrana káblov, kompatibilné náhradné diely a kontakt na servis či prenájom.",
+      "cost_basis": "Servis a náhradné diely podľa aktuálnej ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky a prevádzková rezerva.",
+      "responsibility": "SZČO; opravu zabezpečí servis podľa potreby.",
+      "monitoring": "Pred zákazkou a priebežne: stav, poruchy, hodiny prestoja.",
+      "source_row": 16,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R10",
+      "classification": "Finančné a prevádzkové",
+      "title": "Nevyužitý prenajatý žeriav",
+      "cause": "Žeriav objednaný pred potvrdením pripravenosti dielov, ľudí alebo pracoviska.",
+      "consequence": "Platené čakanie bez postupu montáže; zníženie výsledku zákazky.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: potvrdiť pripravenosť pred objednaním, časové okno, cenu čakania a podmienky zmeny termínu.",
+      "cost_basis": "Čas koordinácie; rezervácia a storno podľa ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky z ceny úkolu; prípadnú kompenzáciu dohodnúť.",
+      "responsibility": "SZČO ako objednávateľ prenájmu; pripravenosť s firmou.",
+      "monitoring": "Pred objednaním a pri montáži: využité a platené nevyužité hodiny.",
+      "source_row": 18,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R11",
+      "classification": "Ekonomické",
+      "title": "Drahé alebo vzdialené ubytovanie",
+      "cause": "Veľké podujatie a neskoré preverenie dostupnosti v termíne zákazky.",
+      "consequence": "Vyššia cena nocí a PHM, dlhšie dochádzanie; nižší výsledok úkolu.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: preveriť ubytovanie a termín podujatí pred cenou; rezervovať a zahrnúť dochádzanie do kalkulácie.",
+      "cost_basis": "Čas preverenia; záloha a rezervácia podľa ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky z ceny úkolu.",
+      "responsibility": "SZČO.",
+      "monitoring": "Pred prijatím úkolu: cena a vzdialenosť; po zákazke plán oproti skutočnosti.",
+      "source_row": 19,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R12",
+      "classification": "Organizačné",
+      "title": "Nedostatočná koordinácia medzi firmami",
+      "cause": "Nepotvrdené termíny a zmeny, nejasné úlohy alebo kontaktné osoby.",
+      "consequence": "Prerábanie, čakanie a konflikt rozsahu práce; viac času pri pevnej odmene.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: jedna kontaktná osoba, písomné potvrdenie zmien, krátka kontrola nadväznosti prác.",
+      "cost_basis": "Pracovný čas a bežná komunikácia. Peňažný prírastok neurčený.",
+      "funding": "Vlastné prostriedky; organizačné kroky spoločne s firmou.",
+      "responsibility": "SZČO a dohodnutá kontaktná osoba partnera.",
+      "monitoring": "Pri zmene a denne: potvrdené úlohy a nezhody v koordinácii.",
+      "source_row": 20,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R13",
+      "classification": "Komunikačné",
+      "title": "Nedorozumenie v nemčine",
+      "cause": "Nepochopený odborný pojem, pokyn, rozsah alebo termín.",
+      "consequence": "Nesprávny výkon alebo dohoda; oprava, prestoj a dodatočný čas.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Existujúce opatrenia: samostatná komunikácia a učenie nemčiny. Navrhované opatrenia: potvrdenie pokynu vlastnými slovami a písomne; odborný kurz podľa potreby.",
+      "cost_basis": "Čas učenia; kurz a materiály podľa ponuky. Suma neurčená.",
+      "funding": "Vlastné prostriedky na odborný rozvoj.",
+      "responsibility": "SZČO; pri nejasnosti zapojiť jazykovo zdatnú kontaktnú osobu.",
+      "monitoring": "Priebežne: zoznam odborných pojmov a nedorozumení s dopadom.",
+      "source_row": 21,
+      "rank": 2,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "classification": "Majetkové a bezpečnostné",
+      "title": "Poškodenie dielu pri manipulácii",
+      "cause": "Pád, náraz alebo strata stability pri premiestňovaní a zdvíhaní.",
+      "consequence": "Poškodenie cudzieho dielu, zastavenie montáže; možné zranenie.",
+      "p": 1,
+      "n": 3,
+      "score": 3,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: koordinovaný postup manipulácie, vhodné vybavenie a kompetentná obsluha; preveriť vlastné poistné krytie.",
+      "cost_basis": "Čas prípravy; pomôcky a poistné podľa dokladov. Suma neurčená.",
+      "funding": "Vlastné prostriedky; poistné plnenie len podľa zmluvy.",
+      "responsibility": "SZČO za svoju úlohu; obsluha a koordinátor zdvíhania podľa dohody.",
+      "monitoring": "Pred manipuláciou: pripravenosť; pri škode záznam a oznámenie poisťovni.",
+      "source_row": 15,
+      "rank": 11,
+      "sensitivity": [
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 3
+        },
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -1
+        }
+      ]
+    },
+    {
+      "id": "R14",
+      "classification": "Kontinuita a zdravie",
+      "title": "Dočasná pracovná neschopnosť",
+      "cause": "Choroba, pracovný alebo mimopracovný úraz.",
+      "consequence": "Nenastúpenie alebo nedokončenie úkolu, výpadok príjmu a zmena termínu.",
+      "p": 1,
+      "n": 3,
+      "score": 3,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Navrhované opatrenia: bezpečné vykonávanie práce, dohoda o postupe pri výpadku a kvalifikovanom zastúpení, rezerva; preveriť vhodné poistenie.",
+      "cost_basis": "Čas dohody; ochranné vybavenie a poistné podľa dokladov. Suma neurčená.",
+      "funding": "Vlastné prostriedky a likvidná rezerva; plnenie len podľa krytia.",
+      "responsibility": "SZČO; prípadný náhradník a objednávateľ po dohode.",
+      "monitoring": "Pred úkolom: postup pri výpadku; priebežne stav rezervy a poistných podmienok.",
+      "source_row": 22,
+      "rank": 11,
+      "sensitivity": [
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "delta": 3
+        },
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "delta": -1
+        }
+      ]
+    },
+    {
+      "id": "R15",
+      "classification": "Finančné",
+      "title": "Oneskorená úhrada faktúry",
+      "cause": "Úhrada po splatnosti alebo spor o prevzatie a fakturovaný rozsah.",
+      "consequence": "Dočasné viazanie peňazí; prípadne problém financovať ďalší úkol.",
+      "p": 1,
+      "n": 2,
+      "score": 2,
+      "band": "M",
+      "acceptance": "A",
+      "measures": "Navrhované opatrenia: splatnosť a odovzdanie písomne, prehľad pohľadávok, pripomienka, rezerva a podľa dohody priebežná fakturácia.",
+      "cost_basis": "Čas evidencie; výška likvidnej rezervy podľa výdavkov. Suma neurčená.",
+      "funding": "Vlastné prostriedky; záloha alebo etapová platba po dohode.",
+      "responsibility": "SZČO a platobná kontaktná osoba objednávateľa.",
+      "monitoring": "Týždenne: pohľadávky po splatnosti a dostupné peniaze na ďalšiu zákazku.",
+      "source_row": 23,
+      "rank": 13,
+      "sensitivity": [
+        {
+          "p": 2,
+          "n": 2,
+          "score": 4,
+          "band": "S",
+          "delta": 2
+        },
+        {
+          "p": 1,
+          "n": 1,
+          "score": 1,
+          "band": "M",
+          "delta": -1
+        },
+        {
+          "p": 1,
+          "n": 3,
+          "score": 3,
+          "band": "S",
+          "delta": 1
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "classification": "Prevádzkové",
+      "title": "Chýbajúce spotrebné veci a náradie",
+      "cause": "Neúplná príprava; vyčerpaný plyn, chýbajúce skrutky alebo nástroj.",
+      "consequence": "Zháňanie, cesta, nákup a prerušenie práce; dočasné financovanie nákupu.",
+      "p": 2,
+      "n": 1,
+      "score": 2,
+      "band": "M",
+      "acceptance": "A",
+      "measures": "Existujúce opatrenia: príprava náradia. Navrhované opatrenia: zoznam a kontrola zásob, plán doplnenia, dohodnúť úhradu obstarania.",
+      "cost_basis": "Zásoba a doprava podľa dokladov; suma neurčená.",
+      "funding": "Vlastné prostriedky; prefakturácia dohodnutých nákupov.",
+      "responsibility": "SZČO.",
+      "monitoring": "Pred nástupom: zoznam zásob; po zákazke počet neplánovaných nákupov.",
+      "source_row": 11,
+      "rank": 13,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 1,
+          "score": 1,
+          "band": "M",
+          "delta": -1
+        },
+        {
+          "p": 3,
+          "n": 1,
+          "score": 3,
+          "band": "S",
+          "delta": 1
+        },
+        {
+          "p": 2,
+          "n": 2,
+          "score": 4,
+          "band": "S",
+          "delta": 2
+        }
+      ]
+    },
+    {
+      "id": "R09",
+      "classification": "Prevádzkové",
+      "title": "Prerušenie elektrického napájania",
+      "cause": "Plánovaná odstávka alebo nedostupné napájanie na stavbe.",
+      "consequence": "Nemožnosť zvárať; pri úkole dlhší čas bez automatického zvýšenia ceny.",
+      "p": 2,
+      "n": 1,
+      "score": 2,
+      "band": "M",
+      "acceptance": "A",
+      "measures": "Navrhované opatrenia: vopred zistiť odstávky, koordinovať postup, naplánovať možné činnosti bez napájania.",
+      "cost_basis": "Čas koordinácie; náhradný zdroj len po posúdení a cenovej ponuke.",
+      "funding": "Vlastné prostriedky; osobitné riešenie dohodnúť s firmou.",
+      "responsibility": "SZČO a kontaktná osoba vedenia stavby.",
+      "monitoring": "Denný plán a skutočné hodiny odstávok.",
+      "source_row": 17,
+      "rank": 13,
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 1,
+          "score": 1,
+          "band": "M",
+          "delta": -1
+        },
+        {
+          "p": 3,
+          "n": 1,
+          "score": 3,
+          "band": "S",
+          "delta": 1
+        },
+        {
+          "p": 2,
+          "n": 2,
+          "score": 4,
+          "band": "S",
+          "delta": 2
+        }
+      ]
+    }
+  ],
+  "matrix": [
+    {
+      "p": 3,
+      "n": 1,
+      "score": 3,
+      "band": "S",
+      "ids": []
+    },
+    {
+      "p": 3,
+      "n": 2,
+      "score": 6,
+      "band": "V",
+      "ids": [
+        "R04"
+      ]
+    },
+    {
+      "p": 3,
+      "n": 3,
+      "score": 9,
+      "band": "V",
+      "ids": []
+    },
+    {
+      "p": 2,
+      "n": 1,
+      "score": 2,
+      "band": "M",
+      "ids": [
+        "R03",
+        "R09"
+      ]
+    },
+    {
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "ids": [
+        "R01",
+        "R02",
+        "R05",
+        "R06",
+        "R08",
+        "R10",
+        "R11",
+        "R12",
+        "R13"
+      ]
+    },
+    {
+      "p": 2,
+      "n": 3,
+      "score": 6,
+      "band": "V",
+      "ids": []
+    },
+    {
+      "p": 1,
+      "n": 1,
+      "score": 1,
+      "band": "M",
+      "ids": []
+    },
+    {
+      "p": 1,
+      "n": 2,
+      "score": 2,
+      "band": "M",
+      "ids": [
+        "R15"
+      ]
+    },
+    {
+      "p": 1,
+      "n": 3,
+      "score": 3,
+      "band": "S",
+      "ids": [
+        "R07",
+        "R14"
+      ]
+    }
+  ],
+  "economics": {
+    "model_only": true,
+    "base": {
+      "hourly_quote_eur": 65,
+      "rate_source": "Orientačná sadzba uvedená používateľom; nie údaj zo školských dokumentov",
+      "other_costs_eur": 1500,
+      "hours": 100,
+      "nights": 10,
+      "night_price_eur": 60,
+      "transport_eur": 300,
+      "revenue_eur": 6500
+    },
+    "base_cost_eur": 2400,
+    "base_result_eur": 4100,
+    "base_result_per_hour_eur": 41.0,
+    "scenarios": [
+      {
+        "id": "R05",
+        "cases": [
+          {
+            "case": 1,
+            "inputs": {
+              "repair_hours": 5,
+              "consumables_eur": 25
+            },
+            "extra_cost_eur": 25,
+            "result_eur": 4075,
+            "loss_eur": 25,
+            "hourly_drop_eur": 2.19,
+            "work_hours": 105,
+            "waiting_hours": 0,
+            "hours": 105,
+            "result_per_hour_eur": 38.81
+          },
+          {
+            "case": 2,
+            "inputs": {
+              "repair_hours": 10,
+              "consumables_eur": 50
+            },
+            "extra_cost_eur": 50,
+            "result_eur": 4050,
+            "loss_eur": 50,
+            "hourly_drop_eur": 4.18,
+            "work_hours": 110,
+            "waiting_hours": 0,
+            "hours": 110,
+            "result_per_hour_eur": 36.82
+          },
+          {
+            "case": 3,
+            "inputs": {
+              "repair_hours": 20,
+              "consumables_eur": 100
+            },
+            "extra_cost_eur": 100,
+            "result_eur": 4000,
+            "loss_eur": 100,
+            "hourly_drop_eur": 7.67,
+            "work_hours": 120,
+            "waiting_hours": 0,
+            "hours": 120,
+            "result_per_hour_eur": 33.33
+          }
+        ]
+      },
+      {
+        "id": "R10",
+        "cases": [
+          {
+            "case": 1,
+            "inputs": {
+              "idle_hours": 1,
+              "crane_eur_per_hour": 100
+            },
+            "extra_cost_eur": 100,
+            "result_eur": 4000,
+            "loss_eur": 100,
+            "hourly_drop_eur": 1.4,
+            "work_hours": 100,
+            "waiting_hours": 1,
+            "hours": 101,
+            "result_per_hour_eur": 39.6
+          },
+          {
+            "case": 2,
+            "inputs": {
+              "idle_hours": 3,
+              "crane_eur_per_hour": 120
+            },
+            "extra_cost_eur": 360,
+            "result_eur": 3740,
+            "loss_eur": 360,
+            "hourly_drop_eur": 4.69,
+            "work_hours": 100,
+            "waiting_hours": 3,
+            "hours": 103,
+            "result_per_hour_eur": 36.31
+          },
+          {
+            "case": 3,
+            "inputs": {
+              "idle_hours": 6,
+              "crane_eur_per_hour": 150
+            },
+            "extra_cost_eur": 900,
+            "result_eur": 3200,
+            "loss_eur": 900,
+            "hourly_drop_eur": 10.81,
+            "work_hours": 100,
+            "waiting_hours": 6,
+            "hours": 106,
+            "result_per_hour_eur": 30.19
+          }
+        ]
+      },
+      {
+        "id": "R11",
+        "cases": [
+          {
+            "case": 1,
+            "inputs": {
+              "night_price_eur": 70,
+              "extra_nights": 0,
+              "extra_transport_eur": 0
+            },
+            "extra_cost_eur": 100,
+            "result_eur": 4000,
+            "loss_eur": 100,
+            "hourly_drop_eur": 1.0,
+            "work_hours": 100,
+            "waiting_hours": 0,
+            "hours": 100,
+            "result_per_hour_eur": 40.0
+          },
+          {
+            "case": 2,
+            "inputs": {
+              "night_price_eur": 90,
+              "extra_nights": 2,
+              "extra_transport_eur": 100
+            },
+            "extra_cost_eur": 580,
+            "result_eur": 3520,
+            "loss_eur": 580,
+            "hourly_drop_eur": 5.8,
+            "work_hours": 100,
+            "waiting_hours": 0,
+            "hours": 100,
+            "result_per_hour_eur": 35.2
+          },
+          {
+            "case": 3,
+            "inputs": {
+              "night_price_eur": 120,
+              "extra_nights": 4,
+              "extra_transport_eur": 200
+            },
+            "extra_cost_eur": 1280,
+            "result_eur": 2820,
+            "loss_eur": 1280,
+            "hourly_drop_eur": 12.8,
+            "work_hours": 100,
+            "waiting_hours": 0,
+            "hours": 100,
+            "result_per_hour_eur": 28.2
+          }
+        ]
+      }
+    ]
+  }
+}
