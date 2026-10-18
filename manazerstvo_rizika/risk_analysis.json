@@ -3,20 +3,23 @@
   "horizon_months": 12,
   "sources": [
     {
-      "name": "Register_rizik_SZCO.xlsx",
-      "sha256": "c0a7d2f706c4c51b7542be2d363602fec9685b25c60016bf2fdb75f9cc7be0a4"
+      "name": "Register_rizik_SZCO(4).xlsx",
+      "sha256": "9dec18b679020d7b50b27b5a67b14b4f9953cc8f6fb42f07e2dc16fb01cfca93"
     },
     {
-      "name": "Pripadova_studia_SZCO.docx",
-      "sha256": "2b5a86ab00394cbecca9ecea9584ab51874f2427bea91ddd728c61bbc81dfc0a"
+      "name": "Kocik_Matus_Manazerstvo_rizika_Pripadova_studia(2).pdf",
+      "sha256": "3b5641cbc4138b805250689a8d1ab8c9d30576aee0b17b4c5204304be0db7c27"
+    },
+    {
+      "name": "Kocik_Matus_Manazerstvo_rizika_Register_rizik(2).pdf",
+      "sha256": "2dc26c55d1e84d137b66fcc3ef4d272d690e8e0b95ad248277048644edb6c74b"
     }
   ],
   "audit": {
     "15_risks": true,
     "distribution": true,
-    "word_distribution": true,
-    "word_top_risk": true,
-    "word_scale": true
+    "pdf_excel_scores": true,
+    "budget_reconciled": true
   },
   "counts": {
     "S": 11,
@@ -25,36 +28,36 @@
   },
   "risks": [
     {
-      "id": "R04",
-      "classification": "Technologické",
-      "title": "Nepasujúce alebo poškodené diely",
-      "cause": "Rozmerová nezhoda, deformácia alebo poškodenie pri dodaní.",
-      "consequence": "Dodatočné ustavovanie a úpravy; dlhší úkol, možné oneskorenie.",
-      "p": 3,
-      "n": 2,
+      "classification": "Technogénne riziká",
+      "title": "Poškodenie dielu pri manipulácii",
+      "cause": "Pád, náraz alebo strata stability pri zdvíhaní; obsluhu na stavbe vykonáva SZČO. Poškodenie už pri príchode kamióna rieši firma (R04).",
+      "consequence": "Poškodenie cudzieho dielu, zastavenie montáže a možné zranenie. Orientačná hodnota kompletnej steny: bez žľabu cca 15 000 €, so žľabom cca 22 000–25 000 € vrátane dopravy, bez práce montážneho zvárača.",
+      "p": 2,
+      "n": 3,
       "score": 6,
       "band": "V",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: kontrola dielov podľa výkresu a skúšobné zostavenie; poškodenie zdokumentovať a odsúhlasiť postup.",
-      "cost_basis": "Čas kontroly; meradlá alebo oprava podľa ponuky. Suma neurčená.",
-      "funding": "Vlastné prostriedky na kontrolu; chybnú dodávku riešiť s firmou.",
-      "responsibility": "SZČO; dodávateľ alebo firma pri nezhode dodávky.",
-      "monitoring": "Pri prevzatí a pred spojením: rozmery, hrúbka, poškodenie a čas úprav.",
-      "source_row": 12,
-      "rank": 1,
+      "measures": "Existujúce: poistenie zodpovednosti a doterajšia manipulácia. Priorita 1. Nové: doplniť alebo obnoviť ochranné pomôcky do 200 € a pripraviť kontrolný zoznam manipulácie; poistenie nie je nový nákup.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 200 €; spolu 250 €. Pomôcky 200 € sú rozpočtový odhad doplnenia. Existujúce poistné 700 €/rok je mimo nových opatrení.",
+      "funding": "Vlastné prostriedky na pomôcky. Existujúce poistenie kryje dohodnuté finančné následky; poistné plnenie nie je zdroj nákupu pomôcok. Nová poistka sa v rozpočte zavedenia nekupuje.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 14 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
+      "monitoring": "Pred zdvíhaním kontrola pomôcok a postupu; priebežne platnosť poistenia. Po udalosti fotodokumentácia a hlásenie. Verejný produkt nepotvrdzuje rozsah konkrétnej zmluvy.",
+      "id": "R07",
+      "source_row": 15,
+      "priority": "1",
+      "budget": {
+        "cash_eur": 200,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 250
+      },
       "sensitivity": [
         {
-          "p": 2,
-          "n": 2,
-          "score": 4,
-          "band": "S",
-          "delta": -2
-        },
-        {
-          "p": 3,
-          "n": 1,
+          "p": 1,
+          "n": 3,
           "score": 3,
           "band": "S",
+          "acceptance": "N",
           "delta": -3
         },
         {
@@ -62,13 +65,22 @@
           "n": 3,
           "score": 9,
           "band": "V",
+          "acceptance": "N",
           "delta": 3
+        },
+        {
+          "p": 2,
+          "n": 2,
+          "score": 4,
+          "band": "S",
+          "acceptance": "N",
+          "delta": -2
         }
-      ]
+      ],
+      "rank": 1
     },
     {
-      "id": "R01",
-      "classification": "Prevádzkové",
+      "classification": "Výrobné riziká",
       "title": "Nejasná alebo neaktuálna dokumentácia",
       "cause": "Neoznámená zmena; nesúlad výkresu, dodávky a pokynov.",
       "consequence": "Nesprávny výkon, dováranie a čas navyše; úhradu zmien dohodnúť.",
@@ -77,19 +89,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Existujúce opatrenia: štúdium výkresov a plánu. Navrhované opatrenia: overenie revízie a písomné vyjasnenie nesúladu pred prácou.",
-      "cost_basis": "Čas prípravy; prípadná konzultácia podľa ponuky. Suma neurčená.",
+      "measures": "Existujúce: štúdium výkresov a plánu. Priorita 2. Nové: zaviesť stručný záznam platnej revízie a písomného odsúhlasenia zmien.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky; zmeny úkolu po dohode s objednávateľom.",
-      "responsibility": "SZČO; platnú dokumentáciu potvrdiť s kontaktnou osobou firmy.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred zákazkou a pri zmene: verzia výkresu a záznam odsúhlasenia.",
+      "id": "R01",
       "source_row": 9,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -97,6 +117,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -104,6 +125,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -111,13 +133,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R02",
-      "classification": "Prevádzkové",
+      "classification": "Výrobné riziká",
       "title": "Oneskorený materiál alebo nepripravené vstupy",
       "cause": "Materiál alebo nadväzujúce práce nie sú pripravené na dohodnutý termín.",
       "consequence": "Prestoj; pri pevnom úkole viac času a prípadné ďalšie noci.",
@@ -126,19 +149,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Existujúce opatrenia: časový predstih a rezerva. Navrhované opatrenia: potvrdiť pripravenosť pred nástupom; dohodnúť úhradu čakania.",
-      "cost_basis": "Čas koordinácie; výška rezervy podľa kalkulácie zákazky.",
+      "measures": "Existujúce: časový predstih a rezerva. Priorita 2. Nové: zaviesť potvrdenie pripravenosti pred cestou a dohodnutý postup pri čakaní.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky; dohodnutá kompenzácia od firmy.",
-      "responsibility": "SZČO v koordinácii s dodávateľom a vedením montáže.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred cestou a denne: dostupnosť dielov, hodiny prestoja.",
+      "id": "R02",
       "source_row": 10,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -146,6 +177,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -153,6 +185,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -160,13 +193,74 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R05",
-      "classification": "Technologické",
+      "classification": "Výrobné riziká",
+      "title": "Nepasujúce alebo poškodené dodané diely",
+      "cause": "Rozmerová nezhoda, deformácia alebo poškodenie pri dodaní.",
+      "consequence": "Dodatočné ustavovanie a úpravy; dlhší úkol a oneskorenie. Kompletnú poškodenú stenu rieši dodávateľ podľa zodpovednosti, nie automaticky SZČO.",
+      "p": 2,
+      "n": 2,
+      "score": 4,
+      "band": "S",
+      "acceptance": "N",
+      "measures": "Existujúce: výkresy a bežné meradlá. Priorita 2. Nové: zjednotiť preberací záznam a fotografovanie nezhôd; pred úpravou dohodnúť postup a úhradu.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
+      "funding": "Vlastné prostriedky na kontrolu; chybnú dodávku riešiť s firmou.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
+      "monitoring": "Pri prevzatí a pred spojením: rozmery, hrúbka, poškodenie a čas úprav.",
+      "id": "R04",
+      "source_row": 12,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
+      "sensitivity": [
+        {
+          "p": 1,
+          "n": 2,
+          "score": 2,
+          "band": "M",
+          "acceptance": "A",
+          "delta": -2
+        },
+        {
+          "p": 3,
+          "n": 2,
+          "score": 6,
+          "band": "V",
+          "acceptance": "N",
+          "delta": 2
+        },
+        {
+          "p": 2,
+          "n": 1,
+          "score": 2,
+          "band": "M",
+          "acceptance": "A",
+          "delta": -2
+        },
+        {
+          "p": 2,
+          "n": 3,
+          "score": 6,
+          "band": "V",
+          "acceptance": "N",
+          "delta": 2
+        }
+      ],
+      "rank": 2
+    },
+    {
+      "classification": "Výrobné riziká",
       "title": "Nezhodný zvar vyžadujúci opravu",
       "cause": "Nevhodná príprava, ochrana alebo vykonanie zvaru.",
       "consequence": "Bezplatná oprava vlastnej chyby; nižší výsledok na hodinu, spotreba a návrat.",
@@ -175,19 +269,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: kontrola prípravy, plynu a postupu, priebežná kontrola zvarov a záznam opráv.",
-      "cost_basis": "Čas kontroly; spotrebné diely a školenie podľa potreby. Suma neurčená.",
+      "measures": "Existujúce: odborná zváračská práca a bežná kontrola. Priorita 2. Nové: zaviesť jednoduchú evidenciu príčin a času opráv; nezapočítať znovu bežnú kontrolu.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky zahrnuté v kalkulácii úkolu.",
-      "responsibility": "SZČO; rozsah kontroly dohodnúť s objednávateľom.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Po etapách: počet a hodiny opráv, príčiny nezhôd.",
+      "id": "R05",
       "source_row": 13,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -195,6 +297,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -202,6 +305,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -209,13 +313,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R06",
-      "classification": "Kvalita a bezpečnosť",
+      "classification": "Výrobné riziká",
       "title": "Nedostatok zistený až po napustení",
       "cause": "Nezhoda povrchu alebo zvaru nezachytená včas; nejasná výstupná kontrola.",
       "consequence": "Sťažená oprava, opakovaný nástup; pri ostrej hrane možné porezanie používateľa.",
@@ -224,19 +329,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: dohodnúť kontrolu zvarov a prístupných hrán pred napustením; nedostatky uzavrieť a zdokumentovať.",
-      "cost_basis": "Čas kontroly; prípadné skúšky podľa dohody a ponuky. Suma neurčená.",
+      "measures": "Existujúce: vizuálna kontrola povrchu a hrán. Priorita 2. Nové: doplniť záznam ukončenia výstupnej kontroly pred napustením; nejde o nákup pomôcok.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky; osobitné skúšky podľa dohodnutého rozsahu.",
-      "responsibility": "SZČO za vlastnú dodávku; prevzatie koordinovať s firmou.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred napustením: záznam kontroly a odstránenia nedostatkov.",
+      "id": "R06",
       "source_row": 14,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -244,6 +357,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -251,6 +365,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -258,34 +373,43 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R08",
-      "classification": "Technogénne",
+      "classification": "Technické riziká",
       "title": "Porucha zváracieho stroja, horáka alebo káblov",
-      "cause": "Opotrebovanie alebo poškodenie zariadenia, prerušené káble.",
+      "cause": "Opotrebovanie alebo poškodenie stroja či káblov. Výpadok horáka čiastočne pokrýva existujúci druhý horák; poruchu stroja tým nemožno vyriešiť.",
       "consequence": "Zastavenie zvárania; zložité a drahé obstaranie náhrady, čas a výdavky navyše.",
       "p": 2,
       "n": 2,
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: kontrola a údržba, ochrana káblov, kompatibilné náhradné diely a kontakt na servis či prenájom.",
-      "cost_basis": "Servis a náhradné diely podľa aktuálnej ponuky. Suma neurčená.",
+      "measures": "Existujúce: druhý záložný horák (pôvodne cca 600 €). Priorita 2. Nové: naplánovať preventívny servis 200–400 € a kontakt na náhradný stroj; druhý horák sa nekupuje.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 300 €; spolu 350 €. Servis 200–400 €, stred 300 €; spolu s časom 250–450 €. Horák už existuje.",
       "funding": "Vlastné prostriedky a prevádzková rezerva.",
-      "responsibility": "SZČO; opravu zabezpečí servis podľa potreby.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred zákazkou a priebežne: stav, poruchy, hodiny prestoja.",
+      "id": "R08",
       "source_row": 16,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 300,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 350
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -293,6 +417,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -300,6 +425,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -307,13 +433,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R10",
-      "classification": "Finančné a prevádzkové",
+      "classification": "Výrobné riziká",
       "title": "Nevyužitý prenajatý žeriav",
       "cause": "Žeriav objednaný pred potvrdením pripravenosti dielov, ľudí alebo pracoviska.",
       "consequence": "Platené čakanie bez postupu montáže; zníženie výsledku zákazky.",
@@ -322,19 +449,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: potvrdiť pripravenosť pred objednaním, časové okno, cenu čakania a podmienky zmeny termínu.",
-      "cost_basis": "Čas koordinácie; rezervácia a storno podľa ponuky. Suma neurčená.",
+      "measures": "Existujúce: objednávanie a úhrada prenájmu podľa zákazky. Priorita 2. Nové: zaviesť písomné potvrdenie pripravenosti a podmienok plateného čakania pred prenájmom.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky z ceny úkolu; prípadnú kompenzáciu dohodnúť.",
-      "responsibility": "SZČO ako objednávateľ prenájmu; pripravenosť s firmou.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred objednaním a pri montáži: využité a platené nevyužité hodiny.",
+      "id": "R10",
       "source_row": 18,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -342,6 +477,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -349,6 +485,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -356,34 +493,43 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R11",
-      "classification": "Ekonomické",
+      "classification": "Ekonomické riziká",
       "title": "Drahé alebo vzdialené ubytovanie",
-      "cause": "Veľké podujatie a neskoré preverenie dostupnosti v termíne zákazky.",
-      "consequence": "Vyššia cena nocí a PHM, dlhšie dochádzanie; nižší výsledok úkolu.",
+      "cause": "Zákazka dohodnutá aj rok vopred; presný nástup sa vyjasní neskôr. Ubytovanie sa rezervuje pár dní až 2–3 týždne pred cestou; podujatia môžu zvýšiť cenu.",
+      "consequence": "Ubytovanie platí SZČO: drahšia noc alebo dochádzanie. Model 5 nocí: 70 €/noc = 350 €, 250 €/noc = 1 250 €; navýšenie 900 €. Nejde o pravidelnú stratu.",
       "p": 2,
       "n": 2,
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: preveriť ubytovanie a termín podujatí pred cenou; rezervovať a zahrnúť dochádzanie do kalkulácie.",
-      "cost_basis": "Čas preverenia; záloha a rezervácia podľa ponuky. Suma neurčená.",
-      "funding": "Vlastné prostriedky z ceny úkolu.",
-      "responsibility": "SZČO.",
-      "monitoring": "Pred prijatím úkolu: cena a vzdialenosť; po zákazke plán oproti skutočnosti.",
+      "measures": "Existujúce: porovnanie ubytovania po vyjasnení nástupu. Priorita 2. Nové: sledovať podujatia pri predpokladanom termíne a zahrnúť rezervu do kalkulácie; rezervovať po vyjasnení nástupu, nie povinne rok vopred.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €. Navýšenie ubytovania 900 € je možný následok, nie cena opatrenia.",
+      "funding": "Vlastné prostriedky; cenová rezerva v kalkulácii zákazky, nie automatická úhrada od firmy.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
+      "monitoring": "Po potvrdení nástupu porovnať cenu a dochádzanie; po výjazde porovnať plán a skutočnosť. Sledujú sa ceny, nie pevná dĺžka každej zákazky.",
+      "id": "R11",
       "source_row": 19,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -391,6 +537,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -398,6 +545,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -405,13 +553,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R12",
-      "classification": "Organizačné",
+      "classification": "Výrobné riziká",
       "title": "Nedostatočná koordinácia medzi firmami",
       "cause": "Nepotvrdené termíny a zmeny, nejasné úlohy alebo kontaktné osoby.",
       "consequence": "Prerábanie, čakanie a konflikt rozsahu práce; viac času pri pevnej odmene.",
@@ -420,19 +569,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: jedna kontaktná osoba, písomné potvrdenie zmien, krátka kontrola nadväznosti prác.",
-      "cost_basis": "Pracovný čas a bežná komunikácia. Peňažný prírastok neurčený.",
+      "measures": "Existujúce: bežná komunikácia s firmami. Priorita 2. Nové: zaviesť jednu kontaktnú osobu a stručné písomné potvrdenie nadväznosti; nezdvojovať úkony R01/R02/R10.",
+      "cost_basis": "Model zavedenia: 1 h × 50 €/h = 50 € hodnota času; nové peňažné výdavky 0 €; spolu 50 €.",
       "funding": "Vlastné prostriedky; organizačné kroky spoločne s firmou.",
-      "responsibility": "SZČO a dohodnutá kontaktná osoba partnera.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pri zmene a denne: potvrdené úlohy a nezhody v koordinácii.",
+      "id": "R12",
       "source_row": 20,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 1,
+        "time_eur": 50,
+        "total_eur": 50
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -440,6 +597,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -447,6 +605,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -454,13 +613,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R13",
-      "classification": "Komunikačné",
+      "classification": "Sociogénne riziká",
       "title": "Nedorozumenie v nemčine",
       "cause": "Nepochopený odborný pojem, pokyn, rozsah alebo termín.",
       "consequence": "Nesprávny výkon alebo dohoda; oprava, prestoj a dodatočný čas.",
@@ -469,19 +629,27 @@
       "score": 4,
       "band": "S",
       "acceptance": "N",
-      "measures": "Existujúce opatrenia: samostatná komunikácia a učenie nemčiny. Navrhované opatrenia: potvrdenie pokynu vlastnými slovami a písomne; odborný kurz podľa potreby.",
-      "cost_basis": "Čas učenia; kurz a materiály podľa ponuky. Suma neurčená.",
+      "measures": "Existujúce: samostatná komunikácia a učenie jazykov. Priorita 2. Nové: úvodný blok 2 hodín odbornej nemčiny a 2 hodiny vlastnej prípravy slovníka; nejde o úplné zvládnutie jazyka.",
+      "cost_basis": "Model zavedenia: 2 h × 50 €/h = 100 € hodnota času; nové peňažné výdavky 60 €; spolu 160 €. Výučba 2 × 30 € = 60 €; vlastná príprava je oddelená. Počet hodín je modelový.",
       "funding": "Vlastné prostriedky na odborný rozvoj.",
-      "responsibility": "SZČO; pri nejasnosti zapojiť jazykovo zdatnú kontaktnú osobu.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Priebežne: zoznam odborných pojmov a nedorozumení s dopadom.",
+      "id": "R13",
       "source_row": 21,
-      "rank": 2,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 60,
+        "hours": 2,
+        "time_eur": 100,
+        "total_eur": 160
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -489,6 +657,7 @@
           "n": 2,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -496,6 +665,7 @@
           "n": 1,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -2
         },
         {
@@ -503,48 +673,14 @@
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 2
     },
     {
-      "id": "R07",
-      "classification": "Majetkové a bezpečnostné",
-      "title": "Poškodenie dielu pri manipulácii",
-      "cause": "Pád, náraz alebo strata stability pri premiestňovaní a zdvíhaní.",
-      "consequence": "Poškodenie cudzieho dielu, zastavenie montáže; možné zranenie.",
-      "p": 1,
-      "n": 3,
-      "score": 3,
-      "band": "S",
-      "acceptance": "N",
-      "measures": "Navrhované opatrenia: koordinovaný postup manipulácie, vhodné vybavenie a kompetentná obsluha; preveriť vlastné poistné krytie.",
-      "cost_basis": "Čas prípravy; pomôcky a poistné podľa dokladov. Suma neurčená.",
-      "funding": "Vlastné prostriedky; poistné plnenie len podľa zmluvy.",
-      "responsibility": "SZČO za svoju úlohu; obsluha a koordinátor zdvíhania podľa dohody.",
-      "monitoring": "Pred manipuláciou: pripravenosť; pri škode záznam a oznámenie poisťovni.",
-      "source_row": 15,
-      "rank": 11,
-      "sensitivity": [
-        {
-          "p": 2,
-          "n": 3,
-          "score": 6,
-          "band": "V",
-          "delta": 3
-        },
-        {
-          "p": 1,
-          "n": 2,
-          "score": 2,
-          "band": "M",
-          "delta": -1
-        }
-      ]
-    },
-    {
-      "id": "R14",
-      "classification": "Kontinuita a zdravie",
+      "classification": "Zdravotné riziká",
       "title": "Dočasná pracovná neschopnosť",
       "cause": "Choroba, pracovný alebo mimopracovný úraz.",
       "consequence": "Nenastúpenie alebo nedokončenie úkolu, výpadok príjmu a zmena termínu.",
@@ -553,19 +689,27 @@
       "score": 3,
       "band": "S",
       "acceptance": "N",
-      "measures": "Navrhované opatrenia: bezpečné vykonávanie práce, dohoda o postupe pri výpadku a kvalifikovanom zastúpení, rezerva; preveriť vhodné poistenie.",
-      "cost_basis": "Čas dohody; ochranné vybavenie a poistné podľa dokladov. Suma neurčená.",
-      "funding": "Vlastné prostriedky a likvidná rezerva; plnenie len podľa krytia.",
-      "responsibility": "SZČO; prípadný náhradník a objednávateľ po dohode.",
+      "measures": "Existujúce: osobná organizácia práce a existujúca všeobecná rezerva. Priorita 2. Nové: dohodnúť postup oznámenia výpadku a možného zastúpenia; plán dostupnej rezervy.",
+      "cost_basis": "Model zavedenia: 2 h × 50 €/h = 100 € hodnota času; nové peňažné výdavky 0 €; spolu 100 €. Rezerva 1 500 € je cieľ disponibilných peňazí, nie výdavok.",
+      "funding": "Vlastné prostriedky; oddelená modelová likvidná rezerva 1 500 €, dostupnosť neoverená.",
+      "responsibility": "SZČO; zaviesť pred najbližšou dotknutou činnosťou, najneskôr do 30 dní od prijatia plánu; súčinnosť partnera podľa úlohy.",
       "monitoring": "Pred úkolom: postup pri výpadku; priebežne stav rezervy a poistných podmienok.",
+      "id": "R14",
       "source_row": 22,
-      "rank": 11,
+      "priority": "2",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 2,
+        "time_eur": 100,
+        "total_eur": 100
+      },
       "sensitivity": [
         {
           "p": 2,
           "n": 3,
           "score": 6,
           "band": "V",
+          "acceptance": "N",
           "delta": 3
         },
         {
@@ -573,13 +717,14 @@
           "n": 2,
           "score": 2,
           "band": "M",
+          "acceptance": "A",
           "delta": -1
         }
-      ]
+      ],
+      "rank": 12
     },
     {
-      "id": "R15",
-      "classification": "Finančné",
+      "classification": "Finančné riziká",
       "title": "Oneskorená úhrada faktúry",
       "cause": "Úhrada po splatnosti alebo spor o prevzatie a fakturovaný rozsah.",
       "consequence": "Dočasné viazanie peňazí; prípadne problém financovať ďalší úkol.",
@@ -588,19 +733,27 @@
       "score": 2,
       "band": "M",
       "acceptance": "A",
-      "measures": "Navrhované opatrenia: splatnosť a odovzdanie písomne, prehľad pohľadávok, pripomienka, rezerva a podľa dohody priebežná fakturácia.",
-      "cost_basis": "Čas evidencie; výška likvidnej rezervy podľa výdavkov. Suma neurčená.",
-      "funding": "Vlastné prostriedky; záloha alebo etapová platba po dohode.",
-      "responsibility": "SZČO a platobná kontaktná osoba objednávateľa.",
-      "monitoring": "Týždenne: pohľadávky po splatnosti a dostupné peniaze na ďalšiu zákazku.",
+      "measures": "Existujúce: fakturácia a sledovanie úhrad. M(A): bez nového znižovania, iba monitoring.",
+      "cost_basis": "Nové znižovanie 0 €. Bežný monitoring je súčasťou prevádzky.",
+      "funding": "Nové financovanie znižovania sa neplánuje.",
+      "responsibility": "SZČO; priebežný monitoring bez nového zavedenia.",
+      "monitoring": "Týždenne splatnosť a likvidita; ak oneskorenie ohrozí ďalšiu zákazku, znovu hodnotiť P/N a odvodenú kategóriu.",
+      "id": "R15",
       "source_row": 23,
-      "rank": 13,
+      "priority": "M",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 0,
+        "time_eur": 0,
+        "total_eur": 0
+      },
       "sensitivity": [
         {
           "p": 2,
           "n": 2,
           "score": 4,
           "band": "S",
+          "acceptance": "N",
           "delta": 2
         },
         {
@@ -608,6 +761,7 @@
           "n": 1,
           "score": 1,
           "band": "M",
+          "acceptance": "A",
           "delta": -1
         },
         {
@@ -615,13 +769,14 @@
           "n": 3,
           "score": 3,
           "band": "S",
+          "acceptance": "N",
           "delta": 1
         }
-      ]
+      ],
+      "rank": 13
     },
     {
-      "id": "R03",
-      "classification": "Prevádzkové",
+      "classification": "Výrobné riziká",
       "title": "Chýbajúce spotrebné veci a náradie",
       "cause": "Neúplná príprava; vyčerpaný plyn, chýbajúce skrutky alebo nástroj.",
       "consequence": "Zháňanie, cesta, nákup a prerušenie práce; dočasné financovanie nákupu.",
@@ -630,19 +785,27 @@
       "score": 2,
       "band": "M",
       "acceptance": "A",
-      "measures": "Existujúce opatrenia: príprava náradia. Navrhované opatrenia: zoznam a kontrola zásob, plán doplnenia, dohodnúť úhradu obstarania.",
-      "cost_basis": "Zásoba a doprava podľa dokladov; suma neurčená.",
-      "funding": "Vlastné prostriedky; prefakturácia dohodnutých nákupov.",
-      "responsibility": "SZČO.",
-      "monitoring": "Pred nástupom: zoznam zásob; po zákazke počet neplánovaných nákupov.",
+      "measures": "Existujúce: príprava náradia a zásob. M(A): bez nového znižovania, iba monitoring.",
+      "cost_basis": "Nové znižovanie 0 €. Bežný monitoring je súčasťou prevádzky.",
+      "funding": "Nové financovanie znižovania sa neplánuje.",
+      "responsibility": "SZČO; priebežný monitoring bez nového zavedenia.",
+      "monitoring": "Pred zákazkou skontrolovať funkčnosť súčasnej prípravy; po nej vyhodnotiť neplánované nákupy. Pri väčšom dopade znovu hodnotiť P/N.",
+      "id": "R03",
       "source_row": 11,
-      "rank": 13,
+      "priority": "M",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 0,
+        "time_eur": 0,
+        "total_eur": 0
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 1,
           "score": 1,
           "band": "M",
+          "acceptance": "A",
           "delta": -1
         },
         {
@@ -650,6 +813,7 @@
           "n": 1,
           "score": 3,
           "band": "S",
+          "acceptance": "N",
           "delta": 1
         },
         {
@@ -657,13 +821,14 @@
           "n": 2,
           "score": 4,
           "band": "S",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 13
     },
     {
-      "id": "R09",
-      "classification": "Prevádzkové",
+      "classification": "Výrobné riziká",
       "title": "Prerušenie elektrického napájania",
       "cause": "Plánovaná odstávka alebo nedostupné napájanie na stavbe.",
       "consequence": "Nemožnosť zvárať; pri úkole dlhší čas bez automatického zvýšenia ceny.",
@@ -672,19 +837,27 @@
       "score": 2,
       "band": "M",
       "acceptance": "A",
-      "measures": "Navrhované opatrenia: vopred zistiť odstávky, koordinovať postup, naplánovať možné činnosti bez napájania.",
-      "cost_basis": "Čas koordinácie; náhradný zdroj len po posúdení a cenovej ponuke.",
-      "funding": "Vlastné prostriedky; osobitné riešenie dohodnúť s firmou.",
-      "responsibility": "SZČO a kontaktná osoba vedenia stavby.",
-      "monitoring": "Denný plán a skutočné hodiny odstávok.",
+      "measures": "Existujúce: časová rezerva. M(A): bez nového znižovania, iba monitoring.",
+      "cost_basis": "Nové znižovanie 0 €. Bežný monitoring je súčasťou prevádzky.",
+      "funding": "Nové financovanie znižovania sa neplánuje.",
+      "responsibility": "SZČO; priebežný monitoring bez nového zavedenia.",
+      "monitoring": "Denne sledovať odstávky a hodiny prestoja; pri prekročení časovej rezervy znovu hodnotiť P/N.",
+      "id": "R09",
       "source_row": 17,
-      "rank": 13,
+      "priority": "M",
+      "budget": {
+        "cash_eur": 0,
+        "hours": 0,
+        "time_eur": 0,
+        "total_eur": 0
+      },
       "sensitivity": [
         {
           "p": 1,
           "n": 1,
           "score": 1,
           "band": "M",
+          "acceptance": "A",
           "delta": -1
         },
         {
@@ -692,6 +865,7 @@
           "n": 1,
           "score": 3,
           "band": "S",
+          "acceptance": "N",
           "delta": 1
         },
         {
@@ -699,9 +873,11 @@
           "n": 2,
           "score": 4,
           "band": "S",
+          "acceptance": "N",
           "delta": 2
         }
-      ]
+      ],
+      "rank": 13
     }
   ],
   "matrix": [
@@ -717,9 +893,7 @@
       "n": 2,
       "score": 6,
       "band": "V",
-      "ids": [
-        "R04"
-      ]
+      "ids": []
     },
     {
       "p": 3,
@@ -746,6 +920,7 @@
       "ids": [
         "R01",
         "R02",
+        "R04",
         "R05",
         "R06",
         "R08",
@@ -760,7 +935,9 @@
       "n": 3,
       "score": 6,
       "band": "V",
-      "ids": []
+      "ids": [
+        "R07"
+      ]
     },
     {
       "p": 1,
@@ -784,180 +961,58 @@
       "score": 3,
       "band": "S",
       "ids": [
-        "R07",
         "R14"
       ]
     }
   ],
   "economics": {
     "model_only": true,
-    "base": {
-      "hourly_quote_eur": 65,
-      "rate_source": "Orientačná sadzba uvedená používateľom; nie údaj zo školských dokumentov",
-      "other_costs_eur": 1500,
-      "hours": 100,
-      "nights": 10,
-      "night_price_eur": 60,
-      "transport_eur": 300,
-      "revenue_eur": 6500
+    "time_rate_eur": 50,
+    "cash_eur": 560,
+    "hours": 14,
+    "time_eur": 700,
+    "total_eur": 1260,
+    "min_eur": 1160,
+    "max_eur": 1360,
+    "priority_1_eur": 250,
+    "priority_2_eur": 1010,
+    "excluded": {
+      "existing_insurance_per_year_eur": 700,
+      "existing_torch_eur": 600,
+      "liquid_reserve_eur": 1500
     },
-    "base_cost_eur": 2400,
-    "base_result_eur": 4100,
-    "base_result_per_hour_eur": 41.0,
     "scenarios": [
       {
         "id": "R05",
-        "cases": [
-          {
-            "case": 1,
-            "inputs": {
-              "repair_hours": 5,
-              "consumables_eur": 25
-            },
-            "extra_cost_eur": 25,
-            "result_eur": 4075,
-            "loss_eur": 25,
-            "hourly_drop_eur": 2.19,
-            "work_hours": 105,
-            "waiting_hours": 0,
-            "hours": 105,
-            "result_per_hour_eur": 38.81
-          },
-          {
-            "case": 2,
-            "inputs": {
-              "repair_hours": 10,
-              "consumables_eur": 50
-            },
-            "extra_cost_eur": 50,
-            "result_eur": 4050,
-            "loss_eur": 50,
-            "hourly_drop_eur": 4.18,
-            "work_hours": 110,
-            "waiting_hours": 0,
-            "hours": 110,
-            "result_per_hour_eur": 36.82
-          },
-          {
-            "case": 3,
-            "inputs": {
-              "repair_hours": 20,
-              "consumables_eur": 100
-            },
-            "extra_cost_eur": 100,
-            "result_eur": 4000,
-            "loss_eur": 100,
-            "hourly_drop_eur": 7.67,
-            "work_hours": 120,
-            "waiting_hours": 0,
-            "hours": 120,
-            "result_per_hour_eur": 33.33
-          }
-        ]
+        "title": "Neplatená oprava vlastného zvaru",
+        "formula": "(odmena − náklady − dodatočná spotreba) / (pracovné hodiny + hodiny opravy)",
+        "numeric_inputs_available": false
       },
       {
         "id": "R10",
-        "cases": [
-          {
-            "case": 1,
-            "inputs": {
-              "idle_hours": 1,
-              "crane_eur_per_hour": 100
-            },
-            "extra_cost_eur": 100,
-            "result_eur": 4000,
-            "loss_eur": 100,
-            "hourly_drop_eur": 1.4,
-            "work_hours": 100,
-            "waiting_hours": 1,
-            "hours": 101,
-            "result_per_hour_eur": 39.6
-          },
-          {
-            "case": 2,
-            "inputs": {
-              "idle_hours": 3,
-              "crane_eur_per_hour": 120
-            },
-            "extra_cost_eur": 360,
-            "result_eur": 3740,
-            "loss_eur": 360,
-            "hourly_drop_eur": 4.69,
-            "work_hours": 100,
-            "waiting_hours": 3,
-            "hours": 103,
-            "result_per_hour_eur": 36.31
-          },
-          {
-            "case": 3,
-            "inputs": {
-              "idle_hours": 6,
-              "crane_eur_per_hour": 150
-            },
-            "extra_cost_eur": 900,
-            "result_eur": 3200,
-            "loss_eur": 900,
-            "hourly_drop_eur": 10.81,
-            "work_hours": 100,
-            "waiting_hours": 6,
-            "hours": 106,
-            "result_per_hour_eur": 30.19
-          }
-        ]
+        "title": "Platený prestoj žeriava",
+        "formula": "Dodatočný náklad = nevyužité hodiny × dohodnutá sadzba prenájmu",
+        "numeric_inputs_available": false
       },
       {
         "id": "R11",
-        "cases": [
-          {
-            "case": 1,
-            "inputs": {
-              "night_price_eur": 70,
-              "extra_nights": 0,
-              "extra_transport_eur": 0
-            },
-            "extra_cost_eur": 100,
-            "result_eur": 4000,
-            "loss_eur": 100,
-            "hourly_drop_eur": 1.0,
-            "work_hours": 100,
-            "waiting_hours": 0,
-            "hours": 100,
-            "result_per_hour_eur": 40.0
-          },
-          {
-            "case": 2,
-            "inputs": {
-              "night_price_eur": 90,
-              "extra_nights": 2,
-              "extra_transport_eur": 100
-            },
-            "extra_cost_eur": 580,
-            "result_eur": 3520,
-            "loss_eur": 580,
-            "hourly_drop_eur": 5.8,
-            "work_hours": 100,
-            "waiting_hours": 0,
-            "hours": 100,
-            "result_per_hour_eur": 35.2
-          },
-          {
-            "case": 3,
-            "inputs": {
-              "night_price_eur": 120,
-              "extra_nights": 4,
-              "extra_transport_eur": 200
-            },
-            "extra_cost_eur": 1280,
-            "result_eur": 2820,
-            "loss_eur": 1280,
-            "hourly_drop_eur": 12.8,
-            "work_hours": 100,
-            "waiting_hours": 0,
-            "hours": 100,
-            "result_per_hour_eur": 28.2
-          }
-        ]
+        "title": "Model piatich nocí",
+        "nights": 5,
+        "normal_price_eur": 70,
+        "high_price_eur": 250,
+        "normal_cost_eur": 350,
+        "high_cost_eur": 1250,
+        "extra_cost_eur": 900
       }
-    ]
-  }
+    ],
+    "service": {
+      "min_eur": 200,
+      "mid_eur": 300,
+      "max_eur": 400
+    }
+  },
+  "source_notes": [
+    "R01: príčina v Exceli MMSP!D9 je prázdna; text prevzatý z registra PDF, strana 1.",
+    "Register PDF má 50 strán; existujúci popis 6 strán sa nepoužil."
+  ]
 }

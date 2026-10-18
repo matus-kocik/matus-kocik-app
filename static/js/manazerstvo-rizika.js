@@ -57,7 +57,7 @@
       const inputs = document.createElement('p'); inputs.textContent = `P${item.p} × N${item.n}`;
       const score = document.createElement('strong'); score.textContent = `R = ${item.score}`;
       const band = document.createElement('span'); band.className = `risk-badge band-${item.band}`; band.textContent = `${bandNames[item.band]} · ${item.band}`;
-      const delta = document.createElement('small'); delta.textContent = index === 0 ? `Prijateľnosť: ${risk.acceptance}` : `Rozdiel skóre: ${item.delta > 0 ? '+' : ''}${item.delta}`;
+      const delta = document.createElement('small'); delta.textContent = index === 0 ? `Prijateľnosť: ${risk.acceptance}` : `Prijateľnosť: ${item.acceptance} · Rozdiel skóre: ${item.delta > 0 ? '+' : ''}${item.delta}`;
       card.append(label, inputs, score, band, delta); output.append(card);
     });
   }
@@ -81,12 +81,12 @@
     const short = text => text.length > 34 ? `${text.slice(0, 32)}…` : text;
     const narrow = window.innerWidth < 600;
     new Chart(document.getElementById('ranking-chart'), {type: 'bar', plugins: [barLabels], data: {labels: data.risks.map(risk => narrow ? risk.id : `${risk.id} · ${short(risk.title)}`), datasets: [{data: data.risks.map(risk => risk.score), backgroundColor: data.risks.map(risk => colors[risk.band]), borderRadius: 5, barThickness: 18}]}, options: {...common, indexAxis: 'y', layout: {padding: {right: 58}}, scales: {x: {min: 0, max: 9, ticks: {stepSize: 1}, title: {display: true, text: 'Skóre R = P × N'}, grid: {color: '#edf0f2'}}, y: {grid: {display: false}, ticks: {autoSkip: false, font: {size: 11}}}}, plugins: {legend: {display: false}, riskBarLabels: {enabled: true, labels: data.risks.map(risk => `${risk.score} · ${risk.band}`)}, tooltip: {callbacks: {title: items => `${data.risks[items[0].dataIndex].id} · ${data.risks[items[0].dataIndex].title}`, label: context => {const risk = data.risks[context.dataIndex]; return `P${risk.p} × N${risk.n} = ${risk.score} · ${bandNames[risk.band]}`;}}}}}});
-    data.economics.scenarios.forEach(scenario => {
-      const isCrane = scenario.id === 'R10';
-      const values = [data.economics.base_result_per_hour_eur, ...scenario.cases.map(item => item.result_per_hour_eur)];
-      new Chart(document.getElementById(`economic-${scenario.id}`), {type: 'bar', data: {labels: ['Základ', ...scenario.cases.map(item => `Scenár ${item.case}`)], datasets: [{data: values, backgroundColor: ['#4E8BC9', '#F2A15F', '#D88CB5', '#F27C73'], borderRadius: 6, maxBarThickness: 70}]}, options: {...common, scales: {y: {beginAtZero: true, title: {display: true, text: 'EUR / h'}, grid: {color: '#edf0f2'}}, x: {grid: {display: false}}}, plugins: {legend: {display: false}, title: {display: true, text: isCrane ? 'Výsledok / čas vrátane čakania' : 'Výsledok / pracovná hodina', color: '#252525', padding: {bottom: 16}}, tooltip: {callbacks: {label: context => `${money.format(context.raw)}/h`}}}}});
-    });
-    new Chart(document.getElementById('comparison-chart'), {type: 'bar', data: {labels: ['Základ', ...data.economics.scenarios.flatMap(scenario => scenario.cases.map(item => `${scenario.id} · ${item.case}`))], datasets: [{data: [data.economics.base_result_eur, ...data.economics.scenarios.flatMap(scenario => scenario.cases.map(item => item.result_eur))], backgroundColor: ['#4E8BC9', ...data.economics.scenarios.flatMap((scenario, index) => scenario.cases.map(() => ['#F2A15F','#D88CB5','#66B7C2'][index]))], borderRadius: 5, maxBarThickness: 45}]}, options: {...common, indexAxis: 'y', scales: {x: {beginAtZero: true, title: {display: true, text: 'Výsledok zákazky (EUR)'}, grid: {color: '#edf0f2'}}, y: {grid: {display: false}, ticks: {autoSkip: false}}}, plugins: {legend: {display: false}, tooltip: {callbacks: {label: context => money.format(context.raw)}}}}});
+    const budget = data.economics;
+    const bars = (id, labels, values, label) => new Chart(document.getElementById(id), {type: 'bar', data: {labels, datasets: [{data: values, backgroundColor: ['#66B7C2', '#F2A15F', '#4E8BC9'], borderRadius: 5}]}, options: {...common, scales: {y: {beginAtZero: true, title: {display: true, text: label}}}, plugins: {legend: {display: false}, tooltip: {callbacks: {label: context => money.format(context.raw)}}}}});
+    new Chart(document.getElementById('budget-chart'), {type: 'bar', data: {labels: data.risks.map(risk => risk.id), datasets: [{label: 'Peňažné výdavky', data: data.risks.map(risk => risk.budget.cash_eur), backgroundColor: '#4E8BC9'}, {label: 'Hodnota času', data: data.risks.map(risk => risk.budget.time_eur), backgroundColor: '#F2A15F'}]}, options: {...common, scales: {x: {stacked: true}, y: {stacked: true, beginAtZero: true, title: {display: true, text: 'EUR'}}}, plugins: {legend: {display: true}, tooltip: {callbacks: {label: context => `${context.dataset.label}: ${money.format(context.raw)}`}}}}});
+    bars('service-chart', ['Servis 200 €', 'Servis 300 €', 'Servis 400 €'], [budget.min_eur, budget.total_eur, budget.max_eur], 'Celkový rozpočet (EUR)');
+    const hotel = budget.scenarios.find(scenario => scenario.id === 'R11');
+    bars('economic-R11', ['70 €/noc × 5', '250 €/noc × 5'], [hotel.normal_cost_eur, hotel.high_cost_eur], 'Náklad ubytovania (EUR)');
   } catch (error) {
     document.getElementById('risk-chart-error').hidden = false;
     console.error('Grafy manažérstva rizika:', error);

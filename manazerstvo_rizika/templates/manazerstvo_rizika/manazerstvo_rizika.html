@@ -41,7 +41,7 @@
         <div>
           <p class="risk-download-type">Príloha – register rizík</p>
           <p class="risk-download-title">Register rizík SZČO</p>
-          <p class="risk-download-meta">PDF · 6 strán · A3 na šírku</p>
+          <p class="risk-download-meta">PDF · register a metodika</p>
           <span class="risk-download-action">Zobraziť register a metodiku</span>
         </div>
         <span class="risk-download-arrow" aria-hidden="true">→</span>
@@ -110,7 +110,7 @@
         </p>
         <p>
           <strong>3</strong> Opakovane očakávateľný scenár pri porovnateľnej
-          expozícii. V R04 návrh pre problémové dodávky; musí sa overiť.
+          expozícii. V tomto hodnotení sa P3 žiadnemu riziku bez dostatočnej opory neprideľuje.
         </p>
       </div>
       <div class="risk-white">
@@ -144,8 +144,7 @@
       </p>
       <p>
         <strong>Prijateľnosť je samostatná.</strong> A = prijateľné, N =
-        potrebuje ďalšie opatrenia. Závažný následok R07 a R14 vyžaduje
-        pozornosť aj pri skóre 3.
+        potrebuje ďalšie opatrenia. M → A: iba monitoring. S → N: primerané plánované opatrenia. V → N: prednostné opatrenia. R06 a R14 vyžadujú zvýšenú pozornosť pre možné zdravotné následky.
       </p>
     </div>
   </section>
@@ -225,24 +224,7 @@
     </section>
     <aside class="risk-panel risk-blue">
       <p class="risk-eyebrow">Výsledky hodnotenia</p>
-      <h2>Veľké riziko: R04</h2>
-      <p class="risk-lead">
-        Nepasujúce alebo poškodené diely dosahujú P3 × N2 = 6. Ide o jediné
-        veľké riziko v aktuálnom registri.
-      </p>
-      <p>
-        Kontrola dodávky a skúšobné zostavenie môžu zachytiť nezhodu pred
-        spojením dielov. P3 je návrh pre problémové dodávky; treba ho overiť
-        záznamami.
-      </p>
-      <div class="risk-white">
-        <h3>Závažné následky</h3>
-        <p>
-          Pri R07 a R14 je N = 3. Ich závažné následky odôvodňujú ďalšie
-          opatrenia aj pri nižšom skóre.
-        </p>
-      </div>
-    </aside>
+      <h2>Najvyššia priorita: R07</h2><p class="risk-lead">Poškodenie dielu pri manipulácii: P2 × N3 = 6, V/N. Jediné veľké riziko; priorita 1 pred manipuláciou, najneskôr do 14 dní od prijatia plánu.</p><p>SZČO obsluhuje žeriav na stavbe. Nové doplnenie: ochranné pomôcky 200 € a 1 hodina prípravy kontrolného zoznamu, spolu 250 €. Existujúce poistenie je transfer finančných následkov; konkrétne krytie nebolo overené.</p><div class="risk-white"><h3>Dodávka a manipulácia</h3><p>R04 má P2/N2/R4, S/N, prioritu 2. Poškodenie už pri dodaní rieši podľa podnikateľa firma. Stena stojí orientačne 15 000 € bez žľabu alebo 22 000–25 000 € so žľabom vrátane dopravy, navyše montážna práca. Hodnota dielu nie je automatická vlastná strata SZČO.</p></div></aside>
   </div>
 
   <section id="poradie" class="risk-panel" aria-labelledby="ranking-title">
@@ -353,7 +335,7 @@
                   <h3>{{ risk.classification }}</h3>
                   <p><strong>Príčina:</strong> {{ risk.cause }}</p>
                   <p><strong>Následok:</strong> {{ risk.consequence }}</p>
-                  <p><strong>Opatrenia:</strong> {{ risk.measures }}</p>
+                  <p><strong>Priorita realizácie:</strong> {{ risk.priority }}</p><p><strong>Opatrenia:</strong> {{ risk.measures }}</p>
                 </div>
                 <div>
                   <p>
@@ -405,7 +387,7 @@
     ></div>
     <p class="risk-caption">
       Ide o alternatívne hodnotenia, nie predpoveď budúcnosti ani dokázaný
-      účinok opatrení. Prijateľnosť A/N sa nemení automaticky.
+      účinok opatrení. Pri alternatíve sa A/N odvodzuje z pásma. Register sa nemení; nové podmienky vyžadujú nové posúdenie P/N.
     </p>
     <noscript
       ><p>
@@ -415,186 +397,18 @@
     >
   </section>
 
-  <section
-    id="ekonomika"
-    class="risk-panel risk-orange"
-    aria-labelledby="economics-title"
-  >
-    <p class="risk-eyebrow">08 · Ekonomické scenáre</p>
-    <h2 id="economics-title">Modelové ekonomické scenáre R05, R10 a R11</h2>
-    <p class="risk-model-label">ILUSTRAČNÉ MODELOVÉ PREDPOKLADY</p>
-    <p class="risk-lead">
-      Sumy nie sú doložené účtovnými dokladmi. Modely ukazujú mechanizmus vplyvu
-      opráv, prenájmu a pobytu na výsledok zákazky.
-    </p>
-    <div class="risk-three">
-      <div class="risk-white">
-        <p>Odmena za zákazku</p>
-        <strong class="risk-number"
-          >{{ analysis.economics.base.revenue_eur|floatformat:0 }} €</strong
-        >
-        <p>
-          Plán {{ analysis.economics.base.hours }} h × {{ analysis.economics.base.hourly_quote_eur }} €/h, potom pevná úkolová
-          odmena
-        </p>
-      </div>
-      <div class="risk-white">
-        <p>Základné náklady</p>
-        <strong class="risk-number"
-          >{{ analysis.economics.base_cost_eur|floatformat:0 }} €</strong
-        >
-        <p>
-          Ostatné {{ analysis.economics.base.other_costs_eur|floatformat:0 }} €
-          + {{ analysis.economics.base.nights }} nocí × {{ analysis.economics.base.night_price_eur }} € + doprava {{ analysis.economics.base.transport_eur }} €
-        </p>
-      </div>
-      <div class="risk-white">
-        <p>Východiskový výsledok</p>
-        <strong class="risk-number"
-          >{{ analysis.economics.base_result_eur|floatformat:0 }} €</strong
-        >
-        <p>
-          {{ analysis.economics.base.hours }} pracovných hodín · {{ analysis.economics.base_result_per_hour_eur|floatformat:2 }} €/h
-        </p>
-      </div>
-    </div>
-    <p class="risk-caption">
-      Modelová kalkulačná sadzba {{ analysis.economics.base.hourly_quote_eur }}
-      €/h slúži na určenie pevnej ceny zákazky. Dodatočné hodiny bezplatných
-      opráv nezvyšujú dohodnutú odmenu.
-    </p>
-    <div class="risk-formulas">
-      <p><strong>Výsledok zákazky</strong> = odmena − náklady</p>
-      <p>
-        <strong>Výsledok na pracovnú hodinu</strong> = výsledok / odpracované
-        hodiny
-      </p>
-    </div>
-    <p class="risk-caption">
-      Výsledok je pred daňami a odvodmi, bez úplnej réžie a ocenenia vlastnej
-      práce. Nie je čistá mzda ani čistý zisk. Nepredpokladá sa kompenzácia
-      objednávateľa ani poistné plnenie.
-    </p>
+  <section id="ekonomika" class="risk-panel risk-orange" aria-labelledby="economics-title">
+    <p class="risk-eyebrow">08 · Ekonomika opatrení</p><h2 id="economics-title">Rozpočet nových opatrení</h2><p class="risk-model-label">MODELOVÝ ODHAD ZAVEDENIA</p><p class="risk-lead">Iba nové doplnenia a dodatočný čas. Ide o modelové odhady, nie cenové ponuky ani preukázané výdavky.</p>
+    <div class="risk-three"><div class="risk-white"><h3>Nové peňažné výdavky</h3><strong class="risk-number">{{ analysis.economics.cash_eur }} €</strong><p>Pomôcky 200 € + servis 300 € + nemčina 60 €</p></div><div class="risk-white"><h3>Dodatočný čas</h3><strong class="risk-number">{{ analysis.economics.time_eur }} €</strong><p>{{ analysis.economics.hours }} h × {{ analysis.economics.time_rate_eur }} €/h</p></div><div class="risk-white"><h3>Spolu</h3><strong class="risk-number">{{ analysis.economics.total_eur }} €</strong><p>Rozpätie {{ analysis.economics.min_eur }}–{{ analysis.economics.max_eur }} €</p></div></div>
+    <p>Priorita 1: {{ analysis.economics.priority_1_eur }} € (R07, pred manipuláciou, najneskôr do 14 dní). Priorita 2: {{ analysis.economics.priority_2_eur }} € (S/N, pred dotknutou činnosťou, najneskôr do 30 dní). M/A: iba monitoring. Kontroly pred manipuláciou a napustením sa neodkladajú.</p>
+    <div class="risk-scroll" tabindex="0" role="region" aria-label="Rozpis nových opatrení"><table class="risk-table"><thead><tr><th scope="col">Riziko</th><th scope="col">Priorita</th><th scope="col">Peňažné výdavky</th><th scope="col">Dodatočný čas</th><th scope="col">Hodnota času</th><th scope="col">Spolu</th></tr></thead><tbody>{% for risk in analysis.risks %}<tr><th scope="row">{{ risk.id }}</th><td>{{ risk.priority }}</td><td>{{ risk.budget.cash_eur }} €</td><td>{{ risk.budget.hours }} h</td><td>{{ risk.budget.time_eur }} €</td><td>{{ risk.budget.total_eur }} €</td></tr>{% endfor %}</tbody><tfoot><tr><th scope="row" colspan="2">Spolu</th><td>{{ analysis.economics.cash_eur }} €</td><td>{{ analysis.economics.hours }} h</td><td>{{ analysis.economics.time_eur }} €</td><td>{{ analysis.economics.total_eur }} €</td></tr></tfoot></table></div>
+    <p class="risk-caption">Sadzba 50 €/h je kalkulačná hodnota času, pri administratíve neznamená spotrebu plynu. Nemčina: výučba 2 × 30 € = 60 € a osobitne 2 h vlastnej prípravy = 100 €; úvodný blok nevyrieši celé jazykové riziko. Financovanie: vlastné prostriedky.</p>
+    <div class="risk-chart risk-economic-chart"><canvas id="budget-chart" role="img" aria-label="Peňažné výdavky a hodnota dodatočného času podľa rizika; presné sumy sú v tabuľke"></canvas></div>
+    <div class="risk-white"><h3>Oddelene od nového rozpočtu</h3><p>Existujúce poistné 700 €/rok a už kúpený záložný horák cca 600 € sa nepripočítavajú. Modelová likvidná rezerva R14 1 500 € = 15 dní × 100 € je cieľ dostupných peňazí, nie výdavok; dostupnosť nebola overená. Existujúce meradlá, bežná kontrola a ubytovanie nie sú nové nákupy.</p><p>Poistenie je existujúci transfer. Krytie manipulácie a obsluhy žeriava v Nemecku je predpoklad štúdie, nie overená zmluva. Poistenie nemení pravdepodobnosť pádu ani fyzickú závažnosť úrazu.</p></div>
   </section>
-
-  {% for scenario in analysis.economics.scenarios %}
-  <section
-    class="risk-panel risk-econ"
-    aria-labelledby="econ-title-{{ scenario.id }}"
-  >
-    <p class="risk-eyebrow">Model {{ scenario.id }}</p>
-    <h2 id="econ-title-{{ scenario.id }}">{{ scenario.title }}</h2>
-    {% if scenario.id == 'R05' %}
-    <p class="risk-lead">
-      Bezplatná oprava vlastnej chyby predĺži prácu. Spotrebný materiál zvyšuje
-      náklady; vlastné hodiny sa druhýkrát neúčtujú ako peňažná strata.
-    </p>
-    {% elif scenario.id == 'R10' %}
-    <p class="risk-lead">
-      Nevyužitý prenájom zvyšuje náklady o hodiny čakania × sadzbu žeriava.
-      Čakanie zobrazujeme oddelene od práce.
-    </p>
-    {% else %}
-    <p class="risk-lead">
-      Vyššia cena všetkých nocí, predĺženie pobytu a dodatočná doprava zvyšujú
-      náklady. Model ponecháva pracovné hodiny nezmenené.
-    </p>
-    {% endif %}
-    <p class="risk-caption">
-      Spoločný základ: výsledok {{ analysis.economics.base_result_eur|floatformat:0 }} €, {{ analysis.economics.base.hours }} pracovných hodín, {{ analysis.economics.base_result_per_hour_eur|floatformat:2 }} €/h.
-    </p>
-    <div
-      class="risk-scroll"
-      tabindex="0"
-      role="region"
-      aria-label="Scenáre {{ scenario.id }}"
-    >
-      <table class="risk-table">
-        <caption class="risk-sr-only">
-          Modelové scenáre {{ scenario.id }}
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Scenár</th>
-            <th scope="col">Predpoklady</th>
-            <th scope="col">Náklady navyše</th>
-            <th scope="col">Výsledok</th>
-            <th scope="col">Pokles výsledku</th>
-            <th scope="col">Pokles €/h</th>
-            <th scope="col">Práca / čakanie</th>
-            <th scope="col">
-              {% if scenario.id == 'R10' %}Výsledok / čas vrátane čakania{% else %}Výsledok / pracovná hodina{% endif %}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for case in scenario.cases %}
-          <tr>
-            <th scope="row">{{ scenario.id }} · {{ case.case }}</th>
-            <td>
-              {% if scenario.id == 'R05' %}{{ case.inputs.repair_hours }} h
-              opravy<br />{{ case.inputs.consumables_eur }} € spotreba{% elif scenario.id == 'R10' %}{{ case.inputs.idle_hours }} h prestoj<br />{{ case.inputs.crane_eur_per_hour }} €/h prenájom{% else %}{{ case.inputs.night_price_eur }} €/noc<br />+{{ case.inputs.extra_nights }} nocí, +{{ case.inputs.extra_transport_eur }} € doprava{% endif %}
-            </td>
-            <td>{{ case.extra_cost_eur|floatformat:0 }} €</td>
-            <td><strong>{{ case.result_eur|floatformat:0 }} €</strong></td>
-            <td>{{ case.loss_eur|floatformat:0 }} €</td>
-            <td>{{ case.hourly_drop_eur|floatformat:2 }} €/h</td>
-            <td>{{ case.work_hours }} h / {{ case.waiting_hours }} h</td>
-            <td>{{ case.result_per_hour_eur|floatformat:2 }} €/h</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="risk-chart risk-economic-chart">
-      <canvas
-        id="economic-{{ scenario.id }}"
-        role="img"
-        aria-label="Porovnanie výsledkov {{ scenario.id }} so základom; hodnoty sú v tabuľke"
-      ></canvas>
-    </div>
-    {% if scenario.id == 'R05' %}
-    <p class="risk-insight">
-      <strong>Dôsledok:</strong> výsledok na pracovnú hodinu klesá aj pri malom
-      peňažnom výdavku, pretože pribúdajú neplatené hodiny opravy.
-    </p>
-    {% elif scenario.id == 'R10' %}
-    <p class="risk-insight">
-      <strong>Dôsledok:</strong> príprava pracoviska pred objednaním pomáha
-      obmedziť platené nevyužitie žeriava. Hodinový ukazovateľ tu zahŕňa
-      pracovný čas aj čakanie; nie je označený ako výsledok na odpracovanú
-      hodinu.
-    </p>
-    {% else %}
-    <p class="risk-insight">
-      <strong>Dôsledok:</strong> vyššia sadzba sa týka celého pobytu. Dodatočné
-      noci a doprava sa pripočítajú raz; predĺženie tu znamená pobyt bez ďalšej
-      práce.
-    </p>
-    {% endif %}
-  </section>
-  {% endfor %}
-
-  <section class="risk-panel" aria-labelledby="comparison-title">
-    <p class="risk-eyebrow">09 · Spoločné porovnanie</p>
-    <h2 id="comparison-title">Porovnanie modelového výsledku zákazky</h2>
-    <p class="risk-lead">
-      Všetkých deväť alternatív porovnávame s rovnakým východiskovým výsledkom
-      {{ analysis.economics.base_result_eur|floatformat:0 }} €. Scenáre
-      predstavujú samostatné prípady a nesčítavajú sa.
-    </p>
-    <div class="risk-chart risk-comparison">
-      <canvas
-        id="comparison-chart"
-        role="img"
-        aria-label="Spoločné porovnanie výsledku deviatich modelových scenárov"
-      ></canvas>
-    </div>
-    <p class="risk-caption">
-      Scenár 1, 2 a 3 znamená variant v príslušnej tabuľke; nejde o
-      pravdepodobnosť ani o rovnako závažný stres naprieč modelmi.
-    </p>
-  </section>
+  <section class="risk-panel risk-econ" aria-labelledby="service-title"><p class="risk-eyebrow">Model R08</p><h2 id="service-title">Citlivosť rozpočtu na cenu servisu</h2><p class="risk-lead">Servis 200–400 €, rozpočtový stred 300 €. Peňažné výdavky spolu 460–660 €; čas zostáva 700 €. Celkový rozpočet 1 160–1 360 €. Druhý horák už existuje a nenahrádza záložný stroj.</p><div class="risk-chart risk-economic-chart"><canvas id="service-chart" role="img" aria-label="Celkový rozpočet pri servise 200, 300 a 400 eur: 1160, 1260 a 1360 eur"></canvas></div></section>
+  <section class="risk-panel risk-econ" aria-labelledby="hotel-title"><p class="risk-eyebrow">Model R11</p><h2 id="hotel-title">Ubytovanie: následok, nie prevencia</h2><p class="risk-lead">Model 5 nocí: 70 €/noc = 350 €, drahý variant 250 €/noc = 1 250 €. Rozdiel 900 € je možný dodatočný náklad zákazky, nie cena preventívneho opatrenia ani pravidelná strata.</p><p>Zákazka môže byť dohodnutá rok vopred, presný nástup zostáva neistý. Rezervácia sa robí pár dní až 2–3 týždne pred cestou po vyjasnení nástupu. Sledujú sa podujatia a rezerva v kalkulácii. Vzdialenejšie ubytovanie má vlastnú dopravu a čas; alternatívy sa automaticky nesčítavajú.</p><div class="risk-chart risk-economic-chart"><canvas id="economic-R11" role="img" aria-label="Model piatich nocí: bežne 350 eur, drahý variant 1250 eur"></canvas></div></section>
+  <section class="risk-panel" aria-labelledby="comparison-title"><p class="risk-eyebrow">09 · Scenáre zákazky</p><h2 id="comparison-title">Ako opravy a prestoje menia výsledok</h2><div class="risk-two">{% for scenario in analysis.economics.scenarios %}{% if not scenario.numeric_inputs_available and scenario.formula %}<div class="risk-white"><h3>{{ scenario.id }} · {{ scenario.title }}</h3><p>{{ scenario.formula }}</p><p>Konkrétne hodiny a náklady nie sú doložené; číselný výsledok sa neurčuje.</p></div>{% endif %}{% endfor %}</div><div class="risk-formulas"><p>Výsledok zákazky = odmena − náklady zákazky.</p><p>Výsledok na pracovnú hodinu = výsledok / skutočne odpracované hodiny.</p></div><p class="risk-caption">Pri pevnom úkole viac práce a nákladov znižuje výsledok. Zaplatené čakanie pri hodinovej odmene nie je vlastný ušlý príjem. Bezplatné hodiny opravy sa nezapočítavajú druhýkrát ako peňažný výdavok. R12/R13 môžu spôsobiť R01/R02/R10, R05 môže prejsť do R06: každú opravu, hodinu, noc a jazdu započítať iba raz. Ukazovateľ nie je príjem po daniach a odvodoch.</p></section>
 
   <section class="risk-panel risk-blue" aria-labelledby="interpretation-title">
     <p class="risk-eyebrow">10 · Záver</p>
@@ -608,9 +422,7 @@
     </p>
     <p>
       Za hlavný praktický prínos považujem nadviazanie registra na už používanú
-      prípravu, cenovú a časovú rezervu. Prioritou je overiť diely pred
-      spojením, zachytiť nedostatky pred napustením a koordinovať drahé
-      prenájmy. Zdravotné a majetkové scenáre si vyžadujú pozornosť aj pri
+      prípravu, cenovú a časovú rezervu. Prioritou 1 je R07: bezpečný postup manipulácie pred zdvíhaním. R04 patrí do priority 2 spolu s ostatnými S/N. Kontroly dodávky a kontroly pred napustením sa neodkladajú. Zdravotné a majetkové scenáre si vyžadujú pozornosť aj pri
       nízkej pravdepodobnosti. Pätnásť scenárov a návrhy opatrení poskytujú
       podklad na riadenie; preskúmanie skóre podľa záznamov a doloženie nákladov
       umožnia používať register aj pri ďalších zákazkách.
@@ -645,7 +457,7 @@
     </dl>
     <p>
       Register obsahuje predbežné odhady pre horizont {{ analysis.horizon_months }} mesiacov. Nie sú dostupné systematické záznamy frekvencie udalostí ani
-      doložené ekonomické sumy.
+      auditované náklady zákazky. Rozpočet opatrení predstavuje modelový odhad. Pri R01 je príčina v Exceli MMSP!D9 prázdna; opis bol prevzatý z registra PDF, strana 1.
     </p>
   </section>
   <div class="grid grid-cols-5 gap-2 risk-palette" aria-hidden="true">
